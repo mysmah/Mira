@@ -75,7 +75,7 @@ class md:
         prediction = self.model.predict([[self.text2dict1(q)]])
         prediction = [int(round(x)) for x in prediction[0]]
         text = self.dict2text1(prediction)
-        return text if text else "?"
+        return text.title() if text else "?"
 
     def text2dict1(self, text):
         text = [_.text for _ in list(tokenize(text.lower()))]
