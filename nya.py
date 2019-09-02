@@ -10,10 +10,12 @@ from aiogram import *
 from razdel import tokenize
 from q import *
 
+
 class md:
     def __init__(self, arr):
         self.new_model(arr)
 
+# Создание новой модели нейросети
     def new_model(self, arr: list):
         if arr == []:
             return 1
@@ -68,15 +70,18 @@ class md:
         self.model.add(layers.Dense(len(self.dict0), activation='tanh'))
         self.model.compile(optimizer=tf.train.AdamOptimizer(0.001), loss='mse', metrics=['mae'])
 
+# Обучение
     def fit(self, n):
         self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
 
+# Обмен айдишниками слов с сетью
     def pred(self, q):
         prediction = self.model.predict([[self.text2dict1(q)]])
         prediction = [int(round(x)) for x in prediction[0]]
         text = self.dict2text1(prediction)
         return text.capitalize() if text else "?"
 
+# Преобразование текста в айдишники слов
     def text2dict1(self, text):
         text = [_.text for _ in list(tokenize(text.lower()))]
         out = []
@@ -84,6 +89,7 @@ class md:
             out += [int(self.dict0[i] in text)]
         return out
 
+# Обратное преобразование
     def dict2text1(self, arr):
         text = []
         for i in range(len(self.dict0)):
@@ -95,6 +101,8 @@ model = md([1024])
 
 bot = Bot(token=token)
 dp = Dispatcher(bot)
+
+# ЗОНА ХАНДЛЕРОВ
 
 @dp.message_handler(commands=['say'])
 async def nyan(message: types.Message):
@@ -165,5 +173,9 @@ async def nya(message: types.Message):
     else:
         await message.reply(model.pred(text))
 
+# ЗОНА ХАНДЛЕРОВ
+
+
+# Инициализация
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
