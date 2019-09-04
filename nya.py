@@ -164,7 +164,7 @@ async def nya(message: types.Message):
     #await message.reply(model.pred(message.text))
     text = message.text.lower()
     if message.chat.id < 0:
-        if text.startswith("мира " or "мира," or "mira " or "mira,"):
+        if text.startswith("мира ") or text.startswith("mira") or text.startwith("мира,") or text.startwith("mira,"):
             await message.reply(model.pred(text[5:]))
         elif "@catgirl_chat_bot" in text:
             await message.reply(model.pred(text.replace("@catgirl_chat_bot", "")))
