@@ -16,7 +16,7 @@ class md:
         self.new_model(arr)
 
 # Создание новой модели нейросети
-    async def new_model(self, arr: list):
+    def new_model(self, arr: list):
         if arr == []:
             return 1
         fil = open('dict.json')
@@ -69,7 +69,7 @@ class md:
             self.model.add(layers.Dense(i, activation='tanh'))
         self.model.add(layers.Dense(len(self.dict0), activation='tanh'))
         self.model.compile(optimizer=tf.train.AdamOptimizer(0.001), loss='mse', metrics=['mae'])
-        await bot.send_message(-1001184868284, "Сеть инициализирована")
+        bot.send_message(-1001184868284, "Сеть инициализирована")
 
 # Обучение
     def fit(self, n):
@@ -128,7 +128,7 @@ async def reset(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     m = [int(x) for x in message.text.split()[1:]]
     await message.reply(m)
-    if await model.new_model(m) == 1:
+    if model.new_model(m) == 1:
         await message.reply("fail")
     else:
         await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:")
