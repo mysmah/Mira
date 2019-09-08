@@ -69,10 +69,12 @@ class md:
             self.model.add(layers.Dense(i, activation='tanh'))
         self.model.add(layers.Dense(len(self.dict0), activation='tanh'))
         self.model.compile(optimizer=tf.train.AdamOptimizer(0.001), loss='mse', metrics=['mae'])
+        await bot.send_message(-1001184868284, "Сеть инициализирована")
 
 # Обучение
     def fit(self, n):
         self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
+        await bot.send_message(-1001184868284, "Бот переведён в активный режим")
 
 # Обмен айдишниками слов с сетью
     def pred(self, q):
@@ -129,7 +131,7 @@ async def reset(message: types.Message):
     if model.new_model(m) == 1:
         await message.reply("fail")
     else:
-        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть: ")
+        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:")
         await bot.send_message(-1001184868284, m)
         await message.reply("success")
 
@@ -183,5 +185,4 @@ async def nya(message: types.Message):
 
 # Инициализация
 if __name__ == '__main__':
-    bot.send_message(-1001184868284, "Бот был запущен")
     executor.start_polling(dp, skip_updates=True)
