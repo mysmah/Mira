@@ -69,12 +69,11 @@ class md:
             self.model.add(layers.Dense(i, activation='tanh'))
         self.model.add(layers.Dense(len(self.dict0), activation='tanh'))
         self.model.compile(optimizer=tf.train.AdamOptimizer(0.001), loss='mse', metrics=['mae'])
-        await bot.send_message(-1001184868284, "Сеть инициализирована")
+        bot.send_message(-1001184868284, "Сеть инициализирована")
 
 # Обучение
     def fit(self, n):
         self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
-        await bot.send_message(-1001184868284, "Бот переведён в активный режим")
 
 # Обмен айдишниками слов с сетью
     def pred(self, q):
@@ -121,6 +120,7 @@ async def fit(message: types.Message):
         n = 1
     await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох")
     model.fit(n)
+    await bot.send_message(-1001184868284, "Бот переведён в активный режим")
     await message.reply("success")
 
 @dp.message_handler(commands=['reset'])
