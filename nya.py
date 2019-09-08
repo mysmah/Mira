@@ -117,7 +117,7 @@ async def fit(message: types.Message):
         n = int(message.text.split()[1])
     except:
         n = 1
-    await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох)
+    await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох")
     model.fit(n)
     await message.reply("success")
 
