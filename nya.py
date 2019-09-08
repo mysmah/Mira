@@ -97,7 +97,7 @@ class md:
                 text += [self.dict0[i]]
         return " ".join(text)
 
-async def init_Bot():
+async def init_Bot(arg):
     await bot.send_message(-1001184868284, "Сеть инициализирована")
 
 model = md([1024])
@@ -187,4 +187,4 @@ async def nya(message: types.Message):
 
 # Инициализация
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True, on_startup=await init_Bot)
+    executor.start_polling(dp, skip_updates=True, on_startup=init_Bot)
