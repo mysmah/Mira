@@ -117,6 +117,7 @@ async def fit(message: types.Message):
         n = int(message.text.split()[1])
     except:
         n = 1
+    await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох)
     model.fit(n)
     await message.reply("success")
 
@@ -128,6 +129,7 @@ async def reset(message: types.Message):
     if model.new_model(m) == 1:
         await message.reply("fail")
     else:
+        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть: " + str(m))
         await message.reply("success")
 
 @dp.message_handler(commands=['add'])
@@ -142,6 +144,7 @@ async def add(message: types.Message):
         writin = open("dialog.txt", "a")
         writin.write("\n" + text)
         writin.close()
+        await bot.send_message(-1001184868284, "Добавлен новый диалог: " + text)
         await message.reply("success")
     await message.delete()
 
@@ -153,6 +156,7 @@ async def adialog(message: types.Message):
         writin = open("dialog.txt", "a")
         writin.write("\n" + message.reply_to_message.text)
         writin.close()
+        await bot.send_message(-1001184868284, "Добавлен новый диалог: " + message.reply_to_message.text)
         await message.reply("success")
     else:
         await message.reply("fail")
@@ -178,4 +182,5 @@ async def nya(message: types.Message):
 
 # Инициализация
 if __name__ == '__main__':
+    bot.send_message(-1001184868284, "Бот был запущен")
     executor.start_polling(dp, skip_updates=True)
