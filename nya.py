@@ -8,10 +8,10 @@ from tensorflow.keras import layers
 import numpy as np
 from aiogram import *
 from razdel import tokenize
-from q import *
+from project_misc import *
 
 
-class md:
+class NeuralNet:
     def __init__(self, arr):
         self.new_model(arr)
 
@@ -101,7 +101,7 @@ async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
 
-model = md([1024])
+model = NeuralNet([1024])
 
 bot = Bot(token=token)
 dp = Dispatcher(bot)
@@ -182,9 +182,6 @@ async def nya(message: types.Message):
             await message.reply(model.pred(text))
     else:
         await message.reply(model.pred(text))
-
-# ЗОНА ХАНДЛЕРОВ
-
 
 # Инициализация
 if __name__ == '__main__':
