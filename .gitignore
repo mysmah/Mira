@@ -5,4 +5,4 @@ project_misc.py
 train*
 start
 *.json
-*.txt
+*.txt*
