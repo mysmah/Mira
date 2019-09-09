@@ -1,15 +1,9 @@
 import json
 import re
 import os
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import models
-from tensorflow.keras import layers
-import numpy as np
-from aiogram import *
-from razdel import tokenize
-from project_misc import *
 from OFPNNL import *
+from aiogram import *
+from project_misc import *
 
 async def start(arg):
     #Функция при запуске
