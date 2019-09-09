@@ -1,8 +1,0 @@
-*.ipynb
-.*
-__pycache__
-project_misc.py
-train*
-start
-*.json
-*.txt*
