@@ -1,0 +1,8 @@
+*.ipynb
+.ipynb_checkpoints
+__pycache__
+project_misc.py
+train*
+start
+*.json
+*.txt
