@@ -21,6 +21,19 @@ async def nyan(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     await message.reply(model.pred(message.text))
 
+
+@dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
+async def decor(message: types.Message):
+	if message.new_chat_members[0].id == botid:
+		await bot.send_message(message.chat.id, pretxt[1])
+
+
+@dp.message_handler(commands=['start'])
+async def court(message: types.Message):
+	if message.chat.id > 0:
+		await bot.send_message(message.chat.id, pretxt[0])
+
+
 @dp.message_handler(commands=['fit'])
 async def fit(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
@@ -34,6 +47,7 @@ async def fit(message: types.Message):
     await bot.send_message(-1001184868284, "Бот переведён в активный режим")
     await message.reply("success")
 
+
 @dp.message_handler(commands=['reset'])
 async def reset(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
@@ -45,6 +59,7 @@ async def reset(message: types.Message):
         await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:")
         await bot.send_message(-1001184868284, m)
         await message.reply("success")
+
 
 @dp.message_handler(commands=['add'])
 async def add(message: types.Message):
@@ -62,6 +77,7 @@ async def add(message: types.Message):
         await message.reply("success")
     await message.delete()
 
+
 @dp.message_handler(commands=['adddialog'])
 async def adialog(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
@@ -76,10 +92,10 @@ async def adialog(message: types.Message):
         await message.reply("fail")
     await message.delete()
 
+
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    #await message.reply(model.pred(message.text))
     text = message.text.lower()
     if message.chat.id < 0:
         if text.startswith("мира ") or text.startswith("mira") or text.startswith("мира,") or text.startswith("mira,"):
@@ -90,6 +106,7 @@ async def nya(message: types.Message):
             await message.reply(model.pred(text))
     else:
         await message.reply(model.pred(text))
+
 
 # Инициализация
 if __name__ == '__main__':
