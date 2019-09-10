@@ -25,7 +25,7 @@ async def nyan(message: types.Message):
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
 async def decor(message: types.Message):
 	if message.new_chat_members[0].id == botid:
-		await bot.send_message(message.chat.id, pretxt[1]parse_mode = ParseMode.MARKDOWN)
+		await bot.send_message(message.chat.id, pretxt[1], parse_mode = ParseMode.MARKDOWN)
 
 
 @dp.message_handler(commands=['start'])
