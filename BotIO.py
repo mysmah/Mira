@@ -4,7 +4,6 @@ import os
 from OFPNNL import *
 from aiogram import *
 from project_misc import *
-from texts import pretxt
 
 async def start(arg):
     #Функция при запуске
