@@ -6,12 +6,16 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
 
+model = NeuralNet([1024])
+
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
+    await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(100) + " эпох")
     model.fit(100)
+    await bot.send_message(-1001184868284, "Бот переведён в активный режим")
 
-model = NeuralNet([1024])
+
 
 bot = Bot(token=token)
 dp = Dispatcher(bot)
