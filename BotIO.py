@@ -9,6 +9,7 @@ from aiogram.types import ParseMode
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
+    model.fit(100)
 
 model = NeuralNet([1024])
 
