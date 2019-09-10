@@ -4,6 +4,7 @@ import os
 from OFPNNL import *
 from aiogram import *
 from project_misc import *
+from aiogram.types import ParseMode
 
 async def start(arg):
     #Функция при запуске
