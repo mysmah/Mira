@@ -13,8 +13,9 @@ model.fit(100)
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
-async def on_close():
-	await bot.send_message('@catgirl_channel', "Бот был остановлен")
+async def on_close(arg):
+    print("Процесс умирает, нетб))9)")
+    await bot.send_message('@catgirl_channel', "Бот был остановлен")
 #signal.signal(signal.SIGTERM, on_close)
 bot = Bot(token=token)
 dp = Dispatcher(bot)
