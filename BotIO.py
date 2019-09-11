@@ -5,6 +5,7 @@ from OFPNNL import *
 from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
+import signal
 
 model = NeuralNet([1024])
 model.fit(100)
@@ -12,7 +13,9 @@ model.fit(100)
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
-
+async def on_close():
+	await bot.send_message('@catgirl_channel', "Бот был остановлен")
+signal.signal(signal.SIGTERM, on_close)
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
