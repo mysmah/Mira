@@ -15,7 +15,7 @@ async def start(arg):
     await bot.send_message(-1001184868284, "Сеть инициализирована")
 async def on_close():
 	await bot.send_message('@catgirl_channel', "Бот был остановлен")
-signal.signal(signal.SIGTERM, on_close)
+#signal.signal(signal.SIGTERM, on_close)
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
@@ -115,4 +115,4 @@ async def nya(message: types.Message):
 
 # Инициализация
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True, on_startup=start)
+    executor.start_polling(dp, skip_updates=True, on_startup=start, on_shutdown=on_close)
