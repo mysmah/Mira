@@ -61,10 +61,10 @@ class NeuralNet:
         self.y = np.asarray(b)
 
         self.model = models.Sequential()
-        self.model.add(layers.Dense(arr[0], input_dim=len(self.dict0), activation='tanh'))
+        self.model.add(layers.SimpleRNN(arr[0], input_dim=len(self.dict0), activation='tanh'))
         for i in arr[1:]:
-            self.model.add(layers.Dense(i, activation='tanh'))
-        self.model.add(layers.Dense(len(self.dict0), activation='tanh'))
+            self.model.add(layers.SimpleRNN(i, activation='tanh'))
+        self.model.add(layers.SimpleRNN(len(self.dict0), activation='tanh'))
         self.model.compile(optimizer=tf.train.AdamOptimizer(0.001), loss='mse', metrics=['mae'])
 
 # Обучение
