@@ -32,7 +32,7 @@ async def decor(message: types.Message):
     if message.new_chat_members[0].id == botid:
         await bot.send_message(message.chat.id, pretxt[1], parse_mode = ParseMode.MARKDOWN)
     else:
-        await message.reply("Привет, [" + message.from_user.first_name + "](tg://user?id=" + str(message.from_user.id) + "), добро пожаловать в *" + message.chat.title + "*!", parse_mode = ParseMode.MARKDOWN)
+        await message.reply("Привет, [" + message.new_chat_members[0].first_name + "](tg://user?id=" + str(message.new_chat_members[0].id) + "), добро пожаловать в *" + message.chat.title + "*!", parse_mode = ParseMode.MARKDOWN)
 
 
 @dp.message_handler(commands=['start'])
