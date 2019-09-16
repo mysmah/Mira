@@ -6,6 +6,7 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
 import requests
+import AdvencedMessageObject as amo
 
 model = NeuralNet([1024])
 model.fit(100)
@@ -18,6 +19,7 @@ async def on_close(arg):
     r = requests.get("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=-1001184868284&text=%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%20%D0%B1%D0%BE%D1%82%D0%B0%20%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BB%D1%81%D1%8F")
 bot = Bot(token=token)
 dp = Dispatcher(bot)
+
 
 # ЗОНА ХАНДЛЕРОВ
 
@@ -66,6 +68,17 @@ async def reset(message: types.Message):
         await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:")
         await bot.send_message(-1001184868284, m)
         await message.reply("success")
+
+@dp.message_handler(commands=['settings'])
+async def knopki(m: types.Message):
+    text = m.text.split()[1:]
+    if text[0] == passGen(m):
+        await amo.create('settings', m, m.from_user.id)
+
+
+@dp.callback_query_handler()
+async def ebuchie(c: types.CallbackQuery):
+    await amo.proccess(c)
 
 
 @dp.message_handler(commands=['add'])
