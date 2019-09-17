@@ -1,5 +1,6 @@
 import json
 import re
+import random
 import os
 from OFPNNL import *
 from aiogram import *
@@ -37,8 +38,23 @@ async def decor(message: types.Message):
     if message.new_chat_members[0].id == botid:
         await bot.send_message(message.chat.id, pretxt[1], parse_mode = ParseMode.MARKDOWN)
     else:
-        await message.reply("Привет, [" + message.new_chat_members[0].first_name + "](tg://user?id=" + str(message.new_chat_members[0].id) + "), добро пожаловать в *" + message.chat.title + "*!", parse_mode = ParseMode.MARKDOWN)
-
+        if NCMusePretxt == 1:
+            await message.reply("Привет, [" + message.new_chat_members[0].first_name + "](tg://user?id=" + str(message.new_chat_members[0].id) + "), добро пожаловать в *" + message.chat.title + "*!", parse_mode = ParseMode.MARKDOWN)
+        else:
+            random.seed()
+            if random.randint(0,4) == 0:
+                text = model.pred('sys.io.answ0')
+            elif random.randint(0,4) == 1:
+                text = model.pred('sys.io.answ1')
+            elif random.randint(0,4) == 2:
+                text = model.pred('sys.io.answ2')
+            elif random.randint(0,4) == 3:
+                text = model.pred('sys.io.answ3')
+            elif random.randint(0,4) == 4:
+                text = model.pred('sys.io.answ4')
+            text.replace('usrn', ', [' + message.new_chat_message[0].first_name+"](tg://user?id="+str(message.new_chat_members[0].id)+"), ")
+            text.replace('chtn', message.chat.title)
+            await message.reply(text, parse_mode=ParseMode.MARKDOWN)
 
 @dp.message_handler(commands=['start'])
 async def court(message: types.Message):
