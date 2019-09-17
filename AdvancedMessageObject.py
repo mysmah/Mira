@@ -82,7 +82,7 @@ class InlineMessage:
 			elif c.data == 'boolNCM':
 				if self.s == c.from_user.id:
 					logging.debug('AMO: Inverting bool')
-					if BotIO.NCMusePretxt = True:
+					if BotIO.NCMusePretxt == True:
                                             BotIO.NCMusePretxt = False
                                         else:
                                             BotIO.NCMusePretxt = True
