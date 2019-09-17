@@ -6,7 +6,7 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
 import requests
-import AdvencedMessageObject as amo
+import AdvancedMessageObject as amo
 
 model = NeuralNet([1024])
 model.fit(100)
