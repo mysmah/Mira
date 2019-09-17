@@ -49,11 +49,9 @@ class NeuralNet:
         fil.close()
 
         fil = open('train.a')
-        print(fil.read())
         a = json.loads(fil.read())
         fil.close()
         fil = open('train.b')
-        print(fil.read())
         b = json.loads(fil.read())
         fil.close()
         for i in range(len(a)):
