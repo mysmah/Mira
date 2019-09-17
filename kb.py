@@ -1,0 +1,31 @@
+from aiogram.types import \
+InlineKeyboardMarkup, InlineKeyboardButton
+
+keyboard = InlineKeyboardMarkup(row_width = 3)
+btn1 = InlineKeyboardButton('FIT MENU', callback_data = 'empty')
+btn2 = InlineKeyboardButton('-', callback_data = 'minus')
+btn3 = InlineKeyboardButton('50', callback_data = 'empty')
+btn4 = InlineKeyboardButton('+', callback_data = 'plus')
+btn5 = InlineKeyboardButton('Start', callback_data = 'gofit')
+btn6 = InlineKeyboardButton('Back', callback_data = 'stop')
+keyboard.add(btn1)
+keyboard.add(btn2, btn3, btn4)
+keyboard.add(btn5)
+keyboard.add(btn6)
+
+keyboard1 = InlineKeyboardMarkup(row_width=3)
+rebtn = InlineKeyboardButton('RESET MENU', callback_data = 'empty')
+rebtn1 = InlineKeyboardButton('-', callback_data = 'minus')
+rebtn2 = InlineKeyboardButton('1024', callback_data = 'empty')
+rebtn3 = InlineKeyboardButton('+', callback_data = 'plus')
+rebtn4 = InlineKeyboardButton('-', callback_data = 'minus1')
+rebtn5 = InlineKeyboardButton('1', callback_data = 'empty')
+rebtn6 = InlineKeyboardButton('+', callback_data = 'plus1')
+rebtn7 = InlineKeyboardButton('Set', callback_data = 'goreset')
+rebtn8 = InlineKeyboardButton('Back', callback_data = 'stop')
+
+keyboard1.add(rebtn)
+keyboard1.add(rebtn1, rebtn2, rebtn3)
+keyboard1.add(rebtn4, rebtn5, rebtn6)
+keyboard1.add(rebtn7)
+keyboard1.add(rebtn8)
