@@ -22,7 +22,7 @@ bot = Bot(token=token)
 dp = Dispatcher(bot)
 
 # Переменные
-NCMusePretxt = 1
+NCMusePretxt = True
 # Переменные/
 
 # ЗОНА ХАНДЛЕРОВ
@@ -38,9 +38,9 @@ async def decor(message: types.Message):
     if message.new_chat_members[0].id == botid:
         await bot.send_message(message.chat.id, pretxt[1], parse_mode = ParseMode.MARKDOWN)
     else:
-        if NCMusePretxt == 1:
+        if NCMusePretxt == True:
             await message.reply("Привет, [" + message.new_chat_members[0].first_name + "](tg://user?id=" + str(message.new_chat_members[0].id) + "), добро пожаловать в *" + message.chat.title + "*!", parse_mode = ParseMode.MARKDOWN)
-        elif NCMusePretxt == -1:
+        elif NCMusePretxt == False:
             random.seed()
             if random.randint(0,4) == 0:
                 text = model.pred('sys.io.answ0')
