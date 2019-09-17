@@ -1,5 +1,4 @@
 import BotIO
-from OFPNNL import *
 import logging
 import kb
 from kb import *
