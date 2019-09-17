@@ -6,7 +6,7 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
 import requests
-#import AdvancedMessageObject as amo
+import AdvancedMessageObject as amo
 
 model = NeuralNet([1024])
 model.fit(100)
@@ -72,16 +72,16 @@ async def reset(message: types.Message):
         await bot.send_message(-1001184868284, m)
         await message.reply("success")
 
-#@dp.message_handler(commands=['settings'])
-#async def knopki(m: types.Message):
-#    text = m.text.split()[1:]
-#    if text[0] == passGen(m):
-#        await amo.create('settings', m, m.from_user.id)
+@dp.message_handler(commands=['settings'])
+async def knopki(m: types.Message):
+    text = m.text.split()[1:]
+    if text[0] == passGen(m):
+        await amo.create('settings', m, m.from_user.id)
 
 
-#@dp.callback_query_handler()
-#async def ebuchie(c: types.CallbackQuery):
-#    await amo.proccess(c)
+@dp.callback_query_handler()
+async def ebuchie(c: types.CallbackQuery):
+    await amo.proccess(c)
 
 
 @dp.message_handler(commands=['add'])
