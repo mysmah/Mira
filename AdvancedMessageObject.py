@@ -1,4 +1,5 @@
 import BotIO
+from BotIO import model, NCMusePretxt
 import logging
 from OFPNNL import *
 import kb
@@ -81,7 +82,7 @@ class InlineMessage:
 			elif c.data == 'boolNCM':
 				if self.s == c.from_user.id:
 					logging.debug('AMO: Inverting bool')
-					BotIO.NCMusePretxt = -BotIO.NCMusePretxt
+					NCMusePretxt = -NCMusePretxt
 					
 			#KeyBoardInit
 					
