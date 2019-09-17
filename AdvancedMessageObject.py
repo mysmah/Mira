@@ -1,4 +1,4 @@
-import BotIO
+#import BotIO
 import logging
 import kb
 from kb import *
