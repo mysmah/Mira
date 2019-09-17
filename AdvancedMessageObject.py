@@ -153,7 +153,7 @@ class InlineMessage:
 					
 					
 					
-			elif c.data == 'start':
+			elif c.data == 'gofit':
 				if c.from_user.id == self.s:
 					await c.answer('Сеть переведена в режим обучения')
 					self.data[0] = 0
