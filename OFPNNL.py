@@ -80,7 +80,8 @@ class NeuralNet:
 
 # Преобразование текста в айдишники слов
     def text2dict1(self, text):
-        print(text)
+
+
         text = [_.text for _ in list(tokenize(text.lower()))]
         out = []
         for i in range(len(self.dict0)):
