@@ -20,6 +20,9 @@ async def on_close(arg):
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
+# Переменные
+NCMusePretxt = 1
+# Переменные/
 
 # ЗОНА ХАНДЛЕРОВ
 
