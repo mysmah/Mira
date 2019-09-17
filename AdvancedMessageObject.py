@@ -83,9 +83,9 @@ class InlineMessage:
 				if self.s == c.from_user.id:
 					logging.debug('AMO: Inverting bool')
 					if BotIO.NCMusePretxt == True:
-                                            BotIO.NCMusePretxt = False
-                                        else:
-                                            BotIO.NCMusePretxt = True
+						BotIO.NCMusePretxt = False
+					else:
+						BotIO.NCMusePretxt = True
 					
 			#KeyBoardInit
 					
