@@ -21,9 +21,12 @@ async def on_close(arg):
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
-# Переменные
+# GПеременные
+
+global NCMusePretxt
 NCMusePretxt = True
-# Переменные/
+
+# GПеременные/
 
 # ЗОНА ХАНДЛЕРОВ
 
