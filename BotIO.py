@@ -104,7 +104,8 @@ async def knopki(m: types.Message):
 
 @dp.callback_query_handler()
 async def ebuchie(c: types.CallbackQuery):
-    await amo.proccess(c)
+    if await amo.proccess(c) == 'conf':
+        loadconf()
 
 
 @dp.message_handler(commands=['add'])
