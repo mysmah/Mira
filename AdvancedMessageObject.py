@@ -1,5 +1,5 @@
 import BotIO
-from BotIO import model, NCMusePretxt
+from BotIO import model
 import logging
 from OFPNNL import *
 import kb
@@ -23,7 +23,7 @@ async def create(type, m, sender):
 async def proccess(c):
 	logging.debug(':AMO: Called proccess method')
 	for i in amolist:
-		await i.proc(c)
+		return await i.proc(c)
 
 
 
@@ -96,6 +96,10 @@ class InlineMessage:
 					
 					await self.m.edit_text(self.m.text, reply_markup = self.kb)
 					await c.answer('NCMusePretext changed')
+					f = open('runtime.conf', 'w')
+					f.write('NCM ' + str(BotIO.NCMusePretxt))
+					f.close()
+					return 'conf'
 				else:
 					await c.answer('Изменять эти параметры может лишь тот, кто открыл их')
 				
