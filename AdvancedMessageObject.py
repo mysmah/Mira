@@ -179,7 +179,7 @@ class InlineMessage:
 					logging.debug('AMO: Leaving fit menu')
 					self.data[0] = 0
 					await c.answer('«Back')
-					await self.m.edit_text(self.m.text, reply_markup = InlineKeyboardMarkup(row_width=3).add(InlineKeyboardButton('NCM_UsePretxt: ' + str(BotIO.NCMusePretxt), callback_data='boolNCM')).row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset')).add(InlineKeyboardButton('Close', callback_data='stop')))
+					await self.m.edit_text(self.m.text, reply_markup = InlineKeyboardMarkup(row_width=3).add(InlineKeyboardButton('NCM_UsePretxt: ' + str(NCMup), callback_data='boolNCM')).row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset')).add(InlineKeyboardButton('Close', callback_data='stop')))
 				else:
 					await c.answer('Изменять эти параметры может лишь тот, кто открыл их')
 						
