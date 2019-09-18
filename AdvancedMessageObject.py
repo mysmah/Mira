@@ -88,7 +88,7 @@ class InlineMessage:
 			#KeyBoardInit
 					
 					self.kb = InlineKeyboardMarkup(row_width = 3)
-					self.kb.add(InlineKeyboardButton('NCM_UsePretxt: ' + str(NCMup), callback_data='boolNCM'))
+					self.kb.add(InlineKeyboardButton('NCM_UsePretxt: ' + str(confs.NCMup), callback_data='boolNCM'))
 					self.kb.row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset'))
 					self.kb.add(InlineKeyboardButton('Close', callback_data='stop'))
 					
