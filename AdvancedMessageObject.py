@@ -14,9 +14,9 @@ amolist = []
 
 # /////public funcs\\\\\\
 
-async def create(type, m, sender):
+async def create(type, m, sender, model):
 	logging.debug(':AMO: Called create method')
-	await InlineMessage().reg(type, m, s = sender)
+	await InlineMessage().reg(type, m, s = sender, model=model)
 
 async def proccess(c):
 	logging.debug(':AMO: Called proccess method')
@@ -37,11 +37,12 @@ class InlineMessage:
 	kb = None
 	
 	
-	async def reg(self, type, m, s):
+	async def reg(self, type, m, s, model):
 		
 		print(s)
 		self.type = type
 		self.s = s
+		self.model = model
 		
 # Determine type of Inline Message
 		
@@ -163,7 +164,7 @@ class InlineMessage:
 					await c.answer('Сеть переведена в режим обучения')
 					self.data[0] = 0
 					await self.m.edit_text(self.m.text, reply_markup = InlineKeyboardMarkup(row_width=3).add(InlineKeyboardButton('NCM_UsePretxt: ' + str(confs.NCMup), callback_data='boolNCM')).row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset')).add(InlineKeyboardButton('Close', callback_data='stop')))
-					model.fit(self.data[1])
+					self.model.fit(self.data[1])
 					
 				else:
 					await c.answer('Изменять эти параметры может лишь тот, кто открыл их')
