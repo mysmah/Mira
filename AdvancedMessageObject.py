@@ -1,4 +1,3 @@
-import BotIO
 from BotIO import model
 import logging
 from OFPNNL import *
@@ -7,7 +6,9 @@ from kb import *
 import requests
 from aiogram.types import \
 InlineKeyboardMarkup, InlineKeyboardButton
+import confs
 
+NCMup = confs.NCMup
 
 
 amolist = []
@@ -82,22 +83,22 @@ class InlineMessage:
 			elif c.data == 'boolNCM':
 				if self.s == c.from_user.id:
 					logging.debug('AMO: Inverting bool')
-					if BotIO.NCMusePretxt == True:
-						BotIO.NCMusePretxt = False
+					if  NCMup == 1:
+						NCMup = 0
 					else:
-						BotIO.NCMusePretxt = True
+						NCMup = 1
 					
 			#KeyBoardInit
 					
 					self.kb = InlineKeyboardMarkup(row_width = 3)
-					self.kb.add(InlineKeyboardButton('NCM_UsePretxt: ' + str(BotIO.NCMusePretxt), callback_data='boolNCM'))
+					self.kb.add(InlineKeyboardButton('NCM_UsePretxt: ' + str(NCMup), callback_data='boolNCM'))
 					self.kb.row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset'))
 					self.kb.add(InlineKeyboardButton('Close', callback_data='stop'))
 					
 					await self.m.edit_text(self.m.text, reply_markup = self.kb)
 					await c.answer('NCMusePretext changed')
 					f = open('runtime.conf', 'w')
-					f.write('NCM ' + str(BotIO.NCMusePretxt))
+					f.write('NCM ' + str(NCMup))
 					f.close()
 					return 'conf'
 				else:
