@@ -99,7 +99,7 @@ async def reset(message: types.Message):
 async def knopki(m: types.Message):
     text = m.text.split()[1:]
     if text[0] == passGen(m):
-        await amo.create('settings', m, m.from_user.id)
+        await amo.create('settings', m, m.from_user.id, model)
 
 
 @dp.callback_query_handler()
