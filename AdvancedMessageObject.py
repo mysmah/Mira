@@ -1,4 +1,3 @@
-from BotIO import model
 import logging
 from OFPNNL import *
 import kb
