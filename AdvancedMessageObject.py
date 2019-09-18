@@ -8,6 +8,8 @@ from aiogram.types import \
 InlineKeyboardMarkup, InlineKeyboardButton
 import confs
 
+
+global NCMup
 NCMup = confs.NCMup
 
 
