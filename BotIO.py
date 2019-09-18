@@ -20,8 +20,8 @@ async def start(arg):
     NCMusePretxt = confs.NCMup
     
 def loadconf():
-	f = open('runtime.conf', 'r')
-    confs = f.read()
+    fil = open('runtime.conf', 'r')
+    confs = fil.read()
     confs = confs.split()
     if confs[0] == 'NCM':
     	NCMusePretxt = confs[1]
