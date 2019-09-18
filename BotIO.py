@@ -1,6 +1,7 @@
 import json
 import re
 import random
+import confs
 import os
 from OFPNNL import *
 from aiogram import *
@@ -15,18 +16,21 @@ model.fit(100)
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
+    global NCMusePretxt
+    NCMusePretxt = confs.NCMup
+    
+def loadconf():
+	f = open('runtime.conf', 'r')
+    confs = f.read()
+    confs = confs.split()
+    if confs[0] == 'NCM':
+    	NCMusePretxt = confs[1]
 async def on_close(arg):
     print("Процесс умирает, нетб))9)")
     r = requests.get("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=-1001184868284&text=%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%20%D0%B1%D0%BE%D1%82%D0%B0%20%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BB%D1%81%D1%8F")
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
-# GПеременные
-
-global NCMusePretxt
-NCMusePretxt = True
-
-# GПеременные/
 
 # ЗОНА ХАНДЛЕРОВ
 
@@ -41,9 +45,9 @@ async def decor(message: types.Message):
     if message.new_chat_members[0].id == botid:
         await bot.send_message(message.chat.id, pretxt[1], parse_mode = ParseMode.MARKDOWN)
     else:
-        if NCMusePretxt == True:
+        if NCMusePretxt == 1:
             await message.reply("Привет, [" + message.new_chat_members[0].first_name + "](tg://user?id=" + str(message.new_chat_members[0].id) + "), добро пожаловать в *" + message.chat.title + "*!", parse_mode = ParseMode.MARKDOWN)
-        elif NCMusePretxt == False:
+        elif NCMusePretxt == 0:
             random.seed()
             if random.randint(0,4) == 0:
                 text = model.pred('sys.io.answ0')
