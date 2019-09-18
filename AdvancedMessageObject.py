@@ -9,10 +9,6 @@ InlineKeyboardMarkup, InlineKeyboardButton
 import confs
 
 
-global NCMup
-NCMup = confs.NCMup
-
-
 amolist = []
 
 
@@ -40,7 +36,6 @@ class InlineMessage:
 	s = None
 	data = []
 	kb = None
-	NCM = NCMup
 	
 	
 	async def reg(self, type, m, s):
@@ -57,7 +52,7 @@ class InlineMessage:
 			#KeyBoard
 			
 			self.kb = InlineKeyboardMarkup(row_width=3)
-			self.kb.add(InlineKeyboardButton('NCM_UsePretxt: ' + str(self.NCM), callback_data='boolNCM'))
+			self.kb.add(InlineKeyboardButton('NCM_UsePretxt: ' + str(confs.NCMup), callback_data='boolNCM'))
 			self.kb.row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset'))
 			self.kb.add(InlineKeyboardButton('Close', callback_data='stop'))
 			
@@ -85,10 +80,10 @@ class InlineMessage:
 			elif c.data == 'boolNCM':
 				if self.s == c.from_user.id:
 					logging.debug('AMO: Inverting bool')
-					if  self.NCM == 1:
-						self.NCM = 0
+					if  confs.NCMup == 1:
+						confs.NCMup = 0
 					else:
-						self.NCM = 1
+						confs.NCMup = 1
 					
 			#KeyBoardInit
 					
@@ -100,7 +95,7 @@ class InlineMessage:
 					await self.m.edit_text(self.m.text, reply_markup = self.kb)
 					await c.answer('NCMusePretext changed')
 					f = open('runtime.conf', 'w')
-					f.write('NCM ' + str(self.NCM))
+					f.write('NCM ' + str(confs.NCMup))
 					f.close()
 					return 'conf'
 				else:
@@ -168,7 +163,7 @@ class InlineMessage:
 				if c.from_user.id == self.s:
 					await c.answer('Сеть переведена в режим обучения')
 					self.data[0] = 0
-					await self.m.edit_text(self.m.text, reply_markup = InlineKeyboardMarkup(row_width=3).add(InlineKeyboardButton('NCM_UsePretxt: ' + str(self.NCM), callback_data='boolNCM')).row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset')).add(InlineKeyboardButton('Close', callback_data='stop')))
+					await self.m.edit_text(self.m.text, reply_markup = InlineKeyboardMarkup(row_width=3).add(InlineKeyboardButton('NCM_UsePretxt: ' + str(confs.NCMup), callback_data='boolNCM')).row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset')).add(InlineKeyboardButton('Close', callback_data='stop')))
 					model.fit(self.data[1])
 					
 				else:
@@ -181,7 +176,7 @@ class InlineMessage:
 					logging.debug('AMO: Leaving fit menu')
 					self.data[0] = 0
 					await c.answer('«Back')
-					await self.m.edit_text(self.m.text, reply_markup = InlineKeyboardMarkup(row_width=3).add(InlineKeyboardButton('NCM_UsePretxt: ' + str(self.NCM), callback_data='boolNCM')).row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset')).add(InlineKeyboardButton('Close', callback_data='stop')))
+					await self.m.edit_text(self.m.text, reply_markup = InlineKeyboardMarkup(row_width=3).add(InlineKeyboardButton('NCM_UsePretxt: ' + str(confs.NCMup), callback_data='boolNCM')).row(InlineKeyboardButton('FIT', callback_data='open_fit'), InlineKeyboardButton('RESET', callback_data='open_reset')).add(InlineKeyboardButton('Close', callback_data='stop')))
 				else:
 					await c.answer('Изменять эти параметры может лишь тот, кто открыл их')
 						
