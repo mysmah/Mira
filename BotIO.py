@@ -91,8 +91,7 @@ async def reset(message: types.Message):
     if model.new_model(m) == 1:
         await message.reply("fail")
     else:
-        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:")
-        await bot.send_message(-1001184868284, m)
+        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(m))
         await message.reply("success")
 
 @dp.message_handler(commands=['settings'])
@@ -107,7 +106,8 @@ async def ebuchie(c: types.CallbackQuery):
     ret = await imo.prc(c)
     if ret == 'fit:fited':
         await bot.send_message('@catgirl_channel', 'Бот переведен в активный режим')
-    elif ret
+    elif isinstance(ret, list) and ret[0] == 'reset:reseted':
+        await bot.send_message('@catgirl_channel', 'Нейросеть бота была сброшена\nНовая сеть:\n'+str(ret[1]))
 
 
 @dp.message_handler(commands=['add'])
