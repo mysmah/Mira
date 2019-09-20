@@ -1,5 +1,5 @@
 import logging
-import kb
+from . import kb
 import requests
 from .pG import pageGen, listGen
 from aiogram.types import \
