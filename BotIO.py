@@ -8,7 +8,7 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
 import requests
-import AdvancedMessageObject as amo
+from AdvancedMessageObjects import imo
 
 model = NeuralNet([1024])
 model.fit(100)
@@ -91,21 +91,23 @@ async def reset(message: types.Message):
     if model.new_model(m) == 1:
         await message.reply("fail")
     else:
-        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:")
-        await bot.send_message(-1001184868284, m)
+        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(m))
         await message.reply("success")
 
 @dp.message_handler(commands=['settings'])
 async def knopki(m: types.Message):
     text = m.text.split()[1:]
     if text[0] == passGen(m):
-        await amo.create('settings', m, m.from_user.id, model)
+        await imo.summon(model, bot, 'settings', locked = True, msg = m, pdata = ['Меню с настройками(кнопоки)', ['СВИТЧИ', 'close:toggles:0'], ['FIT','counter:fit:50:0','send:fit:0','close:fit:0'], ['RESET','counter:neurod:1024:0','counter:layers:1:0','send:reset:0','close:reset:0'], 'close:null:0'])
 
 
 @dp.callback_query_handler()
 async def ebuchie(c: types.CallbackQuery):
-    if await amo.proccess(c) == 'conf':
-        loadconf()
+    ret = await imo.prc(c)
+    if ret == 'fit:fited':
+        await bot.send_message('@catgirl_channel', 'Бот переведен в активный режим')
+    elif isinstance(ret, list) and ret[0] == 'reset:reseted':
+        await bot.send_message('@catgirl_channel', 'Нейросеть бота была сброшена\nНовая сеть:\n'+str(ret[1]))
 
 
 @dp.message_handler(commands=['add'])
