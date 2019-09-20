@@ -4,12 +4,15 @@ import requests
 from .pG import pageGen, listGen
 from aiogram.types import \
 InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram import types
 from warnings import warn
+from project_misc import token
+import pickle
 
 objects=[]
 
 
-async def summon(model, bot, type, locked = False, pdata = None, calledby = None, msg = None):
+async def summon(model, bot, type, locked = False, pdata = None, calledby = None, msg):
 	logging.debug('New imo object')
 	await Module(model, bot).init(type, locked, pdata, calledby, msg)
 
@@ -18,7 +21,6 @@ async def prc(c, pdata = None):
 	for i in objects:
 		if i.msg.message_id == c.message.message_id:
 			return await i.process(c, pdata)
-
 
 
 
@@ -33,6 +35,7 @@ class Module:
 		self.senderid = None
 		self.calledby = None
 		self.locked = False
+		objects.append(self)
 	
 	async def init(self, type, locked, pdata, calledby, msg):
 		if type in Module.types:
@@ -49,7 +52,6 @@ class Module:
 		self.calledby = calledby
 		self.pdata = pdata
 		self.msg = await self.__register(msg,pdata)
-		objects.append(self)
 	
 	
 	
@@ -80,11 +82,14 @@ class Module:
 				return await self.bot.send_message(pdata[1], pdata[0], reply_markup=kb.choose)
 				
 	async def process(self, c, pdata):
+		print(c.data)
 		if self.locked == True:
 			if self.senderid == c.from_user.id:
 				return await self.__proc(c, pdata)
 			else:
 				await c.answer('#400: Ошибка доступа')
+		else:
+			return await self.__proc(c, pdata)
 				
 
 	async def __proc(self, c, pdata):
@@ -267,11 +272,42 @@ class Module:
 		if isinstance(pdata, list) and len(pdata)>=2:
 			try:
 				if self.msg.text:
-					await self.msg.edit_text(self.msg.text, reply_markup=pageGen(pdata))
+					self.msg = await self.msg.edit_text(self.msg.text, reply_markup=pageGen(pdata))
 				elif self.msg.caption:
 					await self.msg.edit_caption(self.msg.caption, reply_markup=pageGen(pdata))
 				return True
 			except Exception:
 				return False
+				
+	def sleep(self):
+		if self.type == 'settings':
+			r.requests.get('https://api.telegram.org/bot'+token+'/messageDelete?chat_id='+self.msg.chat.id+'&message_id='+self.msg.message_id)
+			return None
+		r = requests.get('https://api.telegram.org/bot'+token+'/editMessageText?chat_id='+str(self.msg.chat.id)+'&message_id='+str(self.msg.message_id)+'&text=%D0%92%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%BC%D0%BE%D0%BC%D0%B5%D0%BD%D1%82%20%D0%B1%D0%BE%D1%82%20%D0%BE%D1%82%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%2C%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8%20%D0%BD%D0%B5%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D1%8E%D1%82')
+		with open('runtime.bytes', 'wb') as save:
+			self.bot =None
+			pickle.dump(self, save, -1)
+	async def run(self):
+		await self.msg.edit_text(self.msg.text, reply_markup=self.msg.reply_markup)
+		
+		
+		
+async def shtdw():
+	with open('runtime.bytes', 'wb') as save:
+		for i in objects:
+			print(type(i))
+			i.sleep()
+
+async def initof():
+	with open('runtime.bytes', 'rb') as save:
+		while True:
+			try:
+				loaded = pickle.load(save)
+				await loaded.run()
+				print(loaded)
+				objects.append(loaded)
+				
+			except Exception:
+				return None
 
 
