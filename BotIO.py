@@ -33,13 +33,16 @@ async def on_close(arg):
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
-
 # ЗОНА ХАНДЛЕРОВ
 
 @dp.message_handler(commands=['say'])
 async def nyan(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     await message.reply(model.pred(message.text))
+
+@dp.message_handler(CommandHelp)
+async def help(m: types.Message):
+    await m.reply('Текст для данной команды ещё не готов')
 
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
