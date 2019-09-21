@@ -40,7 +40,7 @@ async def nyan(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     await message.reply(model.pred(message.text))
 
-@dp.message_handler(CommandHelp)
+@dp.message_handler(commands=['help'])
 async def help(m: types.Message):
     await m.reply('Текст для данной команды ещё не готов')
 
@@ -108,7 +108,7 @@ async def knopki(m: types.Message):
 
 @dp.callback_query_handler()
 async def ebuchie(c: types.CallbackQuery):
-    ret = await imo.prc(c, bot)
+    ret = await imo.prc(c, bot, model)
     if ret == 'fit:fited':
         await bot.send_message('@catgirl_channel', 'Бот переведен в активный режим')
     elif isinstance(ret, list) and ret[0] == 'reset:reseted':
