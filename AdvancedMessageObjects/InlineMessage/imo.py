@@ -12,11 +12,11 @@ import pickle
 objects=[]
 
 
-async def summon(model, bot, type, locked = False, pdata = None, calledby = None, msg):
+async def summon(model, bot, type, msg, locked = False, pdata = None, calledby = None):
 	logging.debug('New imo object')
 	await Module(model, bot).init(type, locked, pdata, calledby, msg)
 
-async def prc(c, pdata = None):
+async def prc(c, bot, pdata = None):
 	logging.debug('Processing imo object')
 	for i in objects:
 		if i.msg.message_id == c.message.message_id:
@@ -81,8 +81,8 @@ class Module:
 			if isinstance(pdata, list):
 				return await self.bot.send_message(pdata[1], pdata[0], reply_markup=kb.choose)
 				
-	async def process(self, c, pdata):
-		print(c.data)
+	async def process(self, c, bot, pdata):
+		self.bot = bot
 		if self.locked == True:
 			if self.senderid == c.from_user.id:
 				return await self.__proc(c, pdata)
