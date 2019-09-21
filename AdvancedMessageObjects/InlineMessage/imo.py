@@ -16,11 +16,11 @@ async def summon(model, bot, type, msg, locked = False, pdata = None, calledby =
 	logging.debug('New imo object')
 	await Module(model, bot).init(type, locked, pdata, calledby, msg)
 
-async def prc(c, bot, pdata = None):
+async def prc(c, bot, model, pdata = None):
 	logging.debug('Processing imo object')
 	for i in objects:
 		if i.msg.message_id == c.message.message_id:
-			return await i.process(c,bot, pdata)
+			return await i.process(c,bot,model, pdata)
 
 
 
@@ -81,8 +81,9 @@ class Module:
 			if isinstance(pdata, list):
 				return await self.bot.send_message(pdata[1], pdata[0], reply_markup=kb.choose)
 				
-	async def process(self, c, bot, pdata):
+	async def process(self, c, bot, model, pdata):
 		self.bot = bot
+                self.model = model
 		if self.locked == True:
 			if self.senderid == c.from_user.id:
 				return await self.__proc(c, pdata)
@@ -285,6 +286,7 @@ class Module:
 			return None
 		r = requests.get('https://api.telegram.org/bot'+token+'/editMessageText?chat_id='+str(self.msg.chat.id)+'&message_id='+str(self.msg.message_id)+'&text=%D0%92%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%BC%D0%BE%D0%BC%D0%B5%D0%BD%D1%82%20%D0%B1%D0%BE%D1%82%20%D0%BE%D1%82%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%2C%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8%20%D0%BD%D0%B5%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D1%8E%D1%82')
 		with open('runtime.bytes', 'wb') as save:
+                        self.model = None
 			self.bot =None
 			pickle.dump(self, save, -1)
 	async def run(self):
