@@ -20,7 +20,7 @@ async def prc(c, bot, pdata = None):
 	logging.debug('Processing imo object')
 	for i in objects:
 		if i.msg.message_id == c.message.message_id:
-			return await i.process(c, pdata)
+			return await i.process(c,bot, pdata)
 
 
 
