@@ -83,7 +83,7 @@ class Module:
 				
 	async def process(self, c, bot, model, pdata):
 		self.bot = bot
-                self.model = model
+		self.model = model
 		if self.locked == True:
 			if self.senderid == c.from_user.id:
 				return await self.__proc(c, pdata)
@@ -311,5 +311,4 @@ async def initof():
 				
 			except Exception:
 				return None
-
 
