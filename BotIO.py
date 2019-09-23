@@ -8,6 +8,7 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
 import requests
+import subprocess
 from AdvancedMessageObjects import imo
 
 model = NeuralNet([1024])
@@ -43,6 +44,14 @@ async def nyan(message: types.Message):
 @dp.message_handler(commands=['help'])
 async def help(m: types.Message):
     await m.reply('Текст для данной команды ещё не готов')
+
+@dp.message_handler(commands=['upd'])
+async def update(m: types.Message):
+    if m.text.split()[1] == passGen(m):
+        subprocess.Popen('./start')
+        exit(0)
+    else:
+        pass
 
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
