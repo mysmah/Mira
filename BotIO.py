@@ -105,7 +105,7 @@ async def decor(message: types.Message):
 
 @dp.message_handler(commands=['start'])
 async def court(message: types.Message):
-    addchat(message.chat.id)
+	addchat(message.chat.id)
 	if message.chat.id > 0:
 		await bot.send_message(message.chat.id, pretxt[0], parse_mode = ParseMode.MARKDOWN)
 
