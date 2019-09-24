@@ -61,11 +61,16 @@ async def rb(message: types.Message):
 async def broadcast(message: types.Message):
     await message.chat.do('typing')
     await asyncio.sleep(4.8)
-    await message.reply_to_message.reply('Ну ок, потом всем разошлю')
+    await message.reply('Ну ок, потом всем разошлю')
     await asyncio.sleep(random.randint(24, 904))
     for i in chats:
-        if i != 0:
-            await message.reply_to_message.forward(i)
+        if message.reply_to_message:
+            if i != 0:
+                await message.reply_to_message.forward(i)
+        elif message.text:
+            await bot.send_message(i, message.text.split()[1:])
+        elif message.caption:
+            await bot.send_photo(i)
 
 
 @dp.message_handler(commands=['help'])
