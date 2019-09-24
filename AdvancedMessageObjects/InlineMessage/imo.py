@@ -206,7 +206,7 @@ class Module:
 			elif self.section == 2 and c.data.startswith('send:'):
 				self.section = 0
 				await c.answer('#200: Сеть переведена в режим обучения', show_alert=True)
-				await self.bot.send_message('@catgirl_channel', "Бот переведен в режим обучения")
+				await self.bot.send_message('@catgirl_channel', "Бот переведен в режим тренировки на "+str(self.counter)+" эпох")
 				await self.__updatePage(self.pdata)
 				self.model.fit(self.counter)
 				return 'fit:fited'
