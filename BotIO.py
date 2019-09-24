@@ -14,7 +14,7 @@ from AdvancedMessageObjects import imo
 model = NeuralNet([1024])
 model.fit(100)
 
-chats = []
+chats = ['@catgirl_channel']
 
 def addchat(id: int):
     if id in chats:
@@ -28,12 +28,12 @@ async def start(arg):
     global NCMusePretxt
     NCMusePretxt = confs.NCMup
     await imo.initof()
-    try:
-        fil = open('chats.db', 'r')
-        chats = fil.read()
-        fil.close()
-    except Exception:
-        pass
+    #try:
+        #fil = open('chats.db', 'r')
+        #chats = fil.read()
+        #fil.close()
+    #except Exception:
+        #pass
 def loadconf():
     fil = open('runtime.conf', 'r')
     confs = fil.read()
