@@ -150,7 +150,7 @@ async def adialog(message: types.Message):
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    await message.chat.typing()
+    await message.chat.do('typing')
     text = message.text.lower()
     if message.chat.id < 0:
         if text.startswith("мира ") or text.startswith("mira") or text.startswith("мира,") or text.startswith("mira,"):
