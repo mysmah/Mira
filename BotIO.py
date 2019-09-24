@@ -36,11 +36,6 @@ dp = Dispatcher(bot)
 
 # ЗОНА ХАНДЛЕРОВ
 
-@dp.message_handler(commands=['say'])
-async def nyan(message: types.Message):
-    print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    await message.reply(model.pred(message.text))
-
 @dp.message_handler(commands=['reboot'])
 async def rb(message: types.Message):
 	exit()
