@@ -155,19 +155,19 @@ async def nya(message: types.Message):
     if message.chat.id < 0:
         if text.startswith("мира ") or text.startswith("mira") or text.startswith("мира,") or text.startswith("mira,"):
             await message.chat.do('typing')
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(1)
             await message.reply(model.pred(text[5:]))
         elif "@catgirl_chat_bot" in text:
             await message.chat.do('typing')
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(1)
             await message.reply(model.pred(text.replace("@catgirl_chat_bot", "")))
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
             await message.chat.do('typing')
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(1)
             await message.reply(model.pred(text))
     else:
         await message.chat.do('typing')
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(1)
         await message.reply(model.pred(text))
 
 
