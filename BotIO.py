@@ -112,7 +112,8 @@ async def ebuchie(c: types.CallbackQuery):
         await bot.send_message('@catgirl_channel', 'Бот переведен в активный режим')
     elif isinstance(ret, list) and ret[0] == 'reset:reseted':
         await bot.send_message('@catgirl_channel', 'Нейросеть бота была сброшена\nНовая сеть:\n'+str(ret[1]))
-
+    elif ret == 'reboot':
+        exit()
 
 @dp.message_handler(commands=['add'])
 async def add(message: types.Message):
