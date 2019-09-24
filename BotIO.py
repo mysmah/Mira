@@ -157,25 +157,25 @@ async def nya(message: types.Message):
             text = model.pred(text[5:])
             await asyncio.sleep(0.5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.2*len(text))
+            await asyncio.sleep(0.2*len(text)/2)
             await message.reply(text)
         elif "@catgirl_chat_bot" in text:
             text = model.pred(text.replace('@catgirl_bot', ''))
             await asyncio.sleep(0.5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.2*len(text))
+            await asyncio.sleep(0.2*len(text)/2)
             await message.reply(text)
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
             text = model.pred(text)
             await asyncio.sleep(0.5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.2*len(text))
+            await asyncio.sleep(0.2*len(text)/2)
             await message.reply(text)
     else:
         text = model.pred(text)
         await asyncio.sleep(0.5)
         await message.chat.do('typing')
-        await asyncio.sleep(0.2*len(text))
+        await asyncio.sleep(0.2*len(text)/2)
         await message.reply(text)
 
 
