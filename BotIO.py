@@ -70,7 +70,7 @@ async def broadcast(message: types.Message):
         elif message.text:
             await bot.send_message(i, message.text.split()[1:])
         elif message.caption:
-            await bot.send_photo(i)
+            await bot.send_photo(i, photo = message.photo_size.file_id, caption = message.caption)
 
 
 @dp.message_handler(commands=['help'])
