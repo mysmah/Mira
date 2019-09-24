@@ -14,13 +14,26 @@ from AdvancedMessageObjects import imo
 model = NeuralNet([1024])
 model.fit(100)
 
+chats = []
+
+def addchat(id: int):
+    if id in chats:
+        pass
+    else:
+        chats.append(id)
+
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
     global NCMusePretxt
     NCMusePretxt = confs.NCMup
     await imo.initof()
-    
+    try:
+        fil = open('chats.db', 'r')
+        chats = fil.read()
+        fil.close()
+    except Exception:
+        pass
 def loadconf():
     fil = open('runtime.conf', 'r')
     confs = fil.read()
@@ -31,6 +44,9 @@ async def on_close(arg):
     print("Процесс умирает, нетб))9)")
     r = requests.get("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=-1001184868284&text=%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%20%D0%B1%D0%BE%D1%82%D0%B0%20%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BB%D1%81%D1%8F")
     imo.shtdw()
+    fil = open('chats.db', 'w')
+    fil.write(str(chats))
+    fil.close()
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
@@ -41,12 +57,31 @@ async def rb(message: types.Message):
 	if message.text.split()[1] == passGen(message):
 		exit()
 	
+@dp.message_handler(commands=['broadcast'])
+async def broadcast(message: types.Message):
+    if message.text.split()[1]:
+        text = ' '.join(message.text.split()[1:])
+    elif message.reply_to_message:
+        text = message.reply_to_message.text
+    else:
+        await message.reply('error: empty text')
+        return None
+    await message.chat.do('typing')
+    await asyncio.sleep(4,8)
+    await message.reply('Ну ок, потом всем разошлю')
+    await asyncio.sleep(random.randint(24, 204))
+    for i in chats:
+        if i != 0:
+            await bot.send_message(i, text)
+
+
 @dp.message_handler(commands=['help'])
 async def help(m: types.Message):
     await m.reply('Текст для данной команды ещё не готов')
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
 async def decor(message: types.Message):
+    addchat(message.chat.id)
     if message.new_chat_members[0].id == botid:
         await bot.send_message(message.chat.id, pretxt[1], parse_mode = ParseMode.MARKDOWN)
     else:
@@ -70,6 +105,7 @@ async def decor(message: types.Message):
 
 @dp.message_handler(commands=['start'])
 async def court(message: types.Message):
+    addchat(message.chat.id)
 	if message.chat.id > 0:
 		await bot.send_message(message.chat.id, pretxt[0], parse_mode = ParseMode.MARKDOWN)
 
@@ -150,6 +186,7 @@ async def adialog(message: types.Message):
 
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
+    addchat(message.chat.id)
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     text = message.text.lower()
     if message.chat.id < 0:
