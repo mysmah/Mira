@@ -86,7 +86,13 @@ class Module:
 		self.model = model
 		if self.locked == True:
 			if self.senderid == c.from_user.id:
-				return await self.__proc(c, pdata)
+				self.result = await self.__proc(c, pdata)
+				if isinstance(self.result, list):
+					if self.result[2].startswith('bool:reboot'):
+						await self.msg.delete()
+						return 'reboot'
+				else:
+					return self.result
 			else:
 				await c.answer('#400: Ошибка доступа')
 		else:
@@ -311,4 +317,3 @@ async def initof():
 				
 			except Exception:
 				return None
-
