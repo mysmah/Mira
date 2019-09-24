@@ -59,6 +59,7 @@ async def rb(message: types.Message):
 	
 @dp.message_handler(commands=['broadcast'])
 async def broadcast(message: types.Message):
+    await message.reply('a')
     if message.text.split()[1]:
         text = ' '.join(message.text.split()[1:])
     elif message.reply_to_message:
