@@ -31,6 +31,7 @@ async def start(arg):
     try:
         with open('chats.db', 'r') as hui:
             chats = hui.read().split('\n')[1:]
+            await message.reply(chats)
     except Exception:
         pass
 def loadconf():
