@@ -155,27 +155,47 @@ async def nya(message: types.Message):
     if message.chat.id < 0:
         if text.startswith("мира ") or text.startswith("mira") or text.startswith("мира,") or text.startswith("mira,"):
             text = model.pred(text[5:])
+            length = len(text)
             await asyncio.sleep(0.3)
+            while lenth > 5:
+                await m.chat.do('typing')
+                length -=5
+                await asyncio.sleep(5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.16*len(text)/1.5)
+            await asyncio.sleep(0.2*length)
             await message.reply(text)
         elif "@catgirl_chat_bot" in text:
             text = model.pred(text.replace('@catgirl_bot', ''))
+            length = len(text)
             await asyncio.sleep(0.3)
+            while lenth > 5:
+                await m.chat.do('typing')
+                length -=5
+                await asyncio.sleep(5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.16*len(text)/1.5)
+            await asyncio.sleep(0.2*length)
             await message.reply(text)
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
             text = model.pred(text)
+            length = len(text)
             await asyncio.sleep(0.3)
+            while lenth > 5:
+                await m.chat.do('typing')
+                length -=5
+                await asyncio.sleep(5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.16*len(text)/1.5)
+            await asyncio.sleep(0.2*length)
             await message.reply(text)
     else:
         text = model.pred(text)
+        length = len(text)
         await asyncio.sleep(0.3)
+        while lenth > 5:
+            await m.chat.do('typing')
+            length -=5
+            await asyncio.sleep(5)
         await message.chat.do('typing')
-        await asyncio.sleep(0.16*len(text)/1.5)
+        await asyncio.sleep(0.2*length)
         await message.reply(text)
 
 
