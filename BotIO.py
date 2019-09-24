@@ -71,8 +71,6 @@ async def broadcast(message: types.Message):
                 await message.reply_to_message.forward(i)
         elif message.text:
             await bot.send_message(i, ''.join(message.text.split()[1:]))
-        elif message.caption:
-            await bot.send_photo(i, photo = message.photo[0].file_id, caption = message.caption)
 
 
 @dp.message_handler(commands=['help'])
