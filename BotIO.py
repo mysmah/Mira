@@ -60,20 +60,13 @@ async def rb(message: types.Message):
 @dp.message_handler(commands=['broadcast'])
 async def broadcast(message: types.Message):
     await message.reply('a')
-    if message.text.split()[1]:
-        text = ' '.join(message.text.split()[1:])
-    elif message.reply_to_message:
-        text = message.reply_to_message.text
-    else:
-        await message.reply('error: empty text')
-        return None
     await message.chat.do('typing')
     await asyncio.sleep(4,8)
     await message.reply('Ну ок, потом всем разошлю')
     await asyncio.sleep(random.randint(24, 204))
     for i in chats:
         if i != 0:
-            await bot.send_message(i, text)
+            await message.reply_to_message.forward(i)
 
 
 @dp.message_handler(commands=['help'])
