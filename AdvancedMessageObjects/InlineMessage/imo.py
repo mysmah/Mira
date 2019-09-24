@@ -86,13 +86,7 @@ class Module:
 		self.model = model
 		if self.locked == True:
 			if self.senderid == c.from_user.id:
-				self.result = await self.__proc(c, pdata)
-				if isinstance(self.result, list):
-					if self.result[2].startswith('bool:reboot'):
-						await self.msg.delete()
-						return 'reboot'
-				else:
-					return self.result
+				return await self.__proc(c, pdata)
 			else:
 				await c.answer('#400: Ошибка доступа')
 		else:
@@ -146,6 +140,9 @@ class Module:
 					self.section = 3
 					await self.__updatePage(self.pdata[3])
 					await c.answer('>> Открыт раздел RESET')
+				elif c.data == 'open:4':
+					await c.answer('>> Перезагрузка')
+					exit()
 				else:
 					await c.answer('>> Неизвестный коллбэк')
 				return 'settings:open'
