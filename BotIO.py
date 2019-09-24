@@ -68,7 +68,7 @@ async def broadcast(message: types.Message):
             if i != 0:
                 await message.reply_to_message.forward(i)
         elif message.text:
-            await bot.send_message(i, message.text.split()[1:])
+            await bot.send_message(i, ''.join(message.text.split()[1:]))
         elif message.caption:
             await bot.send_photo(i, photo = message.photo[0].file_id, caption = message.caption)
 
