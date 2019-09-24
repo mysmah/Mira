@@ -102,7 +102,7 @@ async def reset(message: types.Message):
 async def knopki(m: types.Message):
     text = m.text.split()[1:]
     if text[0] == passGen(m):
-        await imo.summon(model, bot, 'settings', m, locked = True, pdata = ['Меню с настройками(кнопоки)', ['СВИТЧИ','close:toggles:0'], ['FIT','counter:fit:50:0','send:fit:0','close:fit:0'], ['RESET','counter:neurod:1024:0','counter:layers:1:0','send:reset:0','close:reset:0'],'bool:reboot:0', 'close:null:0'])
+        await imo.summon(model, bot, 'settings', m, locked = True, pdata = ['Меню с настройками(кнопоки)', ['СВИТЧИ','close:toggles:0'], ['FIT','counter:fit:50:0','send:fit:0','close:fit:0'], ['RESET','counter:neurod:1024:0','counter:layers:1:0','send:reset:0','close:reset:0'],['Перезагрузка'], 'close:null:0'])
 
 
 @dp.callback_query_handler()
