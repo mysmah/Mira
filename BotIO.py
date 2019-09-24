@@ -38,7 +38,8 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['reboot'])
 async def rb(message: types.Message):
-	exit()
+	if message.text.split()[1] == passGen(message):
+		exit()
 	
 @dp.message_handler(commands=['help'])
 async def help(m: types.Message):
@@ -150,9 +151,9 @@ async def adialog(message: types.Message):
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    await message.chat.do('typing')
     text = message.text.lower()
     if message.chat.id < 0:
+        await message.chat.do('typing')
         if text.startswith("мира ") or text.startswith("mira") or text.startswith("мира,") or text.startswith("mira,"):
             await message.reply(model.pred(text[5:]))
         elif "@catgirl_chat_bot" in text:
@@ -160,6 +161,7 @@ async def nya(message: types.Message):
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
             await message.reply(model.pred(text))
     else:
+        await message.chat.do('typing')
         await message.reply(model.pred(text))
 
 
