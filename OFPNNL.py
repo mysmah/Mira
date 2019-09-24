@@ -96,9 +96,9 @@ class NeuralNet:
                 text += [self.dict0[i]]
         ret = " ".join(text)
         ret = ret.replace(' , ', ', ')
-        ret = ret.replace(' ! ', '!')
+        ret = ret.replace(' ! ', '! ')
         ret = ret.replace(' . ', '. ')
-        ret = ret.replace(' ? ', '?')
+        ret = ret.replace(' ? ', '? ')
         ret = ret.replace(' : ', ':')
         ret = ret.replace(' ,', ', ')
         ret = ret.replace(' !', '! ')
@@ -107,4 +107,5 @@ class NeuralNet:
         ret = ret.replace(' < ', '<')
         ret = ret.replace(' " ', ' "')
         ret = ret.replace(' :', ':')
+        ret = ret.replace('< ', '<')
         return ret
