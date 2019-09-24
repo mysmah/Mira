@@ -142,6 +142,7 @@ class Module:
 					await c.answer('>> Открыт раздел RESET')
 				elif c.data == 'open:4':
 					await c.answer('>> Перезагрузка')
+					await self.msg.delete()
 					exit()
 				else:
 					await c.answer('>> Неизвестный коллбэк')
