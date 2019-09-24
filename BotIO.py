@@ -28,12 +28,11 @@ async def start(arg):
     global NCMusePretxt
     NCMusePretxt = confs.NCMup
     await imo.initof()
-    #try:
-        #fil = open('chats.db', 'r')
-        #chats = fil.read()
-        #fil.close()
-    #except Exception:
-        #pass
+    try:
+        with open('chats.db', 'r') as hui:
+            chats = hui.read().split('\n')[1:]
+    except Exception:
+        pass
 def loadconf():
     fil = open('runtime.conf', 'r')
     confs = fil.read()
@@ -44,9 +43,10 @@ async def on_close(arg):
     print("Процесс умирает, нетб))9)")
     r = requests.get("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=-1001184868284&text=%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%20%D0%B1%D0%BE%D1%82%D0%B0%20%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BB%D1%81%D1%8F")
     imo.shtdw()
-    fil = open('chats.db', 'w')
-    fil.write(str(chats))
-    fil.close()
+    chats[0] = '@catgirl_channel'
+    with open('chat.db', 'w') as hui:
+        for i in chats:
+            hui.write('\n' + i)
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
@@ -61,12 +61,12 @@ async def rb(message: types.Message):
 async def broadcast(message: types.Message):
     await message.reply('a')
     await message.chat.do('typing')
-    await asyncio.sleep(4,8)
+    await asyncio.sleep(4.8)
     await message.reply('Ну ок, потом всем разошлю')
-    await asyncio.sleep(random.randint(24, 204))
+    await asyncio.sleep(random.randint(24, 904))
     for i in chats:
         if i != 0:
-            await message.reply_to_message.forward(i)
+            await message.forward(i)
 
 
 @dp.message_handler(commands=['help'])
