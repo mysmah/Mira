@@ -157,9 +157,9 @@ async def nya(message: types.Message):
             text = model.pred(text[5:])
             length = len(text)
             await asyncio.sleep(0.3)
-            while length > 26:
+            while length > 27:
                 await message.chat.do('typing')
-                length -=26
+                length -=27
                 await asyncio.sleep(5)
             await message.chat.do('typing')
             await asyncio.sleep(0.18*length)
@@ -168,9 +168,9 @@ async def nya(message: types.Message):
             text = model.pred(text.replace('@catgirl_bot', ''))
             length = len(text)
             await asyncio.sleep(0.3)
-            while length > 26:
+            while length > 27:
                 await message.chat.do('typing')
-                length -=26
+                length -=27
                 await asyncio.sleep(5)
             await message.chat.do('typing')
             await asyncio.sleep(0.18*length)
@@ -179,9 +179,9 @@ async def nya(message: types.Message):
             text = model.pred(text)
             length = len(text)
             await asyncio.sleep(0.3)
-            while length > 26:
+            while length > 27:
                 await message.chat.do('typing')
-                length -=26
+                length -=27
                 await asyncio.sleep(5)
             await message.chat.do('typing')
             await asyncio.sleep(0.18*length)
