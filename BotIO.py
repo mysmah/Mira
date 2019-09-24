@@ -41,18 +41,13 @@ async def nyan(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     await message.reply(model.pred(message.text))
 
+@dp.message_handler(commands=['reboot'])
+async def rb(message: types.Message):
+	exit()
+	
 @dp.message_handler(commands=['help'])
 async def help(m: types.Message):
     await m.reply('Текст для данной команды ещё не готов')
-
-@dp.message_handler(commands=['update'])
-async def sukahelpi(m: types.Message):
-    #if m.text.split()[1] == passGen(m):
-    await m.reply('aw')
-    exit(0)
-    #else:
-       # pass
-
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
 async def decor(message: types.Message):
