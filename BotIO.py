@@ -158,7 +158,7 @@ async def nya(message: types.Message):
             length = len(text)
             await asyncio.sleep(0.3)
             while length > 25:
-                await m.chat.do('typing')
+                await message.chat.do('typing')
                 length -=25
                 await asyncio.sleep(5)
             await message.chat.do('typing')
@@ -169,7 +169,7 @@ async def nya(message: types.Message):
             length = len(text)
             await asyncio.sleep(0.3)
             while length > 25:
-                await m.chat.do('typing')
+                await message.chat.do('typing')
                 length -=25
                 await asyncio.sleep(5)
             await message.chat.do('typing')
@@ -180,7 +180,7 @@ async def nya(message: types.Message):
             length = len(text)
             await asyncio.sleep(0.3)
             while length > 25:
-                await m.chat.do('typing')
+                await message.chat.do('typing')
                 length -=25
                 await asyncio.sleep(5)
             await message.chat.do('typing')
@@ -191,7 +191,7 @@ async def nya(message: types.Message):
         length = len(text)
         await asyncio.sleep(0.3)
         while length > 25:
-            await m.chat.do('typing')
+            await message.chat.do('typing')
             length -=25
             await asyncio.sleep(5)
         await message.chat.do('typing')
