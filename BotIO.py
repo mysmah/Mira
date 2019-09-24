@@ -8,7 +8,7 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode
 import requests
-import subprocess
+import asyncio
 from AdvancedMessageObjects import imo
 
 model = NeuralNet([1024])
