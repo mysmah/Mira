@@ -94,4 +94,4 @@ class NeuralNet:
         for i in range(len(self.dict0)):
             if arr[i]:
                 text += [self.dict0[i]]
-        return " ".join(text)
+        return "".join(text)
