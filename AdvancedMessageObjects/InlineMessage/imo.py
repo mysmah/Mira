@@ -298,10 +298,9 @@ class Module:
 		
 		
 async def shtdw():
-	with open('runtime.bytes', 'wb') as save:
-		for i in objects:
-			print(type(i))
-			i.sleep()
+	for i in objects:
+		print(type(i))
+		i.sleep()
 
 async def initof():
 	with open('runtime.bytes', 'rb') as save:
