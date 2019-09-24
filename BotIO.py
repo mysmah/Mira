@@ -157,45 +157,45 @@ async def nya(message: types.Message):
             text = model.pred(text[5:])
             length = len(text)
             await asyncio.sleep(0.3)
-            while length > 25:
+            while length > 26:
                 await message.chat.do('typing')
-                length -=25
+                length -=26
                 await asyncio.sleep(5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.2*length)
+            await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif "@catgirl_chat_bot" in text:
             text = model.pred(text.replace('@catgirl_bot', ''))
             length = len(text)
             await asyncio.sleep(0.3)
-            while length > 25:
+            while length > 26:
                 await message.chat.do('typing')
-                length -=25
+                length -=26
                 await asyncio.sleep(5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.2*length)
+            await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
             text = model.pred(text)
             length = len(text)
             await asyncio.sleep(0.3)
-            while length > 25:
+            while length > 26:
                 await message.chat.do('typing')
-                length -=25
+                length -=26
                 await asyncio.sleep(5)
             await message.chat.do('typing')
-            await asyncio.sleep(0.2*length)
+            await asyncio.sleep(0.18*length)
             await message.reply(text)
     else:
         text = model.pred(text)
         length = len(text)
         await asyncio.sleep(0.3)
-        while length > 25:
+        while length > 26:
             await message.chat.do('typing')
-            length -=25
+            length -=26
             await asyncio.sleep(5)
         await message.chat.do('typing')
-        await asyncio.sleep(0.2*length)
+        await asyncio.sleep(0.18*length)
         await message.reply(text)
 
 
