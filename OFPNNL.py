@@ -106,4 +106,5 @@ class NeuralNet:
         ret.replace(' .', '. ')
         ret.replace(' < ', '<')
         ret.replace(' " ', ' "')
+        ret.replace(' :', ':')
         return ret
