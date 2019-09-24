@@ -45,8 +45,8 @@ async def nyan(message: types.Message):
 async def help(m: types.Message):
     await m.reply('Текст для данной команды ещё не готов')
 
-@dp.message_handler(commands=['update])
-async def update(m: types.Message):
+@dp.message_handler(commands=['update'])
+async def sukahelpi(m: types.Message):
     #if m.text.split()[1] == passGen(m):
     await m.reply('aw')
     exit(0)
