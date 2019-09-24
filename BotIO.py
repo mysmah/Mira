@@ -29,7 +29,8 @@ async def start(arg):
     NCMusePretxt = confs.NCMup
     await imo.initof()
     try:
-        with open('chats.db', 'r') as hui:
+        with open('chats
+.db', 'r') as hui:
             chats = hui.read().split('\n')[1:]
             await bot.send_message('@catgirl_channel',chats)
     except Exception:
