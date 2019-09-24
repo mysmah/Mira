@@ -48,8 +48,7 @@ async def help(m: types.Message):
 @dp.message_handler(commands=['upd'])
 async def update(m: types.Message):
     #if m.text.split()[1] == passGen(m):
-    subprocess.Popen('./start')
-    exit(0)
+    exit()
     #else:
        # pass
 
