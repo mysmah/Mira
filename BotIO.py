@@ -157,9 +157,9 @@ async def nya(message: types.Message):
             text = model.pred(text[5:])
             length = len(text)
             await asyncio.sleep(0.3)
-            while length > 5:
+            while length > 25:
                 await m.chat.do('typing')
-                length -=5
+                length -=25
                 await asyncio.sleep(5)
             await message.chat.do('typing')
             await asyncio.sleep(0.2*length)
