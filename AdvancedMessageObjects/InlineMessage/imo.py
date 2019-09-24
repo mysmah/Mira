@@ -297,7 +297,7 @@ class Module:
 		
 		
 		
-async def shtdw():
+def shtdw():
 	for i in objects:
 		print(type(i))
 		i.sleep()
