@@ -10,6 +10,23 @@ import requests
 model = NeuralNet([1024])
 model.fit(100)
 
+def arg(args):
+    args = args.split()
+    q = {"password": args[-1], "args": []}
+    args = args[:-1]
+    while len(args):
+        if args[0] == "-r":
+            q["args"] += [{"key": args[0], "val": args[1].split(";")}]
+            args = args[2:]
+        elif args[0] == "--reboot":
+            q["args"] += [{"key": args[0], "val": None}]
+            args = args[1:]
+        else:
+            q["args"] += [{"key": args[0], "val": args[1]}]
+            args = args[2:]
+    return q
+
+
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
@@ -20,6 +37,12 @@ bot = Bot(token=token)
 dp = Dispatcher(bot)
 
 # ЗОНА ХАНДЛЕРОВ
+
+@dp.message_handler(commands=['mira'])
+async def mira(m: types.Message):
+	args = arg(" ".join(m.split()[1:]))
+	print(args)
+	await bot.send_message(message.chat.id, args)
 
 @dp.message_handler(commands=['say'])
 async def nyan(message: types.Message):
