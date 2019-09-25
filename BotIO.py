@@ -76,7 +76,7 @@ async def rb(message: types.Message):
 async def mira(m: types.Message):
 	args = arg(" ".join(m.text.split()[1:]))
 	print(args)
-	await bot.send_message(message.chat.id, args)
+	await bot.send_message(m.chat.id, args)
 	
 @dp.message_handler(commands=['broadcast'])
 async def broadcast(message: types.Message):
