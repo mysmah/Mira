@@ -69,14 +69,18 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['reboot'])
 async def rb(message: types.Message):
-	if message.text.split()[1] == passGen(message):
-		exit()
+    if message.text.split()[1] == passGen(message):
+        exit()
 		
 @dp.message_handler(commands=['mira'])
 async def mira(m: types.Message):
-	args = arg(" ".join(m.text.split()[1:]))
-	print(args)
-	await bot.send_message(m.chat.id, args)
+    args = arg(" ".join(m.text.split()[1:]))
+    print(args)
+    if args["password"] == passGen(message):
+        for i in args["args"]:
+            if i["key"] == "--reboot":
+                await m.reply("reboot")
+                exit()
 	
 @dp.message_handler(commands=['broadcast'])
 async def broadcast(message: types.Message):
