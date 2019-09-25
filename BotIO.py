@@ -199,7 +199,7 @@ async def nya(message: types.Message):
             await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif "@catgirl_chat_bot" in text:
-            text = model.pred(text.replace('@catgirl_bot', ''))
+            text = model.pred(text.replace('@catgirl_chat_bot', ''))
             length = len(text)
             await asyncio.sleep(0.3)
             while length > 27:
