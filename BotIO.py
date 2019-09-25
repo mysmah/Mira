@@ -34,7 +34,7 @@ def arg(args):
             q["args"] += [{"key": args[0], "val": None}]
             args = args[1:]
         elif args[0] == "-s":
-            q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))l}]
+            q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))}]
             args = args[2:]
         else:
             q["args"] += [{"key": args[0], "val": args[1]}]
