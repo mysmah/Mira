@@ -89,7 +89,7 @@ async def mira(m: types.Message):
                 await bot.send_message(-1001184868284, "Бот переведён в активный режим")
                 await m.reply("fit success")
     else:
-	await m.reply("invalid password")
+        await m.reply("invalid password")
 	
 @dp.message_handler(commands=['broadcast'])
 async def broadcast(message: types.Message):
