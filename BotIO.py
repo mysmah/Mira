@@ -45,7 +45,7 @@ async def on_close(arg):
     imo.shtdw()
     with open('chats.db', 'w') as hui:
         for i in chats:
-            hui.write('\n' + i)
+            hui.write('\n' + str(i))
 bot = Bot(token=token)
 dp = Dispatcher(bot)
 
