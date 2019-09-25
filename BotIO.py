@@ -90,7 +90,7 @@ async def mira(m: types.Message):
                     await m.reply("fail")
                 else:
                     await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(l))
-                    await m.reply("success")
+                    await m.reply("reset success")
     else:
         await m.reply("invalid password")
 	
