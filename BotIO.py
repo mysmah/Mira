@@ -81,7 +81,7 @@ async def mira(m: types.Message):
             if i["key"] == "--reboot":
                 await m.reply("reboot")
                 exit()
-	    elif i["key"] == "-f":
+            elif i["key"] == "-f":
                 await m.reply("fit started")
                 n = int(i["val"])
                 await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох")
