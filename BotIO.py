@@ -81,6 +81,15 @@ async def mira(m: types.Message):
             if i["key"] == "--reboot":
                 await m.reply("reboot")
                 exit()
+	    elif i["key"] == "-f":
+                await m.reply("fit started")
+                n = int(i["val"])
+                await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох")
+                model.fit(n)
+                await bot.send_message(-1001184868284, "Бот переведён в активный режим")
+                await m.reply("fit success")
+    else:
+	await m.reply("invalid password")
 	
 @dp.message_handler(commands=['broadcast'])
 async def broadcast(message: types.Message):
