@@ -66,11 +66,6 @@ bot = Bot(token=token)
 dp = Dispatcher(bot)
 
 # ЗОНА ХАНДЛЕРОВ
-
-@dp.message_handler(commands=['reboot'])
-async def rb(message: types.Message):
-    if message.text.split()[1] == passGen(message):
-        exit()
 		
 @dp.message_handler(commands=['mira'])
 async def mira(m: types.Message):
@@ -88,6 +83,14 @@ async def mira(m: types.Message):
                 model.fit(n)
                 await bot.send_message(-1001184868284, "Бот переведён в активный режим")
                 await m.reply("fit success")
+            elif i["key"] == "-r":
+                l = [int(x) for x in i["val"]]
+                await m.reply(l)
+                if model.new_model(l) == 1:
+                    await m.reply("fail")
+                else:
+                    await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(l))
+                    await m.reply("success")
     else:
         await m.reply("invalid password")
 	
@@ -140,32 +143,6 @@ async def court(message: types.Message):
 	addchat(message.chat.id)
 	if message.chat.id > 0:
 		await bot.send_message(message.chat.id, pretxt[0], parse_mode = ParseMode.MARKDOWN)
-
-
-@dp.message_handler(commands=['fit'])
-async def fit(message: types.Message):
-    print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    await message.reply("started")
-    try:
-        n = int(message.text.split()[1])
-    except:
-        n = 1
-    await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох")
-    model.fit(n)
-    await bot.send_message(-1001184868284, "Бот переведён в активный режим")
-    await message.reply("success")
-
-
-@dp.message_handler(commands=['reset'])
-async def reset(message: types.Message):
-    print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    m = [int(x) for x in message.text.split()[1:]]
-    await message.reply(m)
-    if model.new_model(m) == 1:
-        await message.reply("fail")
-    else:
-        await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(m))
-        await message.reply("success")
 
 @dp.message_handler(commands=['settings'])
 async def knopki(m: types.Message):
