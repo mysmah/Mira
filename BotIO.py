@@ -76,7 +76,7 @@ async def rb(message: types.Message):
 async def mira(m: types.Message):
     args = arg(" ".join(m.text.split()[1:]))
     print(args)
-    if args["password"] == passGen(message):
+    if args["password"] == passGen(m):
         for i in args["args"]:
             if i["key"] == "--reboot":
                 await m.reply("reboot")
