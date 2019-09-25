@@ -33,6 +33,9 @@ def arg(args):
         elif args[0] == "--reboot":
             q["args"] += [{"key": args[0], "val": None}]
             args = args[1:]
+        elif args[0] == "-s":
+            q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))l}]
+            args = args[2:]
         else:
             q["args"] += [{"key": args[0], "val": args[1]}]
             args = args[2:]
@@ -91,6 +94,8 @@ async def mira(m: types.Message):
                 else:
                     await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(l))
                     await m.reply("reset success")
+            elif i["key"] == "-s":
+                await m.reply(model.pred(i["val"]))
     else:
         await m.reply("invalid password")
 	
