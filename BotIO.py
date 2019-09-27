@@ -98,7 +98,7 @@ async def mira(m: types.Message):
             elif i["key"] == "-s":
                 await m.reply(model.pred(i["val"]))
             elif i["key"] == "--ping":
-                await m.reply('*pong*\nAlive time: {lt}'.format(lt = (time.time()-borntime)//1)
+                await m.reply('*pong*\nAlive time: {lt}'.format(lt = (time.time()-borntime)//1))
     else:
         await m.reply("invalid password")
 	
