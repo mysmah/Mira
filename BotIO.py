@@ -67,7 +67,7 @@ dp = Dispatcher(bot)
 		
 @dp.message_handler(commands=['mira'])
 async def mira(m: types.Message):
-    args = arg(" ".join(m.text.split()[1:]))
+    args = arg(" ".join(m.text.lower().split()[1:]))
     print(args)
     if args["password"] == passGen(m):
         for i in args["args"]:
@@ -96,7 +96,7 @@ async def mira(m: types.Message):
 	
 @dp.message_handler(commands=['broadcast'])
 async def broadcast(message: types.Message):
-    await message.reply('В данный момент функция *broadcast* не работает, в скором времени она должна стать доступна через команду ```/mira --broadcast <текст броадкаста> <passGen password>```')
+    await message.reply('В данный момент функция *broadcast* не работает, в скором времени она должна стать доступна через команду `/mira --broadcast <текст броадкаста> <passGen password>`')
    # await message.chat.do('typing')
     #await asyncio.sleep(4.8)
    # await message.reply('Ну ок, потом всем разошлю')
