@@ -42,11 +42,6 @@ def arg(args):
         elif args[0] == "-s":
             q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))}]
             args = args[2:]
-        elif args[0] == '--broadcast':
-        	if len(args) > 1:
-        		q['args'] += [{'key': args[0], 'val': ' '.join(args[1:])}]
-        	else:
-        		q['args']+=[{'key': args[0], 'val': None}]
         else:
             q["args"] += [{"key": args[0], "val": args[1]}]
             args = args[2:]
@@ -104,17 +99,6 @@ async def mira(m: types.Message):
                 await m.reply(model.pred(i["val"]))
             elif i["key"] == "--ping":
                 await m.reply('*pong*\nAlive time: {lt}'.format(lt = (time.time()-borntime)//1))
-            elif i['key'] == '--broadcast' and i['val']:
-                await message.chat.do('typing')
-                await asyncio.sleep(4.8)
-                await message.reply('Ну ок, потом всем разошлю')
-                await asyncio.sleep(random.randint(24, 904))
-                for c in chats:
-                    await bot.send_message(c, i['val'])
-            elif i['key'] == '--broadcast' and i['val'] == None:
-                if m.reply_to_message:
-                    for c in chats:
-                        await m.forward(c)
     else:
         await m.reply("invalid password")
 	
