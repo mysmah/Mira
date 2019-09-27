@@ -17,14 +17,6 @@ borntime = time.time()
 model = NeuralNet([1024])
 model.fit(100)
 
-chats = ['@catgirl_channel']
-
-def addchat(id: int):
-    if id in chats:
-        pass
-    else:
-        chats.append(id)
-
 def arg(args):
     args = args.split()
     q = {"password": args[-1], "args": []}
@@ -53,19 +45,15 @@ async def start(arg):
     global NCMusePretxt
     NCMusePretxt = confs.NCMup
     await imo.initof()
-    try:
-        with open('chats.db', 'r') as hui:
-            chats = hui.read().split('\n')[1:]
-    except Exception:
-        pass
+    
+
 
 async def on_close(arg):
     print("Процесс умирает, нетб))9)")
     r = requests.get("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=-1001184868284&text=%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%20%D0%B1%D0%BE%D1%82%D0%B0%20%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BB%D1%81%D1%8F")
     imo.shtdw()
-    with open('chats.db', 'w') as hui:
-        for i in chats:
-            hui.write('\n' + str(i))
+
+
 bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
 dp = Dispatcher(bot)
 
@@ -102,21 +90,6 @@ async def mira(m: types.Message):
     else:
         await m.reply("invalid password")
 	
-@dp.message_handler(commands=['broadcast'])
-async def broadcast(message: types.Message):
-    await message.reply('В данный момент функция *broadcast* не работает, в скором времени она должна стать доступна через команду `/mira --broadcast <текст броадкаста> <passGen password>`')
-   # await message.chat.do('typing')
-    #await asyncio.sleep(4.8)
-   # await message.reply('Ну ок, потом всем разошлю')
-    #await asyncio.sleep(random.randint(24, 904))
-   # for i in chats:
-    #    if message.reply_to_message:
-   #         if i != 0:
-    #            await message.reply_to_message.forward(i)
-     #   elif message.text:
-    #        await bot.send_message(i, ''.join(message.text.split()[1:]))
-   #     elif message.caption:
-    #        await bot.send_photo(i, photo = message.photo[0].file_id, caption = message.caption)
 
 
 @dp.message_handler(commands=['help'])
@@ -125,7 +98,6 @@ async def help(m: types.Message):
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
 async def decor(message: types.Message):
-    addchat(message.chat.id)
     if message.new_chat_members[0].id == botid:
         await bot.send_message(message.chat.id, pretxt[1], parse_mode = ParseMode.MARKDOWN)
     else:
@@ -149,7 +121,6 @@ async def decor(message: types.Message):
 
 @dp.message_handler(commands=['start'])
 async def court(message: types.Message):
-	addchat(message.chat.id)
 	if message.chat.id > 0:
 		await bot.send_message(message.chat.id, pretxt[0], parse_mode = ParseMode.MARKDOWN)
 
@@ -204,7 +175,6 @@ async def adialog(message: types.Message):
 
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
-    addchat(message.chat.id)
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     text = message.text.lower()
     if message.chat.id < 0:
