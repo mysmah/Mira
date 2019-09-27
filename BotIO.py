@@ -204,7 +204,7 @@ async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     text = message.text.lower()
     if message.chat.id < 0:
-        if text.startswith("мира ") or text.startswith("mira") or text.startswith("мира,") or text.startswith("mira,"):
+        if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,"):
             text = model.pred(text[5:])
             length = len(text)
             await asyncio.sleep(0.3)
