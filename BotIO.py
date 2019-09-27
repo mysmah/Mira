@@ -33,6 +33,9 @@ def arg(args):
         elif args[0] == "--reboot":
             q["args"] += [{"key": args[0], "val": None}]
             args = args[1:]
+        elif args[0] == "--ping":
+            q["args"] += [{"key": args[0], "val": None}]
+            args = args[1:]
         elif args[0] == "-s":
             q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))}]
             args = args[2:]
@@ -91,6 +94,8 @@ async def mira(m: types.Message):
                     await m.reply("reset success")
             elif i["key"] == "-s":
                 await m.reply(model.pred(i["val"]))
+            elif i["key"] == "--ping":
+                await m.reply(args)
     else:
         await m.reply("invalid password")
 	
