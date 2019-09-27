@@ -42,7 +42,7 @@ def arg(args):
         elif args[0] == "-s":
             q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))}]
             args = args[2:]
-        elif args[0] == '--broadcast'':
+        elif args[0] == '--broadcast':
         	if len(args) > 1:
         		q['args'] += [{'key': args[0], 'val': ' '.join(args[1:])}]
         	else:
