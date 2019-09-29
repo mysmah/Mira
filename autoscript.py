@@ -32,7 +32,7 @@ class AutoScript:
 		elif act == 'tick':
 			self.unm += 1
 			tk = time()
-			if self.unm > 1 and self.unmt + 21.0 < tk:
+			if self.unm > 50 and self.unmt + 21400.0 < tk:
 				return self.chat.id
 				
 if __name__ == '__main__':
