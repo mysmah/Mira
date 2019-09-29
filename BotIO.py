@@ -214,7 +214,7 @@ async def nya(message: types.Message):
             await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
-            startAS(mey, 'reset')
+            startAS(message, 'reset')
             text = model.pred(text)
             length = len(text)
             await asyncio.sleep(0.3)
