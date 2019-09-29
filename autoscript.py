@@ -6,7 +6,7 @@ from warnings import warn
 chats = []
 
 def startAS(m: Message, act: str = 'reset'):
-	warn(1)
+	warn('1')
 	if m.chat not in chats:
 		chats.append(AutoScript(m.chat))
 	else:
