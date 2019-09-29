@@ -17,7 +17,7 @@ def startAS(m: Message, act: str = 'reset'):
 
 class AutoScript:
 	def __init__(self, c: Chat):
-		warn(c)
+		warn(str(c))
 		self.chat = c
 		self.unm = 0
 		self.unmt = 0
