@@ -13,7 +13,7 @@ def startAS(m: Message, act: str = 'reset'):
 		if i.id == m.chat.id:
 			id += 1
 	if id == 0:
-		chats.append(AutoScripter(m.chat))
+		chats.append(AutoScript(m.chat))
 	else:
 		for i in chats:
 			i.tick(act)
