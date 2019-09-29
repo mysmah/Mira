@@ -11,6 +11,7 @@ from aiogram.types import ParseMode
 import requests
 import asyncio
 from AdvancedMessageObjects import imo
+from autoscript import start
 
 borntime = time.time()
 
