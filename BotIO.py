@@ -11,12 +11,24 @@ from aiogram.types import ParseMode
 import requests
 import asyncio
 from AdvancedMessageObjects import imo
-from autoscript import start
+from autoscript import startAS
+
+bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
+dp = Dispatcher(bot)
 
 borntime = time.time()
 
 model = NeuralNet([1024])
 model.fit(100)
+
+async def write_au(chat):
+    await chat.do('typing')
+    await asyncio.sleep(2)
+    await bot.send_message(chat.id, 'Приветики')
+    await asyncio.sleep(0.5)
+    await chat.do('typing')
+    await asyncio.sleep(3)
+    await bot.send_message(chat.id, 'Как у вас дела?')
 
 def arg(args):
     args = args.split()
@@ -53,10 +65,6 @@ async def on_close(arg):
     print("Процесс умирает, нетб))9)")
     r = requests.get("https://api.telegram.org/bot" + token + "/sendMessage?chat_id=-1001184868284&text=%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%20%D0%B1%D0%BE%D1%82%D0%B0%20%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BB%D1%81%D1%8F")
     imo.shtdw()
-
-
-bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
-dp = Dispatcher(bot)
 
 # ЗОНА ХАНДЛЕРОВ
 		
@@ -179,7 +187,10 @@ async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     text = message.text.lower()
     if message.chat.id < 0:
+        if startAS(m, 'tick') not None:
+            await write_au(m.chat)
         if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,"):
+            startAS(m, 'reset)
             text = model.pred(text[5:])
             length = len(text)
             await asyncio.sleep(0.3)
@@ -191,6 +202,7 @@ async def nya(message: types.Message):
             await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif "@catgirl_chat_bot" in text:
+            startAS(m, 'reset)
             text = model.pred(text.replace('@catgirl_chat_bot', ''))
             length = len(text)
             await asyncio.sleep(0.3)
@@ -202,6 +214,7 @@ async def nya(message: types.Message):
             await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
+            startAS(m, 'reset)
             text = model.pred(text)
             length = len(text)
             await asyncio.sleep(0.3)
