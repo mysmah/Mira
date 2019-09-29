@@ -187,10 +187,10 @@ async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     text = message.text.lower()
     if message.chat.id < 0:
-        if startAS(message, 'tick') != None:
+        if startAS(message, act = 'tick') != None:
             await write_au(message.chat)
         if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,"):
-            startAS(message, 'reset')
+            startAS(message, act = 'reset')
             text = model.pred(text[5:])
             length = len(text)
             await asyncio.sleep(0.3)
@@ -202,7 +202,7 @@ async def nya(message: types.Message):
             await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif "@catgirl_chat_bot" in text:
-            startAS(message, 'reset')
+            startAS(message, act = 'reset')
             text = model.pred(text.replace('@catgirl_chat_bot', ''))
             length = len(text)
             await asyncio.sleep(0.3)
@@ -214,7 +214,7 @@ async def nya(message: types.Message):
             await asyncio.sleep(0.18*length)
             await message.reply(text)
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
-            startAS(message, 'reset')
+            startAS(message, act = 'reset')
             text = model.pred(text)
             length = len(text)
             await asyncio.sleep(0.3)
