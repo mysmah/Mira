@@ -5,7 +5,7 @@ from warnings import warn
 
 chats = []
 
-def startAS(m: Message, act: str = 'reset':
+def startAS(m: Message, act: str = 'reset'):
 	id = 0
 	for i in chats:
 		if i.chat.id == m.chat.id:
