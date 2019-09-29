@@ -187,7 +187,7 @@ async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     text = message.text.lower()
     if message.chat.id < 0:
-        if startAS(m, 'tick') not None:
+        if startAS(m, 'tick') != None:
             await write_au(m.chat)
         if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,"):
             startAS(m, 'reset)
