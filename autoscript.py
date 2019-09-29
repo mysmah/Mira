@@ -30,7 +30,8 @@ class AutoScript:
 			self.unmt = time()
 			return None
 		elif act == 'tick':
-			self.unm += 1			tk = time()
+			self.unm += 1
+			tk = time()
 			if self.unm > 1 and self.unmt + 21.0 < tk:
 				return self.chat.id
 				
