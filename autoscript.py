@@ -8,12 +8,16 @@ chats = []
 def startAS(m: Message, act: str = 'reset'):
 	warn('1')
 	print(chats)
-	if m.chat not in chats:
-		chats.append(AutoScript(m.chat))
+	id = 0
+	for i in chats:
+		if i.id == m.chat.id:
+			id += 1
+	if id == 0:
+		chats.append(AutoScripter(m.chat))
 	else:
 		for i in chats:
-			if i.id == m.chat.id:
-				return i.tick(act)
+			i.tick(act)
+			
 				
 
 class AutoScript:
