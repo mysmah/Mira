@@ -15,7 +15,7 @@ def startAS(m: Message, act: str = 'reset':
 	else:
 		for i in chats:
 			if i.chat.id == m.chat.id:
-				i.tick(act)
+				return i.tick(act)
 			
 				
 
