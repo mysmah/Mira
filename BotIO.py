@@ -189,6 +189,7 @@ async def nya(message: types.Message):
     if message.chat.id < 0:
         if startAS(message, act = 'tick') != None:
             await write_au(message.chat)
+            startAS(message, act = 'reset')
         if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,"):
             startAS(message, act = 'reset')
             text = model.pred(text[5:])
