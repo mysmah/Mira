@@ -80,8 +80,11 @@ class NeuralNet:
         req = []
         for i in q.split():
             if i not in self.dict0 and i[0] != '{' and len(i) > 2:
-                word = Word(i)
-                req.append(word.spellsafe)
+                word = Word(i).spellsafe
+                if word:
+                    req.append(word.spellsafe)
+                else:
+                    req.append(i)
             else:
                 req.append(i)
         q = ' '.join(req).format(comma = ',', point = '.',parenthesescor0='<', parenthesescor1='>', dbpoint=':', parentheses0='(', parentheses1=')', question='?', exclamation='!', spliter='-')
