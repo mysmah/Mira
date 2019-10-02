@@ -79,13 +79,11 @@ class NeuralNet:
         q = q.replace(',',' {comma} ').replace('.',' {point} ').replace('<',' {parenthesescor0} ').replace('>',' {parenthesescor1} ').replace(':',' {dbpoint} ').replace('(',' {parentheses0} ').replace(')',' {parentheses1} ').replace('?',' {question} ').replace('!',' {exclamation} ').replace('-',' {spliter} ')
         req = []
         for i in q.split():
-            if i not in self.dict0 and i[0] != '{':
+            if i not in self.dict0 and i[0] != '{' and len(i) > 2:
                 word = Word(i)
                 req.append(word.spellsafe)
             else:
                 req.append(i)
-        print(req)
-        print(' '.join(req))
         q = ' '.join(req).format(comma = ',', point = '.',parenthesescor0='<', parenthesescor1='>', dbpoint=':', parentheses0='(', parentheses1=')', question='?', exclamation='!', spliter='-')
             
         prediction = self.model.predict([[self.text2dict1(q)]])
