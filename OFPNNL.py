@@ -1,9 +1,11 @@
-import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import models
 from tensorflow.keras import layers
-import numpy as np
 from razdel import tokenize
+from pyaspeller import Word
+
+import tensorflow as tf
+import numpy as np
 import json
 import re
 import os
@@ -73,6 +75,21 @@ class NeuralNet:
 
 # Обмен айдишниками слов с сетью
     def pred(self, q):
+        req = []
+        for i in q.split():
+            if i not in self.dict0:
+                word = Word(i)
+                for a in word.variants():
+                    if a not in self.dict0:
+                        req.append(i)
+                        break
+                    else:
+                        req.append(a)
+                        break
+            else:
+                req.append(i)
+        q = ' '.join(req)
+            
         prediction = self.model.predict([[self.text2dict1(q)]])
         prediction = [int(round(x)) for x in prediction[0]]
         text = self.dict2text1(prediction)
