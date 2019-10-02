@@ -79,13 +79,7 @@ class NeuralNet:
         for i in q.split():
             if i not in self.dict0:
                 word = Word(i)
-                for a in word.variants():
-                    if a not in self.dict0:
-                        req.append(i)
-                        break
-                    else:
-                        req.append(a)
-                        break
+                req.append(word.spellsafe)
             else:
                 req.append(i)
         q = ' '.join(req)
