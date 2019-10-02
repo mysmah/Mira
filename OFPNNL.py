@@ -85,7 +85,7 @@ class NeuralNet:
             else:
                 req.append(i)
         print(req)
-        print(' '.join(req)
+        print(' '.join(req))
         q = ' '.join(req).format(comma = ',', point = '.',parenthesescor0='<', parenthesescor1='>', dbpoint=':', parentheses0='(', parentheses1=')', question='?', exclamation='!', spliter='-')
             
         prediction = self.model.predict([[self.text2dict1(q)]])
