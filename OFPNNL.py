@@ -82,7 +82,7 @@ class NeuralNet:
             if i not in self.dict0 and i[0] != '{' and len(i) > 2:
                 word = Word(i).spellsafe
                 if word:
-                    req.append(word.spellsafe)
+                    req.append(word)
                 else:
                     req.append(i)
             else:
