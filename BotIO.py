@@ -22,13 +22,23 @@ model = NeuralNet([1024])
 model.fit(100)
 
 async def write_au(chat):
-    await chat.do('typing')
-    await asyncio.sleep(2)
-    await bot.send_message(chat.id, 'Приветики')
-    await asyncio.sleep(0.5)
-    await chat.do('typing')
-    await asyncio.sleep(3)
-    await bot.send_message(chat.id, 'Как у вас дела?')
+    rand = random.randint(0,4)
+    if rand == 0:
+        await chat.do('typing')
+        await asyncio.sleep(1.3)
+        await bot.send_message(chat.id, 'Приветики')
+        await asyncio.sleep(0.5)
+        await chat.do('typing')
+        await asyncio.sleep(2)
+        await bot.send_message(chat.id, 'Как у вас дела?')
+    elif rand == 1:
+        await chat.do('typing')
+        await asyncio.sleep(0.4)
+        await bot.send_message(chat.id, 'Эй')
+        await asyncio.sleep(0.5)
+        await chat.do('typing')
+        await asyncio.sleep(3,4)
+        await bot.send_message(chat.id, 'А про меня не забыли?')
 
 def arg(args):
     args = args.split()
