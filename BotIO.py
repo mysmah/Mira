@@ -101,9 +101,9 @@ async def mira(m: types.Message):
 	
 
 
-@dp.message_handler(commands=['help'])
+@dp.message_handler(commands=['help','donate', 'support_project'])
 async def help(m: types.Message):
-    await m.reply('Текст для данной команды ещё не готов')
+    await m.reply('Данная фича пока не поддерживается, или была хакнута котбом')
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
 async def decor(message: types.Message):
