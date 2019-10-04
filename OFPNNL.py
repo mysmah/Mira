@@ -116,6 +116,7 @@ class NeuralNet:
         while i < l - 1:
             if re.search(' [^\"\'\\w]', ret[i] + ret[i + 1]):
                 ret = ret[:i] + ret[i+1:]
+                l = len(ret)
             else:
                 i += 1
         return ret
