@@ -75,8 +75,7 @@ class NeuralNet:
 
 # Обмен айдишниками слов с сетью
     async def pred(self, q):
-        q = q.lower()
-        q = q.replace(',',' {comma} ').replace('.',' {point} ').replace('<',' {parenthesescor0} ').replace('>',' {parenthesescor1} ').replace(':',' {dbpoint} ').replace('(',' {parentheses0} ').replace(')',' {parentheses1} ').replace('?',' {question} ').replace('!',' {exclamation} ').replace('-',' {spliter} ')
+        q = [_.text for _ in list(tokenize(q.lower()))]
         req = []
         for i in q.split():
             if i not in self.dict0 and i[0] != '{' and len(i) > 2:
@@ -90,7 +89,7 @@ class NeuralNet:
         for z in req:
             if self == None:
                 req.remove(self)
-        q = ' '.join(req).format(comma = ',', point = '.',parenthesescor0='<', parenthesescor1='>', dbpoint=':', parentheses0='(', parentheses1=')', question='?', exclamation='!', spliter='-')
+        q = ' '.join(req)
             
         prediction = self.model.predict([[self.text2dict1(q)]])
         prediction = [int(round(x)) for x in prediction[0]]
@@ -99,8 +98,6 @@ class NeuralNet:
 
 # Преобразование текста в айдишники слов
     def text2dict1(self, text):
-
-
         text = [_.text for _ in list(tokenize(text.lower()))]
         out = []
         for i in range(len(self.dict0)):
