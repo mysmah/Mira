@@ -118,9 +118,6 @@ class NeuralNet:
             if re.search(' [^\"\'\\w]', _):
                 ret = ret[:i] + ret[i+1:]
                 l = len(ret)
-            elif re.search('[\'\"] ', _):
-                ret = ret[:i+1] + ret[i+2:]
-                l = len(ret)
             else:
                 i += 1
         return ret
