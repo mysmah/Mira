@@ -74,7 +74,7 @@ class NeuralNet:
         self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
 
 # Обмен айдишниками слов с сетью
-    def pred(self, q):
+    async def pred(self, q):
         q = q.lower()
         q = q.replace(',',' {comma} ').replace('.',' {point} ').replace('<',' {parenthesescor0} ').replace('>',' {parenthesescor1} ').replace(':',' {dbpoint} ').replace('(',' {parentheses0} ').replace(')',' {parentheses1} ').replace('?',' {question} ').replace('!',' {exclamation} ').replace('-',' {spliter} ')
         req = []
