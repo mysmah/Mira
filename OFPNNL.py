@@ -77,7 +77,7 @@ class NeuralNet:
     async def pred(self, q):
         q = [_.text for _ in list(tokenize(q.lower()))]
         req = []
-        for i in q.split():
+        for i in q:
             if i not in self.dict0 and i[0] != '{' and len(i) > 2:
                 word = Word(i).spellsafe
                 if word:
