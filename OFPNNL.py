@@ -73,9 +73,7 @@ class NeuralNet:
     def fit(self, n):
         self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
 
-# Обмен айдишниками слов с сетью
-    async def pred(self, q):
-        q = [_.text for _ in list(tokenize(q.lower()))]
+    async def spell(self, q):
         req = []
         for i in q:
             if i not in self.dict0 and i[0] != '{' and len(i) > 2:
@@ -89,8 +87,12 @@ class NeuralNet:
         for z in req:
             if self == None:
                 req.remove(self)
-        q = ' '.join(req)
-            
+        return ' '.join(req)
+        
+# Обмен айдишниками слов с сетью
+    async def pred(self, q):
+        q = [_.text for _ in list(tokenize(q.lower()))]
+        q = await self.spell(q)
         prediction = self.model.predict([[self.text2dict1(q)]])
         prediction = [int(round(x)) for x in prediction[0]]
         text = self.dict2text1(prediction)
