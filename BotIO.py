@@ -22,7 +22,7 @@ model = NeuralNet([1024])
 model.fit(100)
 
 async def write_au(chat):
-    rand = random.randint(0,4)
+    rand = random.randint(0,1)
     if rand == 0:
         await chat.do('typing')
         await asyncio.sleep(1.3)
