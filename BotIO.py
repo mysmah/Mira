@@ -178,7 +178,13 @@ async def add(message: types.Message):
 
 @dp.message_handler(commands=['get_id'])
 async def getid(m: types.Message):
-    await m.reply(m.content_type)
+    if m.reply_to_message:
+        if m.reply_to_message.content_type == 'sticker':
+            await m.reply('```{}```'.format(m.reply_to_message.sticker.file_id))
+        else:
+            await m.reply('unsupported type')
+    else:
+        await m.reply('fail')
 
 @dp.message_handler(commands=['adddialog'])
 async def adialog(message: types.Message):
