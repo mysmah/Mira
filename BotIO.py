@@ -117,7 +117,7 @@ async def mira(m: types.Message):
                     await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(l))
                     await m.reply("reset success")
             elif i["key"] == "-s":
-                await m.reply(model.pred(i["val"]))
+                await m.reply(await model.pred(i["val"]))
             elif i["key"] == "--ping":
                 await m.reply('Alive time: {lt}'.format(lt = (time.time()-borntime)//1))
     else:
