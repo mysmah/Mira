@@ -178,7 +178,7 @@ async def add(message: types.Message):
 
 @dp.message_handler(commands=['get_id'])
 async def getid(m: types.Message):
-    await m.reply('```wait```')
+    await m.reply(m.content_type)
 
 @dp.message_handler(commands=['adddialog'])
 async def adialog(message: types.Message):
