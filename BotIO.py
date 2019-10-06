@@ -114,7 +114,8 @@ async def mira(m: types.Message):
                 if model.new_model(l) == 1:
                     await m.reply("fail")
                 else:
-                    await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n"+str(l))
+                    await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n")
+                    await bot.send_message(-1001184868284, l)
                     await m.reply("reset success")
             elif i["key"] == "-s":
                 await m.reply(await model.pred(i["val"]))
