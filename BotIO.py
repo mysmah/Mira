@@ -176,6 +176,9 @@ async def add(message: types.Message):
         await message.reply("success")
     await message.delete()
 
+@dp.message_handler(commands=['get_id'])
+async def getid(m: types.Message):
+    await m.reply('```wait```')
 
 @dp.message_handler(commands=['adddialog'])
 async def adialog(message: types.Message):
