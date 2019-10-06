@@ -39,6 +39,20 @@ async def write_au(chat):
         await chat.do('typing')
         await asyncio.sleep(3,4)
         await bot.send_message(chat.id, 'А про меня не забыли?')
+    elif rand == 2:
+        await chat.do('typing')
+        await asyncio.sleep(1.8)
+        await bot.send_message(chat.id, 'Всем дарова')
+        await asyncio.sleep(0.2)
+        await bot.send_stickers(chat.id, stickers['hi2'])
+    elif rand == 3:
+        await chat.do('typing')
+        await asyncio.sleep(1)
+        await bot.send_message(chat.id, '')
+        await asyncio.sleep(0.2)
+        await bot.send_sticker(chat.id, stickers[''])
+    elif rand == 4:
+        await bot.send_sticker(chat.id, stickers['hi1'])
 
 def arg(args):
     args = args.split()
