@@ -180,7 +180,7 @@ async def add(message: types.Message):
 async def getid(m: types.Message):
     if len(m.text.split()) == 2:
         if m.text.split()[1] in stickers.keys():
-            await m.reply_sticker(stickers[m.split()[1]])
+            await m.reply_sticker(stickers[m.text.split()[1]])
         else:
             await m.reply('unknown key')
     else:
