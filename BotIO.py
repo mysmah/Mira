@@ -178,11 +178,11 @@ async def add(message: types.Message):
 
 @dp.message_handler(commands=['get_id'])
 async def getid(m: types.Message):
-    if m.reply_to_message:
-        if m.reply_to_message.content_type == 'sticker':
-            await m.reply('```{}```'.format(m.reply_to_message.sticker.file_id))
+    if len(m.text.split()) == 2:
+        if m.text.split()[1] in stickers.keys():
+            await m.reply_sticker(stickers[m.split()[1])
         else:
-            await m.reply('unsupported type')
+            await m.reply('unknown key')
     else:
         await m.reply('fail')
 
