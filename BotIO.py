@@ -104,8 +104,11 @@ async def mira(m: types.Message):
             elif i["key"] == "-f":
                 await m.reply("fit started")
                 n = int(i["val"])
+                t = time()
+                model.fit(1)
+                await message.reply('Оставшиеся время: {} минут.'.format(((time()-t) //1 * n-1)/60))
                 await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох")
-                model.fit(n)
+                model.fit(n-1)
                 await bot.send_message(-1001184868284, "Бот переведён в активный режим")
                 await m.reply("fit success")
             elif i["key"] == "-r":
