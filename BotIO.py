@@ -232,7 +232,7 @@ async def nya(message: types.Message):
         if startAS(message, act = 'tick') != None:
             startAS(message, act = 'reset')
             await write_au(message.chat)
-        if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,") and afl.check(message) == 0:
+        if text.startswith("мира ") and afl.check(message) == 0 or text.startswith("mira ") and afl.check(message) == 0 or text.startswith("мира,") and afl.check(message) == 0 or text.startswith("mira,") and afl.check(message) == 0:
             startAS(message, act = 'reset')
             text = await model.pred(text[5:])
             length = len(text)
