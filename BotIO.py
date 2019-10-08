@@ -4,6 +4,8 @@ import time
 import random
 import confs
 import os
+
+from aflood import AntiFlood as aflood
 from OFPNNL import *
 from aiogram import *
 from project_misc import *
@@ -13,8 +15,11 @@ import asyncio
 from AdvancedMessageObjects import imo
 from autoscript import startAS
 
+
+loop = asyncio.get_event_loop()
+afl = aflood(loop)
 bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
-dp = Dispatcher(bot)
+dp = Dispatcher(bot, loop=loop)
 
 borntime = time.time()
 
@@ -227,7 +232,7 @@ async def nya(message: types.Message):
         if startAS(message, act = 'tick') != None:
             startAS(message, act = 'reset')
             await write_au(message.chat)
-        if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,"):
+        if text.startswith("мира ") or text.startswith("mira ") or text.startswith("мира,") or text.startswith("mira,") and afl.check(message) == 0:
             startAS(message, act = 'reset')
             text = await model.pred(text[5:])
             length = len(text)
@@ -239,7 +244,7 @@ async def nya(message: types.Message):
             await message.chat.do('typing')
             await asyncio.sleep(0.18*length)
             await message.reply(text)
-        elif "@catgirl_chat_bot" in text:
+        elif "@catgirl_chat_bot" in text and afl.check(message) == 0:
             startAS(message, act = 'reset')
             text = await model.pred(text.replace('@catgirl_chat_bot', ''))
             length = len(text)
@@ -251,7 +256,7 @@ async def nya(message: types.Message):
             await message.chat.do('typing')
             await asyncio.sleep(0.18*length)
             await message.reply(text)
-        elif message.reply_to_message and message.reply_to_message.from_user.id == botid:
+        elif message.reply_to_message and message.reply_to_message.from_user.id == botid and afl.check(message) == 0:
             startAS(message, act = 'reset')
             text = await model.pred(text)
             length = len(text)
@@ -263,7 +268,7 @@ async def nya(message: types.Message):
             await message.chat.do('typing')
             await asyncio.sleep(0.18*length)
             await message.reply(text)
-    else:
+    elif message.chat.id > 0 and afl.check(message) == 0:
         text = await model.pred(text)
         length = len(text)
         await asyncio.sleep(0.3)
@@ -278,4 +283,4 @@ async def nya(message: types.Message):
 
 # Инициализация
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True, on_startup=start, on_shutdown=on_close)
+    executor.start_polling(dp, loop=loop, skip_updates=True, on_startup=start, on_shutdown=on_close)
