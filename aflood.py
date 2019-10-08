@@ -7,7 +7,7 @@ from aiogram.types import Chat
 userDict = {}
 
 class AntiFlood:
-	limits = 20
+	limits = 15
 	
 	async def everysecond(self):
 		while True:
