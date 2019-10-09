@@ -242,19 +242,19 @@ async def nya(message: types.Message):
     rand = random.randint(0,2)
     if check == 3:
         if rand == 0:
-            await typing('test0', message)
-        elif rand == 1:
-            await typing('test1', message)
-        else:
-            await typing('test2', message)
-            
-    elif check == 2:
-        if rand == 0:
             await typing('btest0', message)
         elif rand == 1:
             await typing('btest1', message)
         else:
             await typing('btest2', message)
+            
+    elif check == 2:
+        if rand == 0:
+            await typing('test0', message)
+        elif rand == 1:
+            await typing('test1', message)
+        else:
+            await typing('test2', message)
             
     elif check == 1:
         pass
