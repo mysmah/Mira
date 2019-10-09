@@ -238,29 +238,41 @@ async def adialog(message: types.Message):
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    text = message.text.lower()
-    if message.chat.id < 0:
-        if startAS(message, act = 'tick') != None:
-            startAS(message, act = 'reset')
-            await write_au(message.chat)
-        if text.startswith("мира ") and afl.check(message) == 0 or text.startswith("mira ") and afl.check(message) == 0 or text.startswith("мира,") and afl.check(message) == 0 or text.startswith("mira,") and afl.check(message) == 0:
-            startAS(message, act = 'reset')
-            text = await model.pred(text[5:])
+    check = afl.check(message)
+    rand = random.randint(0,2)
+    if check == 3:
+        if rand == 0:
+            await typing('test0', message)
+        elif rand == 1:
+            await typing('test1', message)
+        else:
+            await typing('test2', message)
+            
+    elif check == 2:
+        if rand == 0:
+            await typing('btest0', message)
+        elif rand == 1:
+            await typing('btest1', message)
+        else:
+            await typing('btest2', message)
+            
+    elif check == 1:
+        pass
+        
+    elif check == 0:
+        text = message.text.lower()
+        if message.reply_to_message and message.reply_to_message.from_user.id = botid:
+            text = model.pred(text)
             await typing(text, message)
-
-        elif "@catgirl_chat_bot" in text and afl.check(message) == 0:
-            startAS(message, act = 'reset')
-            text = await model.pred(text.replace('@catgirl_chat_bot', ''))
+        elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,'):
+            text = model.pred(text[5:])
             await typing(text, message)
-
-        elif message.reply_to_message and message.reply_to_message.from_user.id == botid and afl.check(message) == 0:
-            startAS(message, act = 'reset')
-            text = await model.pred(text)
+        elif text.split(', ')[1] == 'мира':
+            text = model.pred(text.replace[:15](', мира', ''))
             await typing(text, message)
-
-    elif message.chat.id > 0 and afl.check(message) == 0:
-        text = await model.pred(text)
-        await typing(text, message)
+        elif message.chat.id > 0:
+            text = model.pred(text)
+            await typing(text, message)
 
 # Инициализация
 if __name__ == '__main__':
