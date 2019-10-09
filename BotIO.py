@@ -17,7 +17,7 @@ from autoscript import startAS
 
 
 loop = asyncio.get_event_loop()
-afl = aflood(loop)
+afl = aflood(loop, limit=15)
 bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
 dp = Dispatcher(bot, loop=loop)
 
