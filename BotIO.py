@@ -267,7 +267,7 @@ async def nya(message: types.Message):
         elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,'):
             text = model.pred(text[5:])
             await typing(text, message)
-        elif text.split(', ')[1] == 'мира':
+        elif text.split(', ') and text.split(', ')[1] == 'мира':
             text = model.pred(text.replace[:15](', мира', ''))
             await typing(text, message)
         elif message.chat.id > 0:
