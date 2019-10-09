@@ -60,7 +60,7 @@ async def write_au(chat):
         await bot.send_sticker(chat.id, stickers['hi1'])
 
 async def typing(text, message):
-    length = len(text)
+    length = len(await text)
     await asyncio.sleep(0.3)
     while length > 26:
         await message.chat.do('typing')
