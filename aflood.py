@@ -7,8 +7,6 @@ from aiogram.types import Chat
 userDict = {}
 
 class AntiFlood:
-	limits = 15
-	
 	async def everysecond(self):
 		while True:
 			for i in userDict:
@@ -32,11 +30,11 @@ class AntiFlood:
 		if userDict[message.from_user.id].banned > 0:
 			return 1
 		userDict[message.from_user.id].sex += 1
-		if userDict[message.from_user.id].sex > AntiFlood.limits and userDict[message.from_user.id].warn <= 2:
+		if userDict[message.from_user.id].sex > self.limits and userDict[message.from_user.id].warn <= 2:
 			userDict[message.from_user.id].banned = time.time()+1800.0
 			userDict[message.from_user.id].warn += 1
 			return 2
-		elif userDict[message.from_user.id].sex > AntiFlood.limits and userDict[message.from_user.id].warn > 2:
+		elif userDict[message.from_user.id].sex > self.limits and userDict[message.from_user.id].warn > 2:
 			userDict[message.from_user.id].banned = time.time()+99999999.9
 			userDict[message.from_user.id].warn = 0
 			return 3
@@ -44,7 +42,8 @@ class AntiFlood:
 			return 0
 		
 	
-	def __init__(self, event_loop):
+	def __init__(self, event_loop, limit = 15):
+		self.limits = limit
 		self.event_loop = event_loop
 		event_loop.create_task(self.everysecond())
 		event_loop.create_task(self.everyminute())
