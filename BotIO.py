@@ -59,7 +59,7 @@ async def write_au(chat):
     elif rand == 4:
         await bot.send_sticker(chat.id, stickers['hi1'])
 
-async def typing(text, message):
+async def typing(text, message, answer = False):
     length = len(text)
     await asyncio.sleep(0.3)
     while length > 26:
@@ -68,7 +68,10 @@ async def typing(text, message):
         await asyncio.sleep(5)
     await message.chat.do('typing')
     await asyncio.sleep(0.18*length)
-    await message.reply(text)
+    if answer:
+        await message.answer(text)
+    else:
+        await message.reply(text)
 
 def arg(args):
     args = args.split()
@@ -272,7 +275,7 @@ async def nya(message: types.Message):
             await typing(text, message)
         elif message.chat.id > 0:
             text = await model.pred(text)
-            await typing(text, message)
+            await typing(text, message, answer = True)
 
 # Инициализация
 if __name__ == '__main__':
