@@ -60,7 +60,7 @@ async def write_au(chat):
         await bot.send_sticker(chat.id, stickers['hi1'])
 
 async def typing(text, message):
-    length = len(await text)
+    length = len(text)
     await asyncio.sleep(0.3)
     while length > 26:
         await message.chat.do('typing')
@@ -262,16 +262,16 @@ async def nya(message: types.Message):
     elif check == 0:
         text = message.text.lower()
         if message.reply_to_message and message.reply_to_message.from_user.id == botid:
-            text = model.pred(text)
+            text = await model.pred(text)
             await typing(text, message)
         elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,'):
-            text = model.pred(text[5:])
+            text = await model.pred(text[5:])
             await typing(text, message)
         elif len(text.split(', ')) > 1 and text.split(', ')[1] == 'мира':
-            text = model.pred(text.replace(', мира', ''))
+            text = await model.pred(text.replace(', мира', ''))
             await typing(text, message)
         elif message.chat.id > 0:
-            text = model.pred(text)
+            text = await model.pred(text)
             await typing(text, message)
 
 # Инициализация
