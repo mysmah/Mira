@@ -268,7 +268,7 @@ async def nya(message: types.Message):
             text = model.pred(text[5:])
             await typing(text, message)
         elif len(text.split(', ')) > 1 and text.split(', ')[1] == 'мира':
-            text = model.pred(text.replace[:15](', мира', ''))
+            text = model.pred(text.replace(', мира', ''))
             await typing(text, message)
         elif message.chat.id > 0:
             text = model.pred(text)
