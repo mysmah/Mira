@@ -59,6 +59,17 @@ async def write_au(chat):
     elif rand == 4:
         await bot.send_sticker(chat.id, stickers['hi1'])
 
+async def typing(text, message)
+    length = len(text)
+    await asyncio.sleep(0.3)
+    while length > 26:
+        await message.chat.do('typing')
+        length -=26
+        await asyncio.sleep(5)
+    await message.chat.do('typing')
+    await asyncio.sleep(0.18*length)
+    await message.reply(text)
+
 def arg(args):
     args = args.split()
     q = {"password": args[-1], "args": []}
@@ -235,51 +246,21 @@ async def nya(message: types.Message):
         if text.startswith("мира ") and afl.check(message) == 0 or text.startswith("mira ") and afl.check(message) == 0 or text.startswith("мира,") and afl.check(message) == 0 or text.startswith("mira,") and afl.check(message) == 0:
             startAS(message, act = 'reset')
             text = await model.pred(text[5:])
-            length = len(text)
-            await asyncio.sleep(0.3)
-            while length > 27:
-                await message.chat.do('typing')
-                length -=27
-                await asyncio.sleep(5)
-            await message.chat.do('typing')
-            await asyncio.sleep(0.18*length)
-            await message.reply(text)
+            await typing(text, message)
+
         elif "@catgirl_chat_bot" in text and afl.check(message) == 0:
             startAS(message, act = 'reset')
             text = await model.pred(text.replace('@catgirl_chat_bot', ''))
-            length = len(text)
-            await asyncio.sleep(0.3)
-            while length > 27:
-                await message.chat.do('typing')
-                length -=27
-                await asyncio.sleep(5)
-            await message.chat.do('typing')
-            await asyncio.sleep(0.18*length)
-            await message.reply(text)
+            await typing(text, message)
+
         elif message.reply_to_message and message.reply_to_message.from_user.id == botid and afl.check(message) == 0:
             startAS(message, act = 'reset')
             text = await model.pred(text)
-            length = len(text)
-            await asyncio.sleep(0.3)
-            while length > 27:
-                await message.chat.do('typing')
-                length -=27
-                await asyncio.sleep(5)
-            await message.chat.do('typing')
-            await asyncio.sleep(0.18*length)
-            await message.reply(text)
+            await typing(text, message)
+
     elif message.chat.id > 0 and afl.check(message) == 0:
         text = await model.pred(text)
-        length = len(text)
-        await asyncio.sleep(0.3)
-        while length > 26:
-            await message.chat.do('typing')
-            length -=26
-            await asyncio.sleep(5)
-        await message.chat.do('typing')
-        await asyncio.sleep(0.18*length)
-        await message.reply(text)
-
+        await typing(text, message)
 
 # Инициализация
 if __name__ == '__main__':
