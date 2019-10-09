@@ -261,7 +261,7 @@ async def nya(message: types.Message):
         
     elif check == 0:
         text = message.text.lower()
-        if message.reply_to_message and message.reply_to_message.from_user.id = botid:
+        if message.reply_to_message and message.reply_to_message.from_user.id == botid:
             text = model.pred(text)
             await typing(text, message)
         elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,'):
