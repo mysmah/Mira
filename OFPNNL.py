@@ -4,6 +4,7 @@ from tensorflow.keras import layers
 from razdel import tokenize
 from pyaspeller import Word
 
+import asyncio
 import tensorflow as tf
 import numpy as np
 import json
@@ -11,7 +12,8 @@ import re
 import os
 
 class NeuralNet:
-    def __init__(self, arr):
+    def __init__(self, arr, loop):
+        self.loop = loop
         self.new_model(arr)
 
 # Создание новой модели нейросети
@@ -73,7 +75,7 @@ class NeuralNet:
     def fit(self, n):
         self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
 
-    async def spell(self, q):
+    def spell(self, q):
         req = []
         for i in q:
             if i not in self.dict0 and i[0] != '{' and len(i) > 2:
@@ -92,7 +94,7 @@ class NeuralNet:
 # Обмен айдишниками слов с сетью
     async def pred(self, q):
         q = [_.text for _ in list(tokenize(q.lower()))]
-        q = await self.spell(q)
+        q = await self.loop.run_in_executor(None, self.spell, q)
         prediction = self.model.predict([[self.text2dict1(q)]])
         prediction = [int(round(x)) for x in prediction[0]]
         text = self.dict2text1(prediction)
