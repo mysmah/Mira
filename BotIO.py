@@ -253,11 +253,11 @@ async def nya(message: types.Message):
             
     elif check == 2:
         if rand == 0:
-            await typing('test0', message)
+            await typing('Да ты уже достал!', message)
         elif rand == 1:
-            await typing('test1', message)
+            await typing('Ну сколько можно?', message)
         else:
-            await typing('test2', message)
+            await typing('Я уже устала от тебя!', message)
             
     elif check == 1:
         pass
