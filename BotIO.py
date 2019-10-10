@@ -160,7 +160,6 @@ async def decor(message: types.Message):
         if NCMusePretxt == 1:
             await message.reply("Привет, [" + message.new_chat_members[0].first_name + "](tg://user?id=" + str(message.new_chat_members[0].id) + "), добро пожаловать в *" + message.chat.title + "*!", parse_mode = ParseMode.MARKDOWN)
         elif NCMusePretxt == 0:
-            random.seed()
             if random.randint(0,4) == 0:
                 text = model.pred('sys.io.answ0')
             elif random.randint(0,4) == 1:
