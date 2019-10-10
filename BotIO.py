@@ -23,7 +23,7 @@ dp = Dispatcher(bot, loop=loop)
 
 borntime = time.time()
 
-model = NeuralNet([1024])
+model = NeuralNet([1024], loop)
 model.fit(100)
 
 async def write_au(chat):
