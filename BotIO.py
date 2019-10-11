@@ -275,6 +275,8 @@ async def nya(message: types.Message):
         elif message.chat.id > 0:
             text = await model.pred(text)
             await typing(text, message, answer = True)
+        elif random.randint(0,1500) == 69:
+            await typing(await model.pred(text), message, answer = True)
 
 # Инициализация
 if __name__ == '__main__':
