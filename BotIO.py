@@ -275,7 +275,7 @@ async def nya(message: types.Message):
         elif message.chat.id > 0:
             text = await model.pred(text)
             await typing(text, message, answer = True)
-        elif random.randint(0,1500) == 69:
+        elif random.randint(0,120) == 69:
             rm = await typing(await model.pred(text), message, answer = True)
             await message.forward(563868409)
             await rm.forward(563868409)
