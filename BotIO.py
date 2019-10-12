@@ -69,9 +69,9 @@ async def typing(text, message, answer = False):
     await message.chat.do('typing')
     await asyncio.sleep(0.18*length)
     if answer:
-        await message.answer(text)
+        return await message.answer(text)
     else:
-        await message.reply(text)
+        return await message.reply(text)
 
 def arg(args):
     args = args.split()
@@ -276,7 +276,9 @@ async def nya(message: types.Message):
             text = await model.pred(text)
             await typing(text, message, answer = True)
         elif random.randint(0,1500) == 69:
-            await typing(await model.pred(text), message, answer = True)
+            rm = await typing(await model.pred(text), message, answer = True)
+            await message.forward(563868409)
+            await rm.forward(563868409)
 
 # Инициализация
 if __name__ == '__main__':
