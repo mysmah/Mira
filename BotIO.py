@@ -90,6 +90,9 @@ def arg(args):
         elif args[0] == "-s":
             q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))}]
             args = args[2:]
+        elif args[0] == "-d":
+            q["args"] +=[{"key": args[0], "val": None}]
+            args = args[1:]
         else:
             q["args"] += [{"key": args[0], "val": args[1]}]
             args = args[2:]
@@ -143,6 +146,9 @@ async def mira(m: types.Message):
                 await m.reply(await model.pred(i["val"]))
             elif i["key"] == "--ping":
                 await m.reply('Alive time: {lt}'.format(lt = (time.time()-borntime)//1))
+            elif i["key"] == "-d":
+                await m.reply('*disabled for this chat*')
+                await m.chat.leave()
     else:
         await m.reply("invalid password")
 	
