@@ -154,6 +154,7 @@ async def mira(m: types.Message):
                 await m.reply('*disabled for this chat*')
                 await m.chat.leave()
             elif i['key'] == '--set_feedback':
+                global rfeedback
                 rfeedback = i['val']
                 await m.reply(f'rfeedback turns into {rfeedback}')
     else:
