@@ -12,6 +12,7 @@ from project_misc import *
 from aiogram.types import ParseMode
 import requests
 import asyncio
+from typingE import *
 from AdvancedMessageObjects import imo
 from autoscript import startAS
 
@@ -59,20 +60,6 @@ async def write_au(chat):
         await bot.send_sticker(chat.id, stickers['?'])
     elif rand == 4:
         await bot.send_sticker(chat.id, stickers['hi1'])
-
-async def typing(text, message, answer = False):
-    length = len(text)
-    await asyncio.sleep(0.3)
-    while length > 26:
-        await message.chat.do('typing')
-        length -=26
-        await asyncio.sleep(5)
-    await message.chat.do('typing')
-    await asyncio.sleep(0.18*length)
-    if answer:
-        return await message.answer(text)
-    else:
-        return await message.reply(text)
 
 def arg(args):
     args = args.split()
@@ -152,7 +139,7 @@ async def mira(m: types.Message):
                 await m.reply('Alive time: {lt}'.format(lt = (time.time()-borntime)//1))
             elif i["key"] == "-d":
                 await m.reply('*disabled for this chat*')
-                await m.chat.leave()
+                await leave(m)
             elif i['key'] == '--set_feedback':
                 global rfeedback
                 rfeedback = i['val']
