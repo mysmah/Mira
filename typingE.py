@@ -16,10 +16,10 @@ async def typing(text, message, answer = False):
         return await message.reply(text)
        
 async def leave(message):
-    await typing('Оу', message)
-    await asyncio.sleep(1)
-    await typing('Ну чтож...', message)
-    await asyncio.sleep(0.5)
-    await typing('Прощайте.', message)
-    await asyncio.sleep(0.6)
+    await typing('Оу', message, answer=True)
+    await asyncio.sleep(1.8)
+    await typing('Ну чтож...', message, answer=True)
+    await asyncio.sleep(0.9)
+    await typing('Прощайте.', message, answer=True)
+    await asyncio.sleep(0.3)
     await message.chat.leave()
