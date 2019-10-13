@@ -15,6 +15,7 @@ import asyncio
 from AdvancedMessageObjects import imo
 from autoscript import startAS
 
+rfeedback = 120
 
 loop = asyncio.get_event_loop()
 afl = aflood(loop, limit=15)
@@ -93,6 +94,9 @@ def arg(args):
         elif args[0] == "-d":
             q["args"] +=[{"key": args[0], "val": None}]
             args = args[1:]
+        elif args[0] == '--set_feedback':
+            q["args"] += [{'key': args[0], 'val': int(args[1])}]
+            args = args[2:]
         else:
             q["args"] += [{"key": args[0], "val": args[1]}]
             args = args[2:]
@@ -149,6 +153,9 @@ async def mira(m: types.Message):
             elif i["key"] == "-d":
                 await m.reply('*disabled for this chat*')
                 await m.chat.leave()
+            elif i['key'] == '--set_feedback':
+                rfeedback = i['val']
+                await m.reply(f'rfeedback turns into {rfeedback}')
     else:
         await m.reply("invalid password")
 	
