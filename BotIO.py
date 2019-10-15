@@ -240,6 +240,7 @@ async def adialog(message: types.Message):
 
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
+    text = message.text.lower()
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
     if message.reply_to_message and message.reply_to_message.from_user.id == botid:
         check = afl.check(message)
@@ -270,7 +271,6 @@ async def nya(message: types.Message):
         pass
         
     elif check == 0:
-        text = message.text.lower()
         if message.reply_to_message and message.reply_to_message.from_user.id == botid:
             text = await model.pred(text)
             await typing(text, message)
