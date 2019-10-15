@@ -241,7 +241,14 @@ async def adialog(message: types.Message):
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
     print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-    check = afl.check(message)
+    if message.reply_to_message and message.reply_to_message.from_user.id == botid:
+        check = afl.check(message)
+    elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,'):
+        check = afl.check(message)
+    elif len(text.split(', ')) > 1 and text.split(', ')[1] == 'мира':
+        check = afl.check(message)
+    elif message.chat.id > 0:
+        check = afl.check(message)
     rand = random.randint(0,2)
     if check == 3:
         if rand == 0:
