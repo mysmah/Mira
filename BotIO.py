@@ -119,7 +119,7 @@ async def mira(m: types.Message):
                 n = int(i["val"])
                 t = time.time()
                 model.fit(1)
-                await m.reply('Время на эпоху: {} \nОставшиеся время: {} минут.'.format((time.time() - t) // 1, ((time.time() // 1) - (t // 1)) * n-1.0) /60))
+                await m.reply('Время на эпоху: {} \nОставшиеся время: {} минут.'.format((time.time() - t) // 1, ((time.time() // 1) - (t // 1) * n-1.0) /60))
                 await bot.send_message(-1001184868284, "Бот переведён в режим тренировки на " + str(n) + " эпох")
                 model.fit(n-1)
                 await bot.send_message(-1001184868284, "Бот переведён в активный режим")
