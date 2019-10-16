@@ -31,8 +31,8 @@ class AntiFlood:
 			return 1
 		userDict[message.from_user.id].sex += 1
 		if userDict[message.from_user.id].sex > self.limits and userDict[message.from_user.id].warn <= 2:
-			userDict[message.from_user.id].banned = time.time()+1800.0
 			userDict[message.from_user.id].warn += 1
+			userDict[message.from_user.id].banned = time.time()+900.0*userDict[message.from_user.id].warn
 			return 2
 		elif userDict[message.from_user.id].sex > self.limits and userDict[message.from_user.id].warn > 2:
 			userDict[message.from_user.id].banned = time.time()+86400.0
