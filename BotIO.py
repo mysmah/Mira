@@ -251,6 +251,7 @@ async def nya(message: types.Message):
     elif message.chat.id > 0:
         check = afl.check(message)
     rand = random.randint(0,2)
+    else: check = 1
     if check == 3:
         if rand == 0:
             await typing('btest0', message)
