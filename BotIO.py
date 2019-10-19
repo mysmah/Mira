@@ -9,7 +9,7 @@ from aflood import AntiFlood as aflood
 from OFPNNL import *
 from aiogram import *
 from project_misc import *
-from aiogram.types import ParseMode
+from aiogram.types import ParseMode, ContentType
 import requests
 import asyncio
 from typingE import *
@@ -236,6 +236,9 @@ async def adialog(message: types.Message):
     else:
         await message.reply("fail")
     await message.delete()
+
+@dp.message_handler(content_types=ContentType.PINNED_MESSAGE)
+async def pinnedansw(m):
 
 
 @dp.message_handler(regexp='[\s\S]+')
