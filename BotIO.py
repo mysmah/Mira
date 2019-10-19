@@ -251,6 +251,8 @@ async def nya(message: types.Message):
         check = afl.check(message)
     elif message.chat.id > 0:
         check = afl.check(message)
+    else:
+        check = 0
     rand = random.randint(0,2)
     if check == 3:
         if rand == 0:
