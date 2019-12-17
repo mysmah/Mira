@@ -239,7 +239,7 @@ async def adialog(message: types.Message):
 
 @dp.message_handler(content_types=ContentType.PINNED_MESSAGE)
 async def pinnedansw(m):
-    text = await model.pred(m.pinned_message.text.lower()
+    text = await model.pred(m.pinned_message.text.lower())
     await typing(text,m.pinned_message)
 
 @dp.message_handler(regexp='[\s\S]+')
