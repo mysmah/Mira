@@ -4,6 +4,7 @@ from tensorflow.keras import layers
 from razdel import tokenize
 from pyaspeller import Word
 
+import time
 import asyncio
 import tensorflow as tf
 import numpy as np
@@ -76,6 +77,7 @@ class NeuralNet:
         self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
 
     def spell(self, q):
+        tim = time.time()
         req = []
         for i in q:
             if i not in self.dict0 and i[0] != '{' and len(i) > 2:
@@ -89,6 +91,7 @@ class NeuralNet:
         for z in req:
             if self == None:
                 req.remove(self)
+        logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: spelled and predicted in {time.time()-tim} seconds')
         return ' '.join(req)
         
 # Обмен айдишниками слов с сетью
