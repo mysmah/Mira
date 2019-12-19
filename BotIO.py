@@ -1,6 +1,8 @@
 import json
 import re
 import time
+import logging
+import datetime
 import random
 import confs
 import os
@@ -18,6 +20,8 @@ from autoscript import startAS
 
 rfeedback = 120
 
+logging.baseConfig(filename='log.log', filemode='a', logging.INFO)
+logging.INFO(f'\n\n==CHECKPOINT==\nNew instance on {os.name}\nPath: {os.path.abspath(__file__)}\nStart time: {time.time()}
 loop = asyncio.get_event_loop()
 afl = aflood(loop, limit=15)
 bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
