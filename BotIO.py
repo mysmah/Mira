@@ -21,7 +21,8 @@ from autoscript import startAS
 rfeedback = 120
 
 logging.baseConfig(filename='log.log', filemode='a', logging.INFO)
-logging.INFO(f'\n\n==CHECKPOINT==\nNew instance on {os.name}\nPath: {os.path.abspath(__file__)}\nStart time: {time.time()}
+logging.info(f'\n\n==CHECKPOINT==\nNew instance on {os.name}\nPath: {os.path.abspath(__file__)}\nStart time: {datetime.datetime.now().strftime("%c")}\n')
+starttime = time.time()
 loop = asyncio.get_event_loop()
 afl = aflood(loop, limit=15)
 bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
@@ -66,6 +67,7 @@ async def write_au(chat):
         await bot.send_sticker(chat.id, stickers['hi1'])
 
 def arg(args):
+    logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: mira command {args}')
     args = args.split()
     q = {"password": args[-1], "args": []}
     args = args[:-1]
@@ -282,6 +284,7 @@ async def nya(message: types.Message):
         pass
         
     elif check == 0:
+        logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: Message event with {id(message)}')
         if message.reply_to_message and message.reply_to_message.from_user.id == botid:
             text = await model.pred(text)
             await typing(text, message)
@@ -301,4 +304,5 @@ async def nya(message: types.Message):
 
 # Инициализация
 if __name__ == '__main__':
+    logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: bot inited in {str(time.time() - starttime)} seconds')
     executor.start_polling(dp, loop=loop, skip_updates=True, on_startup=start, on_shutdown=on_close)
