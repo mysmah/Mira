@@ -4,6 +4,7 @@ from tensorflow.keras import layers
 from razdel import tokenize
 from pyaspeller import Word
 
+import logging
 import time
 import asyncio
 import tensorflow as tf
