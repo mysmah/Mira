@@ -198,8 +198,8 @@ async def knopki(m: types.Message):
 
 @dp.inline_handler()
 async def inline_echo(inline_query: InlineQuery):
-    text = inline_query.query or 'привет'
-    ans = model.pred(text)
+    text = inline_query.query or ''
+    ans = await model.pred(text)
     text = "- " + text + "\n- " + ans
     input_content = InputTextMessageContent(text)
     result_id: str = hashlib.md5(text.encode()).hexdigest()
