@@ -87,6 +87,9 @@ def arg(args):
         elif args[0] == "-s":
             q["args"] += [{"key": args[0], "val": " ".join(args[1].split("-"))}]
             args = args[2:]
+        elif args[0] == "-a" or args[0] == "--add":
+            q["args"] += [{"key": "-a", "val": None}]
+            args = args[1:]
         elif args[0] == "-d":
             q["args"] +=[{"key": args[0], "val": None}]
             args = args[1:]
@@ -149,6 +152,17 @@ async def mira(m: types.Message):
             elif i["key"] == "-d":
                 await m.reply('*disabled for this chat*')
                 await leave(m)
+            elif i["key"] == "-a":
+                 print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
+                 print(message.reply_to_message.text)
+                     if message.reply_to_message and "".join(message.text.split()[1:]) == passGen(message) and len(message.reply_to_message.text.split("\n")) > 0 and len(message.reply_to_message.text.split("\n")) % 2 == 0:
+                     writin = open("dialog.txt", "a")
+                     writin.write("\n" + message.reply_to_message.text)
+                     writin.close()
+                     await bot.send_message(-1001184868284, "Добавлен новый диалог:\n" + message.reply_to_message.text)
+                     await message.reply("success")
+                 else:
+                     await message.reply("fail")
             elif i['key'] == '--set_feedback':
                 global rfeedback
                 rfeedback = i['val']
