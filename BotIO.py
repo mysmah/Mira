@@ -7,6 +7,9 @@ import random
 import confs
 import os
 
+import hashlib
+from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArtic
+
 from aflood import AntiFlood as aflood
 from OFPNNL import *
 from aiogram import *
@@ -192,6 +195,20 @@ async def knopki(m: types.Message):
     if text[0] == passGen(m):
         await imo.summon(model, bot, 'settings', m, locked = True, pdata = ['Меню с настройками(кнопоки)', ['СВИТЧИ','close:toggles:0'], ['FIT','counter:fit:50:0','send:fit:0','close:fit:0'], ['RESET','counter:neurod:1024:0','counter:layers:1:0','send:reset:0','close:reset:0'],['Перезагрузка'], 'close:null:0'])
 
+
+@dp.inline_handler()
+async def inline_echo(inline_query: InlineQuery):
+    text = inline_query.query
+    ans = model.pred(text)
+    text = "- " + text + "\n- " + ans
+    input_content = InputTextMessageContent(text)
+    result_id: str = hashlib.md5(text.encode()).hexdigest()
+    item = InlineQueryResultArticle(
+        id=result_id,
+        title=ans,
+        input_message_content=input_content,
+   )
+    await bot.answer_inline_query(inline_query.id, results=[item], cache_time=1)
 
 @dp.callback_query_handler()
 async def ebuchie(c: types.CallbackQuery):
