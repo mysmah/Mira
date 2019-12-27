@@ -153,16 +153,16 @@ async def mira(m: types.Message):
                 await m.reply('*disabled for this chat*')
                 await leave(m)
             elif i["key"] == "-a":
-                 print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
-                 print(message.reply_to_message.text)
-                     if message.reply_to_message and "".join(message.text.split()[1:]) == passGen(message) and len(message.reply_to_message.text.split("\n")) > 0 and len(message.reply_to_message.text.split("\n")) % 2 == 0:
-                     writin = open("dialog.txt", "a")
-                     writin.write("\n" + message.reply_to_message.text)
-                     writin.close()
-                     await bot.send_message(-1001184868284, "Добавлен новый диалог:\n" + message.reply_to_message.text)
-                     await message.reply("success")
-                 else:
-                     await message.reply("fail")
+                print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
+                print(message.reply_to_message.text)
+                    if message.reply_to_message and "".join(message.text.split()[1:]) == passGen(message) and len(message.reply_to_message.text.split("\n")) > 0 and len(message.reply_to_message.text.split("\n")) % 2 == 0:
+                    writin = open("dialog.txt", "a")
+                    writin.write("\n" + message.reply_to_message.text)
+                    writin.close()
+                    await bot.send_message(-1001184868284, "Добавлен новый диалог:\n" + message.reply_to_message.text)
+                    await message.reply("success")
+                else:
+                    await message.reply("fail")
             elif i['key'] == '--set_feedback':
                 global rfeedback
                 rfeedback = i['val']
