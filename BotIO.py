@@ -268,7 +268,7 @@ async def pinnedansw(m):
 @dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
     text = message.text.lower()
-    print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
+    print(message.from_user.full_name, " (@", message.from_user.username, ", title: ", message.chat.title, " (", await message.chat.get_url(), ")): ", message.text, sep="")
     check = None
     if message.reply_to_message and message.reply_to_message.from_user.id == botid:
         check = afl.check(message)
