@@ -92,7 +92,6 @@ class NeuralNet:
         for z in req:
             if self == None:
                 req.remove(self)
-        logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: spelled and predicted in {time.time()-tim} seconds')
         return ' '.join(req)
         
 # Обмен айдишниками слов с сетью
