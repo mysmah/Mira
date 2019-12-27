@@ -8,7 +8,7 @@ import confs
 import os
 
 import hashlib
-from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArtic
+from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
 
 from aflood import AntiFlood as aflood
 from OFPNNL import *
