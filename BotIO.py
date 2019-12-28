@@ -119,6 +119,7 @@ async def on_close(arg):
 		
 @dp.message_handler(commands=['mira'])
 async def mira(m: types.Message):
+    print(message.from_user.full_name, " (@", message.from_user.username, ", title: ", message.chat.title, " (", await message.chat.get_url(), ")): ", message.text, sep="")
     args = arg(" ".join(m.text.lower().split()[1:]))
     print(args)
     if args["password"] == passGen(m):
@@ -155,14 +156,14 @@ async def mira(m: types.Message):
             elif i["key"] == "-a":
                 print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
                 print(message.reply_to_message.text)
-                   if message.reply_to_message and "".join(message.text.split()[1:]) == passGen(message) and len(message.reply_to_message.text.split("\n")) > 0 and len(message.reply_to_message.text.split("\n")) % 2 == 0:
-                   writin = open("dialog.txt", "a")
-                   writin.write("\n" + message.reply_to_message.text)
-                   writin.close()
-                   await bot.send_message(-1001184868284, "Добавлен новый диалог:\n" + message.reply_to_message.text)
-                   await message.reply("success")
-               else:
-                   await message.reply("fail")
+                if message.reply_to_message and len(message.reply_to_message.text.split("\n")) > 0 and len(message.reply_to_message.text.split("\n")) % 2 == 0:
+                    writin = open("dialog.txt", "a")
+                    writin.write("\n" + message.reply_to_message.text)
+                    writin.close()
+                    await bot.send_message(-1001184868284, "Добавлен новый диалог:\n" + message.reply_to_message.text)
+                    await message.reply("success")
+                else:
+                    await message.reply("fail")
             elif i['key'] == '--set_feedback':
                 global rfeedback
                 rfeedback = i['val']
@@ -217,6 +218,7 @@ async def inline_echo(inline_query: InlineQuery):
     text = "- " + text + "\n- " + ans
     input_content = InputTextMessageContent(text)
     result_id: str = hashlib.md5(text.encode()).hexdigest()
+    print("inline: ", inline_query.from_user.full_name, " (@", inline_query.from_user.username, "): ", text, sep="")
     item = InlineQueryResultArticle(
         id=result_id,
         title=ans,
@@ -236,7 +238,7 @@ async def ebuchie(c: types.CallbackQuery):
 
 @dp.message_handler(commands=['add'])
 async def add(message: types.Message):
-    print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
+    print(message.from_user.full_name, " (@", message.from_user.username, ", title: ", message.chat.title, " (", await message.chat.get_url(), ")): ", message.text, sep="")
     text = message.text.split()[1:]
     text = " ".join(text[1:]).split("&") if text[0] == passGen(message) else "fail: invalid password"
     if type(text) == list: text = text if len(text) == 2 else "fail: invalid format"
@@ -262,7 +264,7 @@ async def getid(m: types.Message):
 
 @dp.message_handler(commands=['adddialog'])
 async def adialog(message: types.Message):
-    print(message.from_user.full_name, " (@", message.from_user.username, "): ", message.text, sep="")
+    print(message.from_user.full_name, " (@", message.from_user.username, ", title: ", message.chat.title, " (", await message.chat.get_url(), ")): ", message.text, sep="")
     print(message.reply_to_message.text)
     if message.reply_to_message and "".join(message.text.split()[1:]) == passGen(message) and len(message.reply_to_message.text.split("\n")) > 0 and len(message.reply_to_message.text.split("\n")) % 2 == 0:
         writin = open("dialog.txt", "a")
