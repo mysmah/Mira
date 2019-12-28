@@ -119,7 +119,7 @@ async def on_close(arg):
 		
 @dp.message_handler(commands=['mira'])
 async def mira(m: types.Message):
-    print(message.from_user.full_name, " (@", message.from_user.username, ", title: ", message.chat.title, " (", await message.chat.get_url(), ")): ", message.text, sep="")
+    print(m.from_user.full_name, " (@", m.from_user.username, ", title: ", m.chat.title, " (", await m.chat.get_url(), ")): ", m.text, sep="")
     args = arg(" ".join(m.text.lower().split()[1:]))
     print(args)
     if args["password"] == passGen(m):
