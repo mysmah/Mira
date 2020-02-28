@@ -183,6 +183,16 @@ async def mira(m: types.Message):
                 global rfeedback
                 rfeedback = i['val']
                 await m.reply(f'rfeedback turns into {rfeedback}')
+            elif i['key'] == '-w':
+                global wlist
+                wlist = db.add_to_wlist(m.reply_to_message.from_user.id)
+                prepr.update(wlist)
+                await m.delete()
+            elif i['key'] == '-unwatch':
+                global wlist
+                wlist = db.remove_from_wlist(m.reply_to_message.from_user.id)
+                prepr.update(wlist)
+                await m.delete()		 
     else:
         await m.reply("invalid password")
 	
