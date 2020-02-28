@@ -21,6 +21,10 @@ from typingE import *
 from AdvancedMessageObjects import imo
 from autoscript import startAS
 
+import database
+import message_handler as prepr
+
+
 rfeedback = 120
 
 logging.basicConfig(filename='log.log', filemode='a', level=logging.INFO)
@@ -32,6 +36,11 @@ bot = Bot(token=token, parse_mode = ParseMode.MARKDOWN)
 dp = Dispatcher(bot, loop=loop)
 
 borntime = time.time()
+	     
+	    
+db = database.INITIALIZATE()
+wlist = db.get_wlist()
+
 
 model = NeuralNet([1024], loop)
 model.fit(100)
@@ -96,6 +105,12 @@ def arg(args):
         elif args[0] == '--set_feedback':
             q["args"] += [{'key': args[0], 'val': int(args[1])}]
             args = args[2:]
+	elif args[0] == '-w':
+            q["args"] += [{'key': args[0], 'val': None}]
+            args = args[1:]
+	elif args[0] == '--unwatch':
+            q["args"] += [{'key': args[0], 'val': None}]
+            args = args[1:]
         else:
             q["args"] += [{"key": args[0], "val": args[1]}]
             args = args[2:]
@@ -104,9 +119,10 @@ def arg(args):
 async def start(arg):
     #Функция при запуске
     await bot.send_message(-1001184868284, "Сеть инициализирована")
-    global NCMusePretxt
+    global NCMusePretxt, wlist
     NCMusePretxt = confs.NCMup
     await imo.initof()
+    prepr.init(wlist, await bot.me)
     
 
 
@@ -280,7 +296,7 @@ async def pinnedansw(m):
     text = await model.pred(m.pinned_message.text.lower())
     await typing(text,m.pinned_message)
 
-@dp.message_handler(regexp='[\s\S]+')
+#@dp.message_handler(regexp='[\s\S]+')
 async def nya(message: types.Message):
     text = message.text.lower()
     print(message.from_user.full_name, " (@", message.from_user.username, ", title: ", message.chat.title, " (", await message.chat.get_url(), ")): ", message.text, sep="")
@@ -333,6 +349,13 @@ async def nya(message: types.Message):
             rm = await typing(await model.pred(text), message, answer = True)
             await message.forward(563868409)
             await rm.forward(563868409)
+@dp.message_handler(regexp='[\s\S]+')
+async def nnya(m):
+    result = prepr.process_m(m)
+    if result == 0:
+        await typing(await model.pred(m.text.lower()),m,answer = True)
+    elif result == 1:
+        await typing(await model.pred(m.text.lower()),m)
 
 # Инициализация
 if __name__ == '__main__':
