@@ -289,8 +289,8 @@ async def nya(message: types.Message):
         check = afl.check(message)
     elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,') or ', мира,' in text or ', mira,' in text:
         check = afl.check(message)
-    #elif len(text.split(', ')) > 1 and text.split(', ')[1] == 'мира':
-      #  check = afl.check(message)
+    elif len(text.split(', ')) > 1 and text.split(', ')[1] == 'мира':
+        check = afl.check(message)
     elif message.chat.id > 0:
         check = afl.check(message)
     else:
@@ -320,7 +320,7 @@ async def nya(message: types.Message):
         if message.reply_to_message and message.reply_to_message.from_user.id == botid:
             text = await model.pred(text)
             await typing(text, message)
-        elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,'):
+        elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,') or ', мира,' in text or ', mira,' in text:
             text = await model.pred(text[5:])
             await typing(text, message)
         elif len(text.split(', ')) > 1 and text.split(', ')[1] == 'мира':
