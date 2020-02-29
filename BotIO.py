@@ -187,7 +187,7 @@ async def mira(m: types.Message):
                 wlist = db.add_to_wlist(m.reply_to_message.from_user.id)
                 prepr.update(wlist)
                 await m.delete()
-            elif i['key'] == '-unwatch':
+            elif i['key'] == '--unwatch':
                 wlist = db.remove_from_wlist(m.reply_to_message.from_user.id)
                 prepr.update(wlist)
                 await m.delete()		 
