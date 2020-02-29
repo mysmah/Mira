@@ -40,7 +40,7 @@ borntime = time.time()
 	    
 db = database.INITIALIZATE()
 wlist = db.get_wlist()
-print (db)
+print(db)
 
 
 model = NeuralNet([1024], loop)
@@ -119,6 +119,7 @@ def arg(args):
 	
 async def start(arg):
     #Функция при запуске
+    print('start')
     await bot.send_message(-1001184868284, "Сеть инициализирована")
     global NCMusePretxt, wlist
     NCMusePretxt = confs.NCMup
