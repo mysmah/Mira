@@ -122,7 +122,7 @@ async def start(arg):
     global NCMusePretxt, wlist
     NCMusePretxt = confs.NCMup
     await imo.initof()
-    prepr.init(wlist, await bot.me)
+    prepr.init(wlist, await bot.get_me())
     
 
 
