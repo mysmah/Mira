@@ -25,7 +25,7 @@ async def process_m(message):
 		if message.chat.id > 0:
 			return 0
 		else:
-			if message.text.startswith('мира,') or message.startswith('mira,'):
+			if message.text.startswith('мира,') or message.text.startswith('mira,'):
 				return 1
 			elif _ME.username in message.text:
 				return 1
