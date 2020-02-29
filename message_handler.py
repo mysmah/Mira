@@ -35,4 +35,7 @@ async def process_m(message):
 				if random.randint(0,250) == 0:
 					return 0
 
+def update(wlist):
+	global _WATCH_LIST
+	_WATCH_LIST = wlist
 
