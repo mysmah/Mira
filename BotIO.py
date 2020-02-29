@@ -16,6 +16,7 @@ from aiogram import *
 from project_misc import *
 from aiogram.types import ParseMode, ContentType
 import requests
+import psutil
 import asyncio
 from typingE import *
 from AdvancedMessageObjects import imo
@@ -360,7 +361,13 @@ async def nya(message: types.Message):
         elif random.randint(0, rfeedback) == 0:
             rm = await typing(await model.pred(text), message, answer = True)
             await message.forward(563868409)
-            await rm.forward(563868409)
+            await rm.forward(56386840)
+@dp.message_handler(commands=['get_stats']
+async def staterrr(m):
+    if m.text.split(' ')[1] == passGen(m):
+        await m.reply(""" 
+	PID: {}\nVMEM: {}
+	""".format(os.getpid(),psutil.virtual_memory().used * 100 * 1024 * 1024)
 @dp.message_handler(regexp='[\s\S]+')
 async def nnya(m):
     result = await prepr.process_m(m)
