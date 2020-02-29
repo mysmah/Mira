@@ -367,7 +367,7 @@ async def staterrr(m):
     if m.text.split(' ')[1] == passGen(m):
         await m.reply(""" 
 	PID: {}\nVMEM: {}
-	""".format(os.getpid(),psutil.virtual_memory().used * 100 * 1024 * 1024)
+	""".format(os.getpid(),psutil.virtual_memory().used * 100 * 1024 * 1024))
 @dp.message_handler(regexp='[\s\S]+')
 async def nnya(m):
     result = await prepr.process_m(m)
