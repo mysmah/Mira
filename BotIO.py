@@ -359,7 +359,7 @@ async def nya(message: types.Message):
             await rm.forward(563868409)
 @dp.message_handler(regexp='[\s\S]+')
 async def nnya(m):
-    result = prepr.process_m(m)
+    result = await prepr.process_m(m)
     if result == 0:
         await typing(await model.pred(m.text.lower()),m,answer = True)
     elif result == 1:
