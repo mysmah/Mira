@@ -108,7 +108,7 @@ def arg(args):
         elif args[0] == '-w':
             q["args"] += [{'key': args[0], 'val': None}]
             args = args[1:]
-	elif args[0] == '--unwatch':
+        elif args[0] == '--unwatch':
             q["args"] += [{'key': args[0], 'val': None}]
             args = args[1:]
         else:
