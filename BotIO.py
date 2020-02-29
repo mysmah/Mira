@@ -108,7 +108,7 @@ def arg(args):
         elif args[0] == '-w':
             q["args"] += [{'key': args[0], 'val': None}]
             args = args[1:]
-        elif args[0] == '--unwatch':
+	elif args[0] == '--unwatch':
             q["args"] += [{'key': args[0], 'val': None}]
             args = args[1:]
         else:
@@ -138,6 +138,7 @@ async def mira(m: types.Message):
     print(m.from_user.full_name, " (@", m.from_user.username, ", title: ", m.chat.title, " (", await m.chat.get_url(), ")): ", m.text, sep="")
     args = arg(" ".join(m.text.lower().split()[1:]))
     print(args)
+    global wlist, rfeedback
     if args["password"] == passGen(m):
         for i in args["args"]:
             if i["key"] == "--reboot":
@@ -180,16 +181,13 @@ async def mira(m: types.Message):
                 else:
                     await message.reply("fail")
             elif i['key'] == '--set_feedback':
-                global rfeedback
                 rfeedback = i['val']
                 await m.reply(f'rfeedback turns into {rfeedback}')
             elif i['key'] == '-w':
-                global wlist
                 wlist = db.add_to_wlist(m.reply_to_message.from_user.id)
                 prepr.update(wlist)
                 await m.delete()
             elif i['key'] == '-unwatch':
-                global wlist
                 wlist = db.remove_from_wlist(m.reply_to_message.from_user.id)
                 prepr.update(wlist)
                 await m.delete()		 
@@ -370,4 +368,4 @@ async def nnya(m):
 # Инициализация
 if __name__ == '__main__':
     logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: bot inited in {str(time.time() - starttime)} seconds')
-    executor.start_polling(dp, loop=loop, skip_updates=True, on_startup=start, on_shutdown=on_close)
+executor.start_polling(dp, loop=loop, skip_updates=True, on_startup=start, on_shutdown=on_close)
