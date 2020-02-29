@@ -40,6 +40,7 @@ borntime = time.time()
 	    
 db = database.INITIALIZATE()
 wlist = db.get_wlist()
+print (db)
 
 
 model = NeuralNet([1024], loop)
@@ -184,6 +185,7 @@ async def mira(m: types.Message):
                 rfeedback = i['val']
                 await m.reply(f'rfeedback turns into {rfeedback}')
             elif i['key'] == '-w':
+                await m.reply('a')
                 wlist = db.add_to_wlist(m.reply_to_message.from_user.id)
                 prepr.update(wlist)
                 await m.delete()
