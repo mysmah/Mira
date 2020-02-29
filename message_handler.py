@@ -11,7 +11,7 @@ def init(ids, wlist):
 	global _WATCH_LIST, _ME
 	logging.info('preproc: Initializating module')
 	_WATCH_LIST = wlist
-	_ID = ids
+	_ME = ids
 	logging.info('preproc: Done')
 async def process_m(message):
 	message.text = message.text.lower()
