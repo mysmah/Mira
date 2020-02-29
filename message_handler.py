@@ -1,5 +1,5 @@
 # PREPROCESS MODULE
-# version 0.0.1
+# version 0.0.2
 _WATCH_LIST = None
 _ME = None
 _DB = None
