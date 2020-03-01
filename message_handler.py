@@ -44,7 +44,7 @@ async def process_m(message):
 
 def update(wlist):
 	global _WATCH_LIST
-_WATCH_LIST = wlist
+	_WATCH_LIST = wlist
 
 def close():
 	#Write new dialogs to dialog.txt
