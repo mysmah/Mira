@@ -206,15 +206,19 @@ async def mira(m: types.Message):
                 rfeedback = i['val']
                 await m.reply(f'rfeedback turns into {rfeedback}')
             elif i['key'] == '-w':
-                await m.reply('a')
                 wlist = db.add_to_wlist(m.reply_to_message.from_user.id)
-                await m.reply('a')
-                prepr.update(wlist)
-                await m.reply('a')
+                if isinstance(wlist, list):
+                    prepr.update(wlist)
+                    await m.delete()
+                else:
+                    await m.reply('error')
             elif i['key'] == '--unwatch':
                 wlist = db.remove_from_wlist(m.reply_to_message.from_user.id)
-                prepr.update(wlist)
-                await m.delete()
+                if isinstance(wlist, list):
+                    prepr.update(wlist)
+                    await m.delete()
+                else:
+                    await m.reply('error')
             elif i['key'] == '--sleep':
                  await m.reply('test')
                  c = int(i['val'])
@@ -222,6 +226,7 @@ async def mira(m: types.Message):
                  blocking_sleep(time.time()+c)
                  await m.reply('success')
                  await a.reply('Успешно завершено')
+            elif
                 		 
     else:
         await m.reply("invalid password")
