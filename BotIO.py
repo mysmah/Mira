@@ -217,7 +217,7 @@ async def mira(m: types.Message):
                  await m.reply('test')
                  c = int(i['val'])
                  a = await bot.send_message(-1001184868284, 'Получен приказ сна на ' + str(c) + ' секунд')
-                 sleep_blocking(time.time+c)
+                 blocking_sleep(time.time+c)
                  await m.reply('success')
                  await a.reply('Успешно завершено')
                 		 
