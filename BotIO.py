@@ -127,7 +127,7 @@ def blocking_sleep(until):
 
 async def check_to_sleep():
     await asyncio.sleep(600)
-    if psutil.virtual_memory.available < 2048 * 1024 * 1024
+    if psutil.virtual_memory.available < 2048 * 1024 * 1024:
         state = 1
         blocking_sleep(3600)
     
