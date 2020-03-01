@@ -121,7 +121,7 @@ def arg(args):
     return q
 def blocking_sleep(until):
     print('on_sleep')
-    prepr.close(_DBC)
+    prepr.close()
     model.new_model([1024,5120,1024])
     while time.time < until:
         model.fit(50)
