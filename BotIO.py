@@ -38,7 +38,8 @@ dp = Dispatcher(bot, loop=loop)
 
 borntime = time.time()
 	     
-_DBC = None
+
+
 	    
 db = database.INITIALIZATE()
 wlist = db.get_wlist()
@@ -135,14 +136,13 @@ async def check_to_sleep():
 		
 	
 async def start(arg):
-    global _DBC
     #Функция при запуске
     print('start')
     await bot.send_message(-1001184868284, "Сеть инициализирована")
     global NCMusePretxt, wlist
     NCMusePretxt = confs.NCMup
     await imo.initof()
-    _DBC = prepr.init(await bot.get_me(), wlist)
+    prepr.init(await bot.get_me(), wlist)
     loop.create_task(check_to_sleep())
     
     
