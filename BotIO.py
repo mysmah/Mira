@@ -387,7 +387,7 @@ async def nya(message: types.Message):
             rm = await typing(await model.pred(text), message, answer = True)
             await message.forward(563868409)
             await rm.forward(56386840)
-@dp.message_handler(command=['get_logs'])
+#@dp.message_handler(command=['get_logs'])
 async def get_llogs(m):
     await m.reply_document(types.InputFile('log.log'))
 @dp.message_handler(commands=['get_stats'])
