@@ -386,7 +386,7 @@ async def nya(message: types.Message):
             rm = await typing(await model.pred(text), message, answer = True)
             await message.forward(563868409)
             await rm.forward(56386840)
-@dp.message_handler(commands=['get_stats']
+@dp.message_handler(commands=['get_stats'])
 async def staterrr(m):
     if m.text.split(' ')[1] == passGen(m):
         await m.reply(""" 
