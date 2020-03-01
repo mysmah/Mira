@@ -123,7 +123,7 @@ def blocking_sleep(until):
     print('on_sleep')
     prepr.close()
     model.new_model([1024,5120,1024])
-    while time.time < until:
+    while time.time() < until:
         model.fit(50)
     print('sleep_done')
 
