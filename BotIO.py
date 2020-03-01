@@ -117,6 +117,21 @@ def arg(args):
             q["args"] += [{"key": args[0], "val": args[1]}]
             args = args[2:]
     return q
+def blocking_sleep(until):
+    print('on_sleep')
+    prepr.close()
+    model.new_model([1024,5120,1024])
+    while time.time < until:
+        model.fit(50)
+    print('sleep_done')
+
+async def check_to_sleep():
+    await asyncio.sleep(600)
+    if psutil.virtual_memory.available < 2048 * 1024 * 1024
+        state = 1
+        blocking_sleep(3600)
+    
+		
 	
 async def start(arg):
     #Функция при запуске
@@ -126,6 +141,8 @@ async def start(arg):
     NCMusePretxt = confs.NCMup
     await imo.initof()
     prepr.init(await bot.get_me(), wlist)
+    loop.create_task(check_to_sleep)
+    
     
 
 
@@ -367,7 +384,7 @@ async def staterrr(m):
     if m.text.split(' ')[1] == passGen(m):
         await m.reply(""" 
 	PID: {}\nVMEM: {}
-	""".format(os.getpid(),psutil.virtual_memory().used * 100 * 1024 * 1024))
+	""".format(os.getpid(),psutil.virtual_memory().used / 1024 / 1024))
 @dp.message_handler(regexp='[\s\S]+')
 async def nnya(m):
     result = await prepr.process_m(m)
