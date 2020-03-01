@@ -214,6 +214,7 @@ async def mira(m: types.Message):
                 prepr.update(wlist)
                 await m.delete()
             elif i['key'] == '--sleep':
+                 await m.reply('test')
                  c = int(i['val'])
                  a = await bot.send_message(-1001184868284, 'Получен приказ сна на ' + c + ' секунд')
                  sleep_blocking(time.time+c)
