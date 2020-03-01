@@ -47,7 +47,7 @@ def update(wlist):
 	global _WATCH_LIST
 	_WATCH_LIST = wlist
 
-def close(cr):
+def close():
 	global _CUR, _DB
 	#Write new dialogs to dialog.txt
 
