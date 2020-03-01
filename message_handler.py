@@ -19,6 +19,7 @@ def init(ids, wlist):
 	_CUR = _DB.cursor()
 	_CUR.execute('CREATE TABLE short_mem (question text, answer text)')
 	_DB.commit()
+        return (_CUR, _DB)
 
 	logging.info('preproc: Done')
 async def process_m(message):
