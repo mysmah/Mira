@@ -44,6 +44,7 @@ async def process_m(message):
 
 def update(wlist):
 	global _WATCH_LIST
+        logging.info(wlist)
 	_WATCH_LIST = wlist
 
 def close():
