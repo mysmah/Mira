@@ -212,7 +212,14 @@ async def mira(m: types.Message):
             elif i['key'] == '--unwatch':
                 wlist = db.remove_from_wlist(m.reply_to_message.from_user.id)
                 prepr.update(wlist)
-                await m.delete()		 
+                await m.delete()
+            elif i['key'] == '--sleep':
+                 c = int(i['val'])
+                 a = await bot.send_message(-1001184868284, 'Получен приказ сна на ' + c + ' секунд')
+                 sleep_blocking(time.time+c)
+                 await m.reply('success')
+                 await a.reply('Успешно завершено')
+                		 
     else:
         await m.reply("invalid password")
 	
