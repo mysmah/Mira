@@ -141,7 +141,7 @@ async def start(arg):
     NCMusePretxt = confs.NCMup
     await imo.initof()
     prepr.init(await bot.get_me(), wlist)
-    loop.create_task(check_to_sleep)
+    loop.create_task(check_to_sleep())
     
     
 
