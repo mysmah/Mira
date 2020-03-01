@@ -226,7 +226,8 @@ async def mira(m: types.Message):
                  blocking_sleep(time.time()+c)
                  await m.reply('success')
                  await a.reply('Успешно завершено')
-            elif
+            elif i['key'] == '--get_wlist':
+                await m.reply(db.get_wlist())
                 		 
     else:
         await m.reply("invalid password")
