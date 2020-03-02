@@ -25,7 +25,7 @@ from autoscript import startAS
 import database
 import message_handler as prepr
 
-
+_Me = None
 rfeedback = 120
 
 logging.basicConfig(filename='log.log', filemode='a', level=logging.INFO)
@@ -125,7 +125,7 @@ def blocking_sleep(until):
     model.new_model([1024,5120,1024])
     while time.time() < until:
         model.fit(50)
-    prepr.init(await bot.get_me(), wlist)
+    prepr.init(_Me, wlist)
     logging.info('sleep_done')
     print('sleep_done')
 
@@ -141,10 +141,11 @@ async def start(arg):
     #Функция при запуске
     print('start')
     await bot.send_message(-1001184868284, "Сеть инициализирована")
-    global NCMusePretxt, wlist
+    global NCMusePretxt, wlist, _Me
     NCMusePretxt = confs.NCMup
+    _Me = await bot.get_me()
     await imo.initof()
-    prepr.init(await bot.get_me(), wlist)
+    prepr.init(_Me, wlist)
     loop.create_task(check_to_sleep())
     
     
