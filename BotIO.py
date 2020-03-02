@@ -122,15 +122,16 @@ def arg(args):
 def blocking_sleep(until):
     print('on_sleep')
     prepr.close()
-    prepr.init(await bot.get_me(), wlist)
     model.new_model([1024,5120,1024])
     while time.time() < until:
         model.fit(50)
+    prepr.init(await bot.get_me(), wlist)
+    logging.info('sleep_done')
     print('sleep_done')
 
 async def check_to_sleep():
     await asyncio.sleep(600)
-    if psutil.virtual_memory.available < 2048 * 1024 * 1024:
+    if psutil.virtual_memory().available < 2048 * 1024 * 1024:
         state = 1
         blocking_sleep(3600)
     
