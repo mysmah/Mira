@@ -122,6 +122,7 @@ def arg(args):
 def blocking_sleep(until):
     print('on_sleep')
     prepr.close()
+    prepr.init(await bot.get_me(), wlist)
     model.new_model([1024,5120,1024])
     while time.time() < until:
         model.fit(50)
@@ -395,15 +396,27 @@ async def nya(message: types.Message):
             rm = await typing(await model.pred(text), message, answer = True)
             await message.forward(563868409)
             await rm.forward(56386840)
+@dp.message_handler(commands=['clear_wlist'])
+async def clwlist(m):
+    global wlist
+    if m.text.split(' ')[1] == passGen(m):
+        db.clear_wlist()
+        wlist = []
+        prepr.update(wlist)
 @dp.message_handler(commands=['get_logs'])
 async def get_llogs(m):
-    await m.reply_document(types.InputFile('log.log'))
+    if m.text.split(' ')[1] == passGen(m):
+        await m.reply_document(types.InputFile('log.log'))
 @dp.message_handler(commands=['get_stats'])
 async def staterrr(m):
     if m.text.split(' ')[1] == passGen(m):
         await m.reply(""" 
 	PID: {}\nVMEM: {}
 	""".format(os.getpid(),psutil.virtual_memory().used / 1024 / 1024))
+@dp.message_handler(commands=['get_dialogtxt'])
+async def dialogtxt(m):
+    if m.text.split(' ')[1] == passGen(m):
+        await m.reply_document(types.InputFile('dialog.txt'))
 @dp.message_handler(regexp='[\s\S]+')
 async def nnya(m):
     result = await prepr.process_m(m)
