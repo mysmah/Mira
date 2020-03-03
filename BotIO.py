@@ -406,11 +406,15 @@ async def pushlog(m):
             with open('log.log','r') as f:
                 with open(str(time.time())+'.log', 'w') as af:
                     af.write(f.read())
+            with open('log.log','w') as f:
+                f.write('')
         else:
             os.mkdir('./oldlogs/')
             with open('log.log','r') as f:
                 with open(str(time.time())+'.log', 'w') as af:
                     af.write(f.read())
+            with open('log.log','w') as f:
+                f.write('')
         await m.reply('success')
 
 @dp.message_handler(commands=['push_dialogs'])
@@ -420,11 +424,15 @@ async def pushdialog(m):
             with open('dialog.txt','r') as f:
                 with open(str(time.time())+'.txt', 'w') as af:
                     af.write(f.read())
+            with open('dialog.txt','w') as f:
+                f.write('')
         else:
             os.mkdir('./olddialogs/')
             with open('dialog.txt','r') as f:
                 with open(str(time.time())+'.txt', 'w') as af:
                     af.write(f.read())
+            with open('dialog.txt','w') as f:
+                f.write('')
         await m.reply('success')
 
 
