@@ -83,7 +83,7 @@ def close():
 		for i in result:
 			ap_text += i
 		f.write(ap_text)
-        logging.info(ap_text)
+	logging.info(ap_text)
 	_DB.close()
 	_CUR = None
 	_DB = None
