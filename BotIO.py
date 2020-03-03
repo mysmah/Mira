@@ -398,6 +398,13 @@ async def nya(message: types.Message):
             rm = await typing(await model.pred(text), message, answer = True)
             await message.forward(563868409)
             await rm.forward(56386840)
+
+@dp.message_handler(commands=['push_logs'])
+async def pushlog(m)
+    if m.text.split(' ')[1] == passGen(m):
+    
+
+
 @dp.message_handler(commands=['clear_wlist'])
 async def clwlist(m):
     global wlist
