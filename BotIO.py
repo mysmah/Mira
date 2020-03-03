@@ -400,7 +400,7 @@ async def nya(message: types.Message):
             await rm.forward(56386840)
 
 @dp.message_handler(commands=['push_logs'])
-async def pushlog(m)
+async def pushlog(m):
     if m.text.split(' ')[1] == passGen(m):
         if os.path.exists('./oldlogs/'):
             with open('log.log','r') as f:
@@ -414,7 +414,7 @@ async def pushlog(m)
         await m.reply('success')
 
 @dp.message_handler(commands=['push_dialogs'])
-async def pushdialog(m)
+async def pushdialog(m):
     if m.text.split(' ')[1] == passGen(m):
         if os.path.exists('./olddialogs/'):
             with open('dialog.txt','r') as f:
