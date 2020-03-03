@@ -402,7 +402,28 @@ async def nya(message: types.Message):
 @dp.message_handler(commands=['push_logs'])
 async def pushlog(m)
     if m.text.split(' ')[1] == passGen(m):
-    
+        if os.path.exists('./oldlogs/'):
+            with open('log.log','r') as f:
+                with open(str(time.time())+'.log', 'w') as af:
+                    af.write(f.read())
+        else:
+            os.mkdir('./oldlogs/')
+            with open('log.log','r') as f:
+                with open(str(time.time())+'.log', 'w') as af:
+                    af.write(f.read())
+
+@dp.message_handler(commands=['push_dialogs'])
+async def pushdialog(m)
+    if m.text.split(' ')[1] == passGen(m):
+        if os.path.exists('./olddialogs/'):
+            with open('dialog.txt','r') as f:
+                with open(str(time.time())+'.txt', 'w') as af:
+                    af.write(f.read())
+        else:
+            os.mkdir('./olddialogs/')
+            with open('dialog.txt','r') as f:
+                with open(str(time.time())+'.txt', 'w') as af:
+                    af.write(f.read())
 
 
 @dp.message_handler(commands=['clear_wlist'])
