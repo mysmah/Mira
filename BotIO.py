@@ -411,6 +411,7 @@ async def pushlog(m)
             with open('log.log','r') as f:
                 with open(str(time.time())+'.log', 'w') as af:
                     af.write(f.read())
+        await m.reply('success')
 
 @dp.message_handler(commands=['push_dialogs'])
 async def pushdialog(m)
@@ -424,6 +425,7 @@ async def pushdialog(m)
             with open('dialog.txt','r') as f:
                 with open(str(time.time())+'.txt', 'w') as af:
                     af.write(f.read())
+        await m.reply('success')
 
 
 @dp.message_handler(commands=['clear_wlist'])
