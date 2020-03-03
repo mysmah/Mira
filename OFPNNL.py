@@ -28,6 +28,9 @@ class NeuralNet:
 
         fil = open('dialog.txt')
         dialog = fil.read().split("\n")
+        if not dialog: 
+            fil.write('привет\nпривет')
+            fil.read().split('\n')
         fil.close()
         fil = open('text.txt', "w")
         fil.write(" ".join(dialog))
