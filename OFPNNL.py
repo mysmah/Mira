@@ -26,7 +26,7 @@ class NeuralNet:
         self.dict0 = json.loads(fil.read())
         fil.close()
 
-        fil = open('dialog.txt')
+        fil = open('dialog.txt', 'rw')
         dialog = fil.read().split("\n")
         if not dialog: 
             fil.write('привет\nпривет')
