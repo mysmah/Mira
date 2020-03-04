@@ -25,7 +25,7 @@ async def process_m(message):
 	message.text = message.text.lower()
 	if message.reply_to_message and message.reply_to_message.from_user.id == _ME.id:
 		return 1
-	elif message.reply_to_message:
+	elif message.reply_to_message and message.reply_to_message.from_user != _ME.id:
 		if message.from_user.id in _WATCH_LIST and random.randint(0,1) == 0:
 			_CUR.execute('INSERT INTO short_mem VALUES (?,?)', (message.reply_to_message.text.lower(), message.text))
 			_DB.commit()
