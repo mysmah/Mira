@@ -63,10 +63,10 @@ def close():
 		v1 = a_list[n]
 
 		#copy finder cycle
-		for n1, v2 in enumerate(q_list):
-			if n1 != n and v2[0] == v[0] and v1[0] == a_list[n1][0]:
-				q_list.pop(n)
-				q_list.pop(n1)
+		#for n1, v2 in enumerate(q_list):
+			#if n1 != n and v2[0] == v[0] and v1[0] == a_list[n1][0]:
+				#q_list.pop(n)
+				#q_list.pop(n1)
 
 		#VALUE to STRING
 		result.append('\n' + v[0].replace('\n','⇄') + '\n' + a_list[n][0].replace('\n', ' '))
