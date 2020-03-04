@@ -1,3 +1,5 @@
+with open('dialog.txt',"w") as f:
+    f.write('привет\nпривет')
 import json
 import re
 import time
