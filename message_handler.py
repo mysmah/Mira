@@ -89,4 +89,4 @@ def close():
 	_CUR = None
 	_DB = None
 
-	return 0
+	return ap_text
