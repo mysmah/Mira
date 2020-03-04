@@ -1,6 +1,4 @@
 #BotIO 1.0.0
-with open('dialog.txt','w') as f:
-    f.write('hello\nhello world!')
 import json
 import re
 import time
