@@ -122,12 +122,13 @@ def arg(args):
     return q
 def blocking_sleep(until):
     print('on_sleep')
-    prepr.close()
+    a = prepr.close()
     model.new_model([1024,5120,1024])
     while time.time() < until:
         model.fit(50)
     prepr.init(_Me, wlist)
     logging.info('sleep_done')
+    loop.create_task(bot.send_message(-1001184868284, 'Новые диалоги: ' + a))
     print('sleep_done')
 
 async def check_to_sleep():
