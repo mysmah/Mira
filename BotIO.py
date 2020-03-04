@@ -1,5 +1,4 @@
-with open('dialog.txt',"w") as f:
-    f.write('привет\nпривет')
+#BotIO 1.0.0
 import json
 import re
 import time
@@ -434,7 +433,7 @@ async def pushdialog(m):
                 with open(str(time.time())+'.txt', 'w') as af:
                     af.write(f.read())
             with open('dialog.txt','w') as f:
-                f.write('')
+                f.write('привет\nпривет')
         await m.reply('success')
 
 
