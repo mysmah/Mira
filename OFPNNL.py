@@ -80,7 +80,7 @@ class NeuralNet:
 
 # Обучение
     def fit(self, n):
-        self.model.fit(self.x, self.y, epochs=n, batch_size=1000)
+        self.model.fit(self.x, self.y, epochs=n, batch_size=5000)
 
     def spell(self, q):
         tim = time.time()
