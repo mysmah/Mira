@@ -182,13 +182,11 @@ async def mira(m: types.Message):
                 await bot.send_message(-1001184868284, "Бот переведён в активный режим")
                 await m.reply("fit success")
             elif i["key"] == "-r":
-                l = [int(x) for x in i["val"]]
                 await m.reply(l)
-                if model.new_model(l) == 1:
+                if model.new_model() == 1:
                     await m.reply("fail")
                 else:
-                    await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\nНовая сеть:\n")
-                    await bot.send_message(-1001184868284, l)
+                    await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\n")
                     await m.reply("reset success")
             elif i["key"] == "-s":
                 await m.reply(await model.pred(i["val"]))
