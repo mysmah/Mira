@@ -50,8 +50,8 @@ def signal_handler(sig, frame):
     top_stats = snapshot.statistics('lineno')
     print("[ Top 10 ]")
     for stat in top_stats[:10]:
-    print(stat)
-    sys.exit(0)
+        print(stat)
+        sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
 	    
