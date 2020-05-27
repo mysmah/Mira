@@ -68,7 +68,7 @@ class NeuralNet:
         self.y = b
         
         local_dir = os.path.dirname(__file__)
-        config_path = os.path.join(local_dir, 'config-feedforward')
+        config_file = os.path.join(local_dir, 'config-feedforward')
 
         self.config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
