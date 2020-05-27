@@ -1,6 +1,4 @@
-from tensorflow import keras
-from tensorflow.keras import models
-from tensorflow.keras import layers
+import neat
 from razdel import tokenize
 from pyaspeller import Word
 
@@ -16,48 +14,48 @@ import os
 class NeuralNet:
     def __init__(self, arr, loop):
         self.loop = loop
-        self.new_model(arr)
+        self.new_model()
 
 # Создание новой модели нейросети
-    def new_model(self, arr: list):
+    def new_model(self):
         if arr == []:
             return 1
         fil = open('dict.json')
         self.dict0 = json.loads(fil.read())
         fil.close()
 
-        fil = open('dialog.txt')
-        dialog = fil.read().split("\n")
-        if not dialog:
-            fil1=open('dialog.txt','w')
-            fil1.write('привет\nпривет')
-            fil1.close()
-            dialog = fil.read().split('\n')
-        fil.close()
-        fil = open('text.txt', "w")
-        fil.write(" ".join(dialog))
-        fil.close()
-        a = []
-        b = []
-        for i in range(len(dialog)):
-            if i % 2:
-                b += [dialog[i]]
-            else:
-                a += [dialog[i]]
-        fil = open('train.a', 'w')
-        fil.write(json.dumps(a, ensure_ascii=False))
-        fil.close()
-        fil = open('train.b', 'w')
-        fil.write(json.dumps(b, ensure_ascii=False))
-        fil.close()
+        #fil = open('dialog.txt')
+        #dialog = fil.read().split("\n")
+        #if not dialog:
+        #    fil1=open('dialog.txt','w')
+        #    fil1.write('привет\nпривет')
+        #    fil1.close()
+        #    dialog = fil.read().split('\n')
+        #fil.close()
+        #fil = open('text.txt', "w")
+        #fil.write(" ".join(dialog))
+        #fil.close()
+        #a = []
+        #b = []
+        #for i in range(len(dialog)):
+        #    if i % 2:
+        #        b += [dialog[i]]
+        #    else:
+        #        a += [dialog[i]]
+        #fil = open('train.a', 'w')
+        #fil.write(json.dumps(a, ensure_ascii=False))
+        #fil.close()
+        #fil = open('train.b', 'w')
+        #fil.write(json.dumps(b, ensure_ascii=False))
+        #fil.close()
 
-        fil = open('text.txt')
-        text = fil.read()
-        fil.close()
-        self.dict0 = list(set([_.text for _ in list(tokenize(text.lower()))]))
-        fil = open('dict.json', 'w')
-        fil.write(json.dumps(self.dict0, ensure_ascii=False))
-        fil.close()
+        #fil = open('text.txt')
+        #text = fil.read()
+        #fil.close()
+        #self.dict0 = list(set([_.text for _ in list(tokenize(text.lower()))]))
+        #fil = open('dict.json', 'w')
+        #fil.write(json.dumps(self.dict0, ensure_ascii=False))
+        #fil.close()
 
         fil = open('train.a')
         a = json.loads(fil.read())
@@ -68,19 +66,28 @@ class NeuralNet:
         for i in range(len(a)):
             a[i] = self.text2dict1(a[i])
             b[i] = self.text2dict1(b[i])
-        self.x = np.asarray(a)
-        self.y = np.asarray(b)
+        self.x = a
+        self.y = b
+        
+        local_dir = os.path.dirname(__file__)
+        config_path = os.path.join(local_dir, 'config-feedforward')
 
-        self.model = models.Sequential()
-        self.model.add(layers.Dense(arr[0], input_dim=len(self.dict0), activation='tanh'))
-        for i in arr[1:]:
-            self.model.add(layers.Dense(i, activation='tanh'))
-        self.model.add(layers.Dense(len(self.dict0), activation='tanh'))
-        self.model.compile(optimizer=tf.compat.v1.train.AdamOptimizer(0.1), loss='mse', metrics=['mae'])
+        self.config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                         neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                         config_file)
+        
+        self.p = neat.Population(self.config)
+
+        self.p.add_reporter(neat.StdOutReporter(True))
+        stats = neat.StatisticsReporter()
+        self.p.add_reporter(stats)
+        winner = p.run(eval_genomes, 1)
+        self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
 # Обучение
     def fit(self, n):
-        self.model.fit(self.x, self.y, epochs=n, batch_size=2000)
+        winner = p.run(eval_genomes, n)
+        self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
     def spell(self, q):
         tim = time.time()
@@ -103,8 +110,8 @@ class NeuralNet:
     async def pred(self, q):
         q = [_.text for _ in list(tokenize(q.lower()))]
         q = await self.loop.run_in_executor(None, self.spell, q)
-        prediction = self.model.predict([[self.text2dict1(q)]])
-        prediction = [int(round(x)) for x in prediction[0]]
+        prediction = self.winner_net.activate(self.text2dict1(q))
+        prediction = [int(round(x)) for x in prediction]
         text = self.dict2text1(prediction)
         return text.capitalize() if text else "?"
 
