@@ -26,6 +26,11 @@ from autoscript import startAS
 import database
 import message_handler as prepr
 
+import tracemalloc
+import signal
+
+tracemalloc.start()
+
 _Me = None
 rfeedback = 120
 
@@ -39,7 +44,15 @@ dp = Dispatcher(bot, loop=loop)
 
 borntime = time.time()
 	     
-
+def signal_handler(sig, frame):
+    print('SIGINT')
+    snapshot = tracemalloc.take_snapshot()
+    top_stats = snapshot.statistics('lineno')
+    print("[ Top 10 ]")
+    for stat in top_stats[:10]:
+    print(stat)
+    sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
 
 	    
 db = database.INITIALIZATE()
@@ -48,6 +61,7 @@ print(db)
 
 
 model = NeuralNet(loop)
+
 
 async def write_au(chat):
     rand = random.randint(0,4)
