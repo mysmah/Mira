@@ -29,8 +29,8 @@ import message_handler as prepr
 _Me = None
 rfeedback = 120
 
-#logging.basicConfig(filename='log.log', filemode='a', level=logging.INFO)
-#logging.info(f'\n\n==CHECKPOINT==\nNew instance on {os.name}\nPath: {os.path.abspath(__file__)}\nStart time: {datetime.datetime.now().strftime("%c")}\n')
+logging.basicConfig(filename='log.log', filemode='a', level=logging.INFO)
+logging.info(f'\n\n==CHECKPOINT==\nNew instance on {os.name}\nPath: {os.path.abspath(__file__)}\nStart time: {datetime.datetime.now().strftime("%c")}\n')
 starttime = time.time()
 loop = asyncio.get_event_loop()
 afl = aflood(loop, limit=15)
@@ -47,7 +47,7 @@ wlist = db.get_wlist()
 print(db)
 
 
-model = NeuralNet([1024], loop)
+model = NeuralNet(loop)
 model.fit(100)
 
 async def write_au(chat):
@@ -468,4 +468,4 @@ async def nnya(m):
 # Инициализация
 if __name__ == '__main__':
     logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: bot inited in {str(time.time() - starttime)} seconds')
-executor.start_polling(dp, loop=loop, skip_updates=True, on_startup=start, on_shutdown=on_close)
+    executor.start_polling(dp, loop=loop, skip_updates=True, on_startup=start, on_shutdown=on_close)
