@@ -29,8 +29,8 @@ import message_handler as prepr
 _Me = None
 rfeedback = 120
 
-logging.basicConfig(filename='log.log', filemode='a', level=logging.INFO)
-logging.info(f'\n\n==CHECKPOINT==\nNew instance on {os.name}\nPath: {os.path.abspath(__file__)}\nStart time: {datetime.datetime.now().strftime("%c")}\n')
+#logging.basicConfig(filename='log.log', filemode='a', level=logging.INFO)
+#logging.info(f'\n\n==CHECKPOINT==\nNew instance on {os.name}\nPath: {os.path.abspath(__file__)}\nStart time: {datetime.datetime.now().strftime("%c")}\n')
 starttime = time.time()
 loop = asyncio.get_event_loop()
 afl = aflood(loop, limit=15)
