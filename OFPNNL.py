@@ -86,7 +86,7 @@ class NeuralNet:
             net = neat.nn.FeedForwardNetwork.create(genome, config)
             for xi, xo in zip(self.x, self.y):
                 output = net.activate(xi)
-                genome.fitness -= (output[0] - xo[0]) ** 2
+                genome.fitness -= sum([(output[i] - xo[i]) ** 2 for i in range(len(output))])
         
 # Обучение
     def fit(self, n):
