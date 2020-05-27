@@ -90,8 +90,8 @@ def arg(args):
     args = args[:-1]
     while len(args):
         if args[0] == "-r":
-            q["args"] += [{"key": args[0], "val": args[1].split(";")}]
-            args = args[2:]
+            q["args"] += [{"key": args[0], "val": None}]
+            args = args[1:]
         elif args[0] == "--reboot":
             q["args"] += [{"key": args[0], "val": None}]
             args = args[1:]
