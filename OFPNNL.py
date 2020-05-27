@@ -77,20 +77,20 @@ class NeuralNet:
         self.p.add_reporter(neat.StdOutReporter(True))
         stats = neat.StatisticsReporter()
         self.p.add_reporter(stats)
-        winner = p.run(eval_genomes, 1)
+        winner = self.p.run(self.eval_genomes, 1)
         self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
-        def eval_genomes(genomes, config):
-            for genome_id, genome in genomes:
-                genome.fitness = 1.0
-                net = neat.nn.FeedForwardNetwork.create(genome, config)
-                for xi, xo in zip(self.x, self.y):
-                    output = net.activate(xi)
-                    genome.fitness -= (output[0] - xo[0]) ** 2
+    def eval_genomes(genomes, config):
+        for genome_id, genome in genomes:
+            genome.fitness = 1.0
+            net = neat.nn.FeedForwardNetwork.create(genome, config)
+            for xi, xo in zip(self.x, self.y):
+                output = net.activate(xi)
+                genome.fitness -= (output[0] - xo[0]) ** 2
         
 # Обучение
     def fit(self, n):
-        winner = p.run(self.eval_genomes, n)
+        winner = self.p.run(self.eval_genomes, n)
         self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
     def spell(self, q):
