@@ -77,8 +77,8 @@ class NeuralNet:
         self.p.add_reporter(neat.StdOutReporter(True))
         stats = neat.StatisticsReporter()
         self.p.add_reporter(stats)
-        #winner = self.p.run(self.eval_genomes, 1)
-        #self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
+        winner = self.p.run(self.eval_genomes, 1)
+        self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
     def eval_genomes(genomes, config):
         for genome_id, genome in genomes:
