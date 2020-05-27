@@ -18,8 +18,6 @@ class NeuralNet:
 
 # Создание новой модели нейросети
     def new_model(self):
-        if arr == []:
-            return 1
         fil = open('dict.json')
         self.dict0 = json.loads(fil.read())
         fil.close()
