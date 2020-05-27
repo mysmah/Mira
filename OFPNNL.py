@@ -72,7 +72,7 @@ class NeuralNet:
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_file)
         
-        #self.p = neat.Population(self.config)
+        self.p = neat.Population(self.config)
 
         #self.p.add_reporter(neat.StdOutReporter(True))
         #stats = neat.StatisticsReporter()
