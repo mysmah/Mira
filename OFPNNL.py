@@ -76,7 +76,7 @@ class NeuralNet:
         for i in arr[1:]:
             self.model.add(layers.Dense(i, activation='tanh'))
         self.model.add(layers.Dense(len(self.dict0), activation='tanh'))
-        self.model.compile(optimizer=keras.optimizers.Nadam(learning_rate=0.01))
+        self.model.compile(optimizer=keras.optimizers.Nadam(learning_rate=0.01), loss='categorical_crossentropy')
 
 # Обучение
     def fit(self, n):
