@@ -48,7 +48,6 @@ print(db)
 
 
 model = NeuralNet(loop)
-model.fit(100)
 
 async def write_au(chat):
     rand = random.randint(0,4)
