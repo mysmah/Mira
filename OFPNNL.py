@@ -5,8 +5,6 @@ from pyaspeller import Word
 import logging
 import time
 import asyncio
-import tensorflow as tf
-import numpy as np
 import json
 import re
 import os
@@ -82,9 +80,17 @@ class NeuralNet:
         winner = p.run(eval_genomes, 1)
         self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
+        def eval_genomes(genomes, config):
+            for genome_id, genome in genomes:
+                genome.fitness = 1.0
+                net = neat.nn.FeedForwardNetwork.create(genome, config)
+                for xi, xo in zip(self.x, self.y):
+                    output = net.activate(xi)
+                    genome.fitness -= (output[0] - xo[0]) ** 2
+        
 # Обучение
     def fit(self, n):
-        winner = p.run(eval_genomes, n)
+        winner = p.run(self.eval_genomes, n)
         self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
     def spell(self, q):
@@ -111,7 +117,7 @@ class NeuralNet:
         prediction = self.winner_net.activate(self.text2dict1(q))
         prediction = [int(round(x)) for x in prediction]
         text = self.dict2text1(prediction)
-        return text.capitalize() if text else "?"
+        return text.capitalize() if text else "..."
 
 # Преобразование текста в айдишники слов
     def text2dict1(self, text):
