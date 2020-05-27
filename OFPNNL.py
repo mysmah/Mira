@@ -10,7 +10,7 @@ import re
 import os
 
 class NeuralNet:
-    def __init__(self, arr, loop):
+    def __init__(self, loop):
         self.loop = loop
         self.new_model()
 
