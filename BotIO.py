@@ -202,7 +202,7 @@ async def mira(m: types.Message):
                     await bot.send_message(-1001184868284, "Нейросеть бота была сброшена\n")
                     await m.reply("reset success")
             elif i["key"] == "-s":
-                await m.reply(await model.pred(i["val"]))
+                await m.reply(model.pred(i["val"]))
             elif i["key"] == "--ping":
                 await m.reply('Alive time: {lt}'.format(lt = (time.time()-borntime)//1))
             elif i["key"] == "-d":
@@ -291,7 +291,7 @@ async def knopki(m: types.Message):
 @dp.inline_handler()
 async def inline_echo(inline_query: InlineQuery):
     text = inline_query.query or ''
-    ans = await model.pred(text)
+    ans = model.pred(text)
     text = "- " + text + "\n- " + ans
     input_content = InputTextMessageContent(text)
     result_id: str = hashlib.md5(text.encode()).hexdigest()
@@ -355,7 +355,7 @@ async def adialog(message: types.Message):
 
 @dp.message_handler(content_types=ContentType.PINNED_MESSAGE)
 async def pinnedansw(m):
-    text = await model.pred(m.pinned_message.text.lower())
+    text = model.pred(m.pinned_message.text.lower())
     await typing(text,m.pinned_message)
 
 #@dp.message_handler(regexp='[\s\S]+')
@@ -396,19 +396,19 @@ async def nya(message: types.Message):
     elif check == 0:
         logging.info(f'[{datetime.datetime.now().strftime("%c")} /INFO]: Message event with {id(message)}')
         if message.reply_to_message and message.reply_to_message.from_user.id == botid:
-            text = await model.pred(text)
+            text = model.pred(text)
             await typing(text, message)
         elif text.startswith('мира ') or text.startswith('мира,') or text.startswith('mira ') or text.startswith('mira,') or ', мира,' in text or ', mira,' in text:
-            text = await model.pred(text[5:])
+            text = model.pred(text[5:])
             await typing(text, message)
         elif len(text.split(', ')) > 1 and text.split(', ')[1] == 'мира':
-            text = await model.pred(text.replace(', мира', ''))
+            text = model.pred(text.replace(', мира', ''))
             await typing(text, message)
         elif message.chat.id > 0:
-            text = await model.pred(text)
+            text = model.pred(text)
             await typing(text, message, answer = True)
         elif random.randint(0, rfeedback) == 0:
-            rm = await typing(await model.pred(text), message, answer = True)
+            rm = await typing(model.pred(text), message, answer = True)
             await message.forward(563868409)
             await rm.forward(56386840)
 
@@ -474,9 +474,9 @@ async def dialogtxt(m):
 async def nnya(m):
     result = await prepr.process_m(m)
     if result == 0:
-        await typing(await model.pred(m.text.lower()),m,answer = True)
+        await typing(model.pred(m.text.lower()),m,answer = True)
     elif result == 1:
-        await typing(await model.pred(m.text.lower()),m)
+        await typing(model.pred(m.text.lower()),m)
 
 # Инициализация
 if __name__ == '__main__':
