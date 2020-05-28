@@ -1,17 +1,12 @@
 import neat
 from razdel import tokenize
-from pyaspeller import Word
-
-import logging
 import time
-import asyncio
 import json
 import re
 import os
 
 class NeuralNet:
-    def __init__(self, loop):
-        self.loop = loop
+    def __init__(self):
         self.new_model()
 
 # Создание новой модели нейросети
@@ -65,7 +60,7 @@ class NeuralNet:
         self.x = a
         self.y = b
         
-        local_dir = os.path.dirname(__file__)
+        local_dir = os.getcwd()
         config_file = os.path.join(local_dir, 'config-feedforward')
 
         self.config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
@@ -74,13 +69,13 @@ class NeuralNet:
         
         self.p = neat.Population(self.config)
 
-        #self.p.add_reporter(neat.StdOutReporter(True))
-        #stats = neat.StatisticsReporter()
-        #self.p.add_reporter(stats)
-        #winner = self.p.run(self.eval_genomes, 1)
-        #self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
+        self.p.add_reporter(neat.StdOutReporter(True))
+        stats = neat.StatisticsReporter()
+        self.p.add_reporter(stats)
+        winner = self.p.run(self.eval_genomes, 1)
+        self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
-    def eval_genomes(genomes, config):
+    def eval_genomes(self, genomes, config):
         for genome_id, genome in genomes:
             genome.fitness = 1.0
             net = neat.nn.FeedForwardNetwork.create(genome, config)
@@ -111,9 +106,8 @@ class NeuralNet:
         return ' '.join(req)
         
 # Обмен айдишниками слов с сетью
-    async def pred(self, q):
-        q = [_.text for _ in list(tokenize(q.lower()))]
-        q = await self.loop.run_in_executor(None, self.spell, q)
+    def pred(self, q):
+        #q = [_.text for _ in list(tokenize(q.lower()))]
         prediction = self.winner_net.activate(self.text2dict1(q))
         prediction = [int(round(x)) for x in prediction]
         text = self.dict2text1(prediction)
