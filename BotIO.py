@@ -196,6 +196,7 @@ async def mira(m: types.Message):
                 await m.reply("fit success")
             elif i["key"] == "-r":
                 await m.reply(l)
+		os.system("rm neat-checkpoint-*")
                 if model.new_model() == 1:
                     await m.reply("fail")
                 else:
