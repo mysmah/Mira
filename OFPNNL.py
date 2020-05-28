@@ -60,32 +60,27 @@ class NeuralNet:
         self.x = a
         self.y = b
         
+        local_dir = os.getcwd()
+        config_file = os.path.join(local_dir, 'config-feedforward')
+
+        self.config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                                 neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                                 config_file)
+        
         if glob.glob('neat-checkpoint-*'):
             chkpt = "neat-checkpoint-" + str(sorted([int(i[16:]) for i in glob.glob('neat-checkpoint-*')])[-1])
             self.p = neat.Checkpointer.restore_checkpoint(chkpt)
             
             print(chkpt)
             
-            local_dir = os.getcwd()
-            config_file = os.path.join(local_dir, 'config-feedforward')
-
-            self.config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-                                      neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                                      config_file)
         else:
-            local_dir = os.getcwd()
-            config_file = os.path.join(local_dir, 'config-feedforward')
-
-            self.config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                             config_file)
-        
             self.p = neat.Population(self.config)
 
             self.p.add_reporter(neat.StdOutReporter(True))
             stats = neat.StatisticsReporter()
             self.p.add_reporter(stats)
             self.p.add_reporter(neat.Checkpointer(5))
+            
         winner = self.p.run(self.eval_genomes, 1)
         self.winner_net = neat.nn.FeedForwardNetwork.create(winner, self.config)
 
