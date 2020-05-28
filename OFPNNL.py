@@ -4,6 +4,7 @@ import time
 import json
 import re
 import os
+import glob
 
 class NeuralNet:
     def __init__(self):
