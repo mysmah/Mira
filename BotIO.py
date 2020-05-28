@@ -60,7 +60,7 @@ wlist = db.get_wlist()
 print(db)
 
 
-model = NeuralNet(loop)
+model = NeuralNet()
 
 
 async def write_au(chat):
