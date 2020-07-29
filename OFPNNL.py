@@ -103,7 +103,7 @@ class NeuralNet:
     async def pred(self, q):
         q = [_.text for _ in list(tokenize(q.lower()))]
         q = await self.loop.run_in_executor(None, self.spell, q)
-        prediction = self.model.predict([[self.text2dict1(q)]])
+        prediction = self.model.predict([self.text2dict1(q)])
         prediction = [int(round(x)) for x in prediction[0]]
         text = self.dict2text1(prediction)
         return text.capitalize() if text else "?"
