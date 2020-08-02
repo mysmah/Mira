@@ -116,6 +116,7 @@ class NeuralNet:
         
 # Обмен айдишниками слов с сетью
     def pred(self, q):
+        print(q)
         #q = [_.text for _ in list(tokenize(q.lower()))]
         prediction = self.winner_net.activate(self.text2dict1(q))
         prediction = [int(round(x)) for x in prediction]
