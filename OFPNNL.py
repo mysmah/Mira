@@ -101,12 +101,13 @@ class NeuralNet:
         
 # Обмен айдишниками слов с сетью
     async def pred(self, q):
+        print(q)
         q = [_.text for _ in list(tokenize(q.lower()))]
         q = await self.loop.run_in_executor(None, self.spell, q)
         prediction = self.model.predict([self.text2dict1(q)])
         prediction = [int(round(x)) for x in prediction[0]]
         text = self.dict2text1(prediction)
-        return text.capitalize() if text else "?"
+        return text.capitalize() if text else "…"
 
 # Преобразование текста в айдишники слов
     def text2dict1(self, text):
